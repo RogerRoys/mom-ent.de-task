@@ -42,6 +42,7 @@
       "settings": {
         "banner_size": "banner-style-fullscreen",
         "banner_full_link": "",
+        "image": "shopify://shop_images/Havenly_Hero_Desktop_08185b3a-aa41-49a5-959f-0c3d544d92a5_1.jpg",
         "primary_image_size": "dt-full-bleed",
         "image_padding": 0,
         "main_image_animation": "none",
