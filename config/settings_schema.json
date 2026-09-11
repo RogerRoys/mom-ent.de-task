@@ -3180,6 +3180,17 @@
         "id": "cart_note_description",
         "label": "t:settings_schema.cart.settings.cart_note_description.label",
         "info": "t:settings_schema.cart.settings.cart_note_description.info"
+      },
+      {
+        "type": "header",
+        "content": "Ausgeblendete Eigenschaften"
+      },
+      {
+        "type": "text",
+        "id": "hidden_cart_properties",
+        "default": "Geschenk,Geschenknachricht",
+        "label": "Im Warenkorb ausblenden",
+        "info": "Namen der Bestell-Eigenschaften, durch Komma getrennt. Sie werden im Warenkorb ausgeblendet, bleiben aber im Checkout, in der Bestellung, im Lieferschein und im Shopify-Admin sichtbar."
       }
     ]
   }

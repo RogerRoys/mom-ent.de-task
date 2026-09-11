@@ -115,7 +115,17 @@
 
                               {%- for property in item.properties -%}
                                 {%- assign property_first_char = property.first | slice: 0 -%}
-                                {%- if property.last != blank and property_first_char != '_' -%}
+                                {%- comment -%}
+                                  Properties listed under Theme settings > Cart are kept out of the
+                                  cart UI. They still reach checkout, the order and the packing slip.
+                                {%- endcomment -%}
+                                {%- assign hidden_properties = ',' | append: settings.hidden_cart_properties | replace: ', ', ',' | append: ',' -%}
+                                {%- assign property_needle = ',' | append: property.first | append: ',' -%}
+                                {%- assign property_hidden = false -%}
+                                {%- if hidden_properties contains property_needle -%}
+                                  {%- assign property_hidden = true -%}
+                                {%- endif -%}
+                                {%- if property.last != blank and property_first_char != '_' and property_hidden == false -%}
                                   <div class="product-option text-small">
                                     <dt>{{ property.first }}: </dt>
                                     <dd>

@@ -681,3 +681,8 @@ cart-drawer-items {
     margin: 0 3rem;
   }
 }
+/* A line whose only properties are hidden (Theme settings > Cart) would
+   otherwise leave an empty <dl> behind, adding a gap to the cart row. */
+.cart-item__details dl:empty {
+  display: none;
+}
