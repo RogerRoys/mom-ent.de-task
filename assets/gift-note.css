@@ -139,6 +139,43 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* The gift note lives inside the product form, right above the button. Below
+   950px the theme pins that whole form to the bottom of the screen as the
+   sticky add-to-cart bar, which would drag the widget along — so pin the button
+   row instead. Same bar, minus the toggle and the message field. */
+@media only screen and (max-width: 949px) {
+  .sticky-buy-buttons .has-gift-note .product-form {
+    position: static;
+    width: auto;
+    padding: 0;
+    background: none;
+    border-top: 0;
+  }
+
+  .sticky-buy-buttons .has-gift-note .product-form__buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 5;
+    background: var(--color-background);
+    padding: var(--page-margin-mobile);
+  }
+
+  .sticky-buy-buttons.sticky-buy-buttons--border-true .has-gift-note .product-form__buttons {
+    border-top: 1px solid rgba(var(--color-foreground-rgb), 0.15);
+  }
+}
+
+/* Above 950px the sticky bar is a floating panel that appears once the real
+   button scrolls away. It shows the product and the button only. */
+@media only screen and (min-width: 950px) {
+  .product-buy-buttons-wrapper.stick-now .gift-note {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gift-note__panel {
     animation: none;

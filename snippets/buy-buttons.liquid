@@ -11,7 +11,15 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
-<div class="product-buy-buttons-wrapper" {{ block.shopify_attributes }}>
+{%- capture gift_note -%}
+  {%- render 'gift-note', product: product, block: block, product_form_id: product_form_id -%}
+{%- endcapture -%}
+{%- assign gift_note = gift_note | strip -%}
+
+<div
+  class="product-buy-buttons-wrapper{% if gift_note != blank %} has-gift-note{% endif %}"
+  {{ block.shopify_attributes }}
+>
   {%- if product != blank -%}
     {%- liquid
       assign gift_card_recipient_feature_active = false
@@ -28,17 +36,6 @@
       if template contains 'preorder' or template contains 'pre-order' or product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'preorder' or product.tags contains 'Preorder'
         assign add_label = 'products.product.pre_order' | t
       endif
-    -%}
-
-    {%- comment -%}
-      Rendered outside <product-form>: on mobile the theme positions
-      .product-form as a fixed sticky bar, and the gift note belongs in the
-      normal page flow. The fields are bound to the form via `form="..."`.
-    {%- endcomment -%}
-    {%- render 'gift-note',
-      product: product,
-      block: block,
-      product_form_id: product_form_id
     -%}
 
     <product-form
@@ -99,6 +96,14 @@
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
+
+        {%- comment -%}
+          Sits right above the button so apps that inject into the form
+          (bundles, upsells) cannot get between the two. .has-gift-note on the
+          wrapper re-points the sticky bar at .product-form__buttons, so the
+          widget is not dragged into it — see gift-note.css.
+        {%- endcomment -%}
+        {{ gift_note }}
 
         <div class="product-form__buttons">
           {%- liquid

@@ -216,16 +216,16 @@
   /* ----------------------------------------------------------- placement */
 
   // The gift note belongs directly above the add-to-cart button, but apps that
-  // inject into the product form area (bundles, upsells) can land between the
-  // two. Nothing forbids that, so put the widget back rather than fight over
-  // markup: keep it the element right before <product-form>.
+  // inject into the product form (bundles, upsells) can land between the two.
+  // Nothing forbids that, so put the widget back rather than fight over markup:
+  // keep it the element right before the button row, wherever that ends up.
   function place(node) {
     var form = document.getElementById(node.dataset.giftForm);
-    var host = form ? form.closest('product-form') : null;
-    if (!host || !host.parentNode) return;
-    if (host.previousElementSibling === node) return;
+    var buttons = form ? form.querySelector('.product-form__buttons') : null;
+    if (!buttons || !buttons.parentNode) return;
+    if (buttons.previousElementSibling === node) return;
 
-    host.parentNode.insertBefore(node, host);
+    buttons.parentNode.insertBefore(node, buttons);
   }
 
   function placeAll() {
