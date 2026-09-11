@@ -53,6 +53,16 @@ are attached to the item and shown in the cart, the order and the packing slip:
 When the toggle is off, the textarea is `disabled`, so no empty property is ever
 submitted.
 
+Shopify stores line item properties **on the line**, so a line added with a
+gift note keeps it for good — adding the same product again with the toggle off
+only creates a second line beside the old one, and the note is still in the
+cart. So the widget rewrites every cart line of that product whenever the
+toggle or the message changes (and once more after an add-to-cart). Lines that
+end up identical are merged by Shopify on its own, and any other property on
+the line — bundle apps, subscriptions — is preserved. On the product page the
+toggle also hydrates from the cart, so it always shows what the order actually
+carries.
+
 The fields sit outside `<product-form>` and are bound to it with the HTML5
 `form` attribute. The theme turns `.product-form` into a fixed sticky bar on
 mobile (**Product page → Sticky add-to-cart**), so anything nested inside it
@@ -63,7 +73,7 @@ page flow while `new FormData(form)` still submits the properties.
 |---|---|
 | `snippets/gift-note.liquid` | markup, reads its settings from the `buy_buttons` block |
 | `assets/gift-note.css` | styling (accent colour via the `--gift-note-accent` custom property) |
-| `assets/gift-note.js` | delegated listeners — survives variant changes and quick-add |
+| `assets/gift-note.js` | widget behaviour + cart reconciliation |
 | `snippets/buy-buttons.liquid` | renders the snippet above `<product-form>` |
 | `sections/main-product.liquid` | the block settings shown in the theme customizer |
 

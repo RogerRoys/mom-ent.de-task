@@ -59,6 +59,12 @@
   <div
     class="gift-note"
     data-gift-note
+    data-gift-product="{{ product.id }}"
+    data-gift-form="{{ product_form_id }}"
+    data-gift-prop-flag="{{ prop_flag | escape }}"
+    data-gift-prop-value="{{ prop_flag_value | escape }}"
+    data-gift-prop-message="{{ prop_message | escape }}"
+    {% if request.page_type == 'product' %}data-gift-hydrate{% endif %}
     {% if block.settings.gift_note_accent != blank %}
       style="--gift-note-accent: {{ block.settings.gift_note_accent }};"
     {% endif %}
