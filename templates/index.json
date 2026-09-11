@@ -12,44 +12,22 @@
     "slideshow_6Ce4Tk": {
       "type": "slideshow",
       "blocks": {
-        "video_slide_7xjbf7": {
-          "type": "video_slide",
+        "slide_gQFMqF": {
+          "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Havenly_Hero_Desktop_08185b3a-aa41-49a5-959f-0c3d544d92a5_1.jpg",
+            "image_animation": "none",
             "caption": "",
-            "heading": "Für Balance & mentale Stärke  jeden Tag",
-            "subheading": "<p>Premium-Mischung mit KSM-66® Ashwagandha, Rhodiola rosea, Löwenmähne & Vitamin B6.</p>",
-            "btn_block_txt": "Jetzt kaufen",
-            "btn_block_url": "shopify://products/moment-of-balance-presale",
-            "btn_block_style": "button--outline"
-          }
-        },
-        "video_slide_6qMHMB": {
-          "type": "video_slide",
-          "settings": {
-            "caption": "",
-            "heading": "Die Kraft der Natur für mehr Balance",
+            "heading": "",
             "subheading": "",
-            "btn_block_txt": "Unsere Inhaltsstoffe",
-            "btn_block_url": "shopify://pages/our-ingredients",
-            "btn_block_style": "button--outline"
-          }
-        },
-        "video_slide_4pf44x": {
-          "type": "video_slide",
-          "settings": {
-            "caption": "",
-            "heading": "Von Müttern für Mütter",
-            "subheading": "<p>Einen Moment nur für dich zu nehmen ist kein Egoismus. Es ist genau das, was dich stark hält.</p>",
-            "btn_block_txt": "Über MOMent",
-            "btn_block_url": "shopify://pages/moment-story",
-            "btn_block_style": "button--outline"
+            "btn_block_txt": "Shop now",
+            "btn_block_url": "shopify://collections/all",
+            "btn_block_style": "button--solid"
           }
         }
       },
       "block_order": [
-        "video_slide_7xjbf7",
-        "video_slide_6qMHMB",
-        "video_slide_4pf44x"
+        "slide_gQFMqF"
       ],
       "custom_css": [
         ".swiper-button-prev:after {display: none; fill: white;}",
@@ -159,7 +137,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/lion-s_mane.jpg",
             "title": "Bio Lion's mane (Hericium erinaceus, Fruchtkörper)",
             "heading_top_margin": 5,
             "heading_margin": 20,
@@ -173,7 +150,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/ashwagandha_roots.jpg",
             "title": "KSM-66® Ashwagandha-Wurzelextrakt (Withania somnifera)",
             "heading_top_margin": 5,
             "heading_margin": 20,
@@ -187,7 +163,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/rhadiola_rosea.jpg",
             "title": "Rhodiola rosea",
             "heading_top_margin": 5,
             "heading_margin": 40,
@@ -201,7 +176,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/Gemini_Generated_Image_bf9tmibf9tmibf9t.png",
             "title": "Vitamin B6",
             "heading_top_margin": 5,
             "heading_margin": 40,
@@ -270,7 +244,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #1:",
             "heading_top_margin": 10,
             "heading_margin": 0,
@@ -284,7 +257,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #2:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -298,7 +270,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #3:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -312,7 +283,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #4:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -380,42 +350,36 @@
         "slide_DPxQfW": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/3rd-party-lab.jpg",
             "link": ""
           }
         },
         "slide_jtTNVC": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/made-in-EU.jpg",
             "link": ""
           }
         },
         "slide_pqmCdQ": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/non-gmo.jpg",
             "link": ""
           }
         },
         "slide_dPemFL": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/gluten-free.jpg",
             "link": ""
           }
         },
         "slide_8mVgC9": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/low-suger.jpg",
             "link": ""
           }
         },
         "slide_TiTVrd": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/vegan.jpg",
             "link": ""
           }
         }
@@ -556,7 +520,6 @@
         "image_alignment": "right",
         "dt_image_width": 50,
         "card_spacing": 30,
-        "image": "shopify://shop_images/Shani_Kids.1.jpg",
         "image_ratio": "square",
         "secondary_image_scale": "small",
         "txt_alignment": "left",
@@ -617,7 +580,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/shani_hersonski_team.png",
             "title": "Shani Hersonski, Gründerin",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -631,7 +593,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/Lenka.png",
             "title": "Lenka Kohnz, Beraterin",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -645,7 +606,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/riki_langberg_team.1.png",
             "title": "Dr. Riki Langberg, Beraterin für Naturheilkunde und Formulierung",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -789,7 +749,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/dates_balls.1.jpg",
             "title": "Unsere liebsten Energy Balls",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -803,7 +762,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/Artistic_Woman_looking_up_by_the_sea.png",
             "title": "Die stille Revolution: Der Leitfaden einer berufstätigen Mutter zur Kunst des Nein-Sagens",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -817,7 +775,6 @@
           "type": "column",
           "settings": {
             "column_span": "1",
-            "image": "shopify://shop_images/illustration_of_a_woman_in_the_nature_heading.png",
             "title": "Die Alchemie der modernen Mutterschaft: Balance in der Weisheit der Natur finden",
             "heading_top_margin": 25,
             "heading_margin": 20,
@@ -909,7 +866,6 @@
       "settings": {
         "alignment": "center",
         "section_layout": "stacked",
-        "bg_image": "shopify://shop_images/thin-plant-stems-in-sun.jpg",
         "text_color": "fg-04",
         "bg_color": "bg-body",
         "padding_top": 60,
