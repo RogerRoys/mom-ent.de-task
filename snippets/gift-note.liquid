@@ -1,0 +1,104 @@
+{%- comment -%}
+  MOMent — Geschenknachricht (gift note)
+
+  Renders an inline toggle + message field inside the product form, directly
+  above the add-to-cart button. The two line item properties are only sent when
+  the customer switches the toggle on:
+
+    properties[Geschenk]           -> "Ja"
+    properties[Geschenknachricht]  -> the message
+
+  MUST be rendered inside {% form 'product' %} ... {% endform %}, otherwise the
+  line item properties are not submitted.
+
+  Accepts:
+  - product:         {Object} product object.
+  - block:           {Object} the buy_buttons block (supplies the settings).
+  - product_form_id: {String} product form id, used to keep element ids unique.
+
+  Usage:
+  {%- render 'gift-note', product: product, block: block, product_form_id: product_form_id -%}
+{%- endcomment -%}
+
+{%- liquid
+  assign gift_enabled = true
+  if block.settings.gift_note_enable == false
+    assign gift_enabled = false
+  endif
+  if product == blank or product.gift_card?
+    assign gift_enabled = false
+  endif
+
+  assign exclude_tag = block.settings.gift_note_exclude_tag | default: 'no-gift-note'
+  if product.tags contains exclude_tag
+    assign gift_enabled = false
+  endif
+-%}
+
+{%- if gift_enabled -%}
+  {%- liquid
+    assign gift_limit = block.settings.gift_note_limit | default: 300
+    assign prop_flag = block.settings.gift_note_property_flag | default: 'Geschenk'
+    assign prop_flag_value = block.settings.gift_note_property_flag_value | default: 'Ja'
+    assign prop_message = block.settings.gift_note_property_message | default: 'Geschenknachricht'
+
+    assign gift_title = block.settings.gift_note_title | default: 'Als Geschenk versenden'
+    assign gift_subtitle = block.settings.gift_note_subtitle | default: 'Handgeschriebene Karte · kostenlos'
+    assign gift_placeholder = block.settings.gift_note_placeholder | default: 'Liebe Mama, ein Moment nur für dich …'
+    assign gift_hint = block.settings.gift_note_hint | default: 'Der Preis erscheint nicht auf dem Lieferschein.'
+
+    assign gift_uid = product_form_id | default: section.id | append: '-gift-note'
+  -%}
+
+  {{ 'gift-note.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'gift-note.js' | asset_url }}" defer="defer"></script>
+
+  <div
+    class="gift-note"
+    data-gift-note
+    {% if block.settings.gift_note_accent != blank %}
+      style="--gift-note-accent: {{ block.settings.gift_note_accent }};"
+    {% endif %}
+  >
+    <label class="gift-note__row" for="{{ gift_uid }}-toggle">
+      <input
+        class="gift-note__checkbox"
+        type="checkbox"
+        id="{{ gift_uid }}-toggle"
+        data-gift-toggle
+        name="properties[{{ prop_flag }}]"
+        value="{{ prop_flag_value }}"
+        aria-controls="{{ gift_uid }}-panel"
+      >
+      <span class="gift-note__switch" aria-hidden="true"><span></span></span>
+      <span class="gift-note__labels">
+        <span class="gift-note__title">{{ gift_title }}</span>
+        {%- if gift_subtitle != blank -%}
+          <span class="gift-note__sub">{{ gift_subtitle }}</span>
+        {%- endif -%}
+      </span>
+    </label>
+
+    <div class="gift-note__panel" id="{{ gift_uid }}-panel" data-gift-panel hidden>
+      <label class="visually-hidden" for="{{ gift_uid }}-message">{{ prop_message }}</label>
+      <textarea
+        class="gift-note__textarea"
+        id="{{ gift_uid }}-message"
+        name="properties[{{ prop_message }}]"
+        data-gift-textarea
+        rows="3"
+        maxlength="{{ gift_limit }}"
+        placeholder="{{ gift_placeholder | escape }}"
+        disabled
+      ></textarea>
+      <div class="gift-note__meta">
+        {%- if gift_hint != blank -%}
+          <span>{{ gift_hint }}</span>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+        <span class="gift-note__count" data-gift-count aria-live="polite">0 / {{ gift_limit }}</span>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
