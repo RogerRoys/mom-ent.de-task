@@ -37,6 +37,35 @@ shopify theme push --unpublished --theme "mom-ent.de dev"
 shopify theme pull
 ```
 
+## Custom work on top of the export
+
+### Geschenknachricht (gift note) — product page
+
+A toggle + message field rendered inside the product form, directly above the
+add-to-cart button. When the customer switches it on, two line item properties
+are attached to the item and shown in the cart, the order and the packing slip:
+
+| Property | Value |
+|---|---|
+| `Geschenk` | `Ja` |
+| `Geschenknachricht` | the customer's message (max. 300 characters) |
+
+When the toggle is off, the textarea is `disabled`, so no empty property is ever
+submitted.
+
+| File | Role |
+|---|---|
+| `snippets/gift-note.liquid` | markup, reads its settings from the `buy_buttons` block |
+| `assets/gift-note.css` | styling (accent colour via the `--gift-note-accent` custom property) |
+| `assets/gift-note.js` | delegated listeners — survives variant changes and quick-add |
+| `snippets/buy-buttons.liquid` | renders the snippet inside `{% form 'product' %}` |
+| `sections/main-product.liquid` | the block settings shown in the theme customizer |
+
+Everything is editable under **Theme customizer → Product page → Buy buttons →
+Geschenknachricht**: on/off, title, subtitle, placeholder, hint, character
+limit, accent colour, the property names, and a tag (`no-gift-note`) that hides
+the field on individual products. Gift card products never show it.
+
 ## Rules
 
 1. Never commit straight to `main` — branch, then open a PR.

@@ -1,0 +1,151 @@
+/* MOMent — Geschenknachricht (gift note) on the product page */
+
+.gift-note {
+  --gift-note-accent: #b03a30;
+  --gift-note-border: #efe8df;
+  --gift-note-field-border: #dfd5ca;
+  --gift-note-field-bg: #fdfaf6;
+  --gift-note-text: #241f1d;
+  --gift-note-muted: #8a7c73;
+  --gift-note-meta: #a2938a;
+
+  border-top: 1px solid var(--gift-note-border);
+  border-bottom: 1px solid var(--gift-note-border);
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: inherit;
+  color: var(--gift-note-text);
+}
+
+.gift-note__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.gift-note__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gift-note__switch {
+  flex: none;
+  width: 46px;
+  height: 27px;
+  border-radius: 999px;
+  background: #dcd2c7;
+  padding: 3px;
+  display: flex;
+  transition: background 180ms ease;
+}
+
+.gift-note__switch > span {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  transition: transform 180ms ease;
+}
+
+.gift-note__checkbox:checked + .gift-note__switch {
+  background: var(--gift-note-accent);
+}
+
+.gift-note__checkbox:checked + .gift-note__switch > span {
+  transform: translateX(19px);
+}
+
+.gift-note__checkbox:focus-visible + .gift-note__switch {
+  outline: 2px solid var(--gift-note-accent);
+  outline-offset: 3px;
+}
+
+.gift-note__labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.gift-note__title {
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.gift-note__sub {
+  font-size: 13.5px;
+  color: var(--gift-note-muted);
+  line-height: 1.4;
+}
+
+.gift-note__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: giftNoteReveal 220ms ease both;
+}
+
+.gift-note__panel[hidden] {
+  display: none;
+}
+
+@keyframes giftNoteReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.gift-note__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  border: 1px solid var(--gift-note-field-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--gift-note-text);
+  background: var(--gift-note-field-bg);
+}
+
+.gift-note__textarea:focus {
+  outline: none;
+  border-color: var(--gift-note-accent);
+  background: #fff;
+}
+
+.gift-note__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12.5px;
+  color: var(--gift-note-meta);
+}
+
+.gift-note__count {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-note__panel {
+    animation: none;
+  }
+
+  .gift-note__switch,
+  .gift-note__switch > span {
+    transition: none;
+  }
+}

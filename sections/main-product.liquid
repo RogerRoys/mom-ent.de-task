@@ -4319,6 +4319,86 @@ addRecentItem();
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        },
+        {
+          "type": "header",
+          "content": "Geschenknachricht"
+        },
+        {
+          "type": "checkbox",
+          "id": "gift_note_enable",
+          "default": true,
+          "label": "Geschenknachricht anzeigen",
+          "info": "Zeigt einen Schalter über dem Warenkorb-Button. Die Nachricht wird als Bestell-Eigenschaft mitgesendet."
+        },
+        {
+          "type": "text",
+          "id": "gift_note_title",
+          "default": "Als Geschenk versenden",
+          "label": "Titel"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_subtitle",
+          "default": "Handgeschriebene Karte \u00b7 kostenlos",
+          "label": "Untertitel"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_placeholder",
+          "default": "Liebe Mama, ein Moment nur f\u00fcr dich \u2026",
+          "label": "Platzhaltertext im Nachrichtenfeld"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_hint",
+          "default": "Der Preis erscheint nicht auf dem Lieferschein.",
+          "label": "Hinweis unter dem Nachrichtenfeld"
+        },
+        {
+          "type": "range",
+          "id": "gift_note_limit",
+          "min": 100,
+          "max": 500,
+          "step": 50,
+          "unit": "Z.",
+          "default": 300,
+          "label": "Maximale L\u00e4nge der Nachricht"
+        },
+        {
+          "type": "color",
+          "id": "gift_note_accent",
+          "default": "#b03a30",
+          "label": "Akzentfarbe (Schalter & Fokus)"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_exclude_tag",
+          "default": "no-gift-note",
+          "label": "Produkte mit diesem Tag ausschlie\u00dfen"
+        },
+        {
+          "type": "header",
+          "content": "Bestell-Eigenschaften",
+          "info": "Diese Namen erscheinen im Warenkorb, in der Bestellung und im Lieferschein."
+        },
+        {
+          "type": "text",
+          "id": "gift_note_property_flag",
+          "default": "Geschenk",
+          "label": "Name der Geschenk-Eigenschaft"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_property_flag_value",
+          "default": "Ja",
+          "label": "Wert der Geschenk-Eigenschaft"
+        },
+        {
+          "type": "text",
+          "id": "gift_note_property_message",
+          "default": "Geschenknachricht",
+          "label": "Name der Nachrichten-Eigenschaft"
         }
       ]
     },
