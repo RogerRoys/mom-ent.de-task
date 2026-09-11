@@ -168,14 +168,6 @@
   }
 }
 
-/* Above 950px the sticky bar is a floating panel that appears once the real
-   button scrolls away. It shows the product and the button only. */
-@media only screen and (min-width: 950px) {
-  .product-buy-buttons-wrapper.stick-now .gift-note {
-    display: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .gift-note__panel {
     animation: none;

@@ -4227,6 +4227,15 @@ a.product__text {
     display: flex;
     gap: 10px;
   }
+  /* The floating bar is the product and the button. Anything else the form
+     carries — the gift note, widgets apps inject into it such as the bundle
+     selector — stays behind in the page instead of being duplicated here. */
+  .product-buy-buttons-wrapper.stick-now
+    .product-form
+    > *:not(.product-sticky-title):not(.product-form__error-message-wrapper):not(form),
+  .product-buy-buttons-wrapper.stick-now .product-form form > *:not(.product-form__buttons) {
+    display: none;
+  }
   .product-buy-buttons-wrapper.stick-now .product-form__buttons .product-form__submit {
     margin-bottom: 0;
   }

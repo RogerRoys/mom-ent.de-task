@@ -72,9 +72,10 @@ That spot is inside the theme's sticky add-to-cart bar (**Product page → Stick
 add-to-cart**), which pins the whole `.product-form` to the bottom of the screen
 below 950px. So `buy-buttons.liquid` marks the wrapper `.has-gift-note`, and
 `gift-note.css` pins `.product-form__buttons` instead: the same bar, without the
-toggle and the message field being dragged into it. On desktop the bar is a
-panel that floats in once the real button scrolls away, so the gift note is
-simply hidden inside it.
+toggle and the message field being dragged into it. On desktop the bar is a panel that floats
+in once the real button scrolls away; `section-main-product.css` now keeps that
+panel to the product and the button, so neither the gift note nor a widget an
+app injected into the form gets duplicated into it.
 
 | File | Role |
 |---|---|
