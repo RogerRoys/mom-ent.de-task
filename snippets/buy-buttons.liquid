@@ -30,6 +30,17 @@
       endif
     -%}
 
+    {%- comment -%}
+      Rendered outside <product-form>: on mobile the theme positions
+      .product-form as a fixed sticky bar, and the gift note belongs in the
+      normal page flow. The fields are bound to the form via `form="..."`.
+    {%- endcomment -%}
+    {%- render 'gift-note',
+      product: product,
+      block: block,
+      product_form_id: product_form_id
+    -%}
+
     <product-form
       class="product-form"
       data-hide-errors="{{ gift_card_recipient_feature_active }}"
@@ -88,12 +99,6 @@
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
-
-        {%- render 'gift-note',
-          product: product,
-          block: block,
-          product_form_id: product_form_id
-        -%}
 
         <div class="product-form__buttons">
           {%- liquid

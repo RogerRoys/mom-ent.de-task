@@ -53,12 +53,18 @@ are attached to the item and shown in the cart, the order and the packing slip:
 When the toggle is off, the textarea is `disabled`, so no empty property is ever
 submitted.
 
+The fields sit outside `<product-form>` and are bound to it with the HTML5
+`form` attribute. The theme turns `.product-form` into a fixed sticky bar on
+mobile (**Product page → Sticky add-to-cart**), so anything nested inside it
+gets pulled down into that bar — `form="..."` keeps the widget in the normal
+page flow while `new FormData(form)` still submits the properties.
+
 | File | Role |
 |---|---|
 | `snippets/gift-note.liquid` | markup, reads its settings from the `buy_buttons` block |
 | `assets/gift-note.css` | styling (accent colour via the `--gift-note-accent` custom property) |
 | `assets/gift-note.js` | delegated listeners — survives variant changes and quick-add |
-| `snippets/buy-buttons.liquid` | renders the snippet inside `{% form 'product' %}` |
+| `snippets/buy-buttons.liquid` | renders the snippet above `<product-form>` |
 | `sections/main-product.liquid` | the block settings shown in the theme customizer |
 
 Everything is editable under **Theme customizer → Product page → Buy buttons →

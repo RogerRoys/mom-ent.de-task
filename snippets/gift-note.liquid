@@ -8,13 +8,16 @@
     properties[Geschenk]           -> "Ja"
     properties[Geschenknachricht]  -> the message
 
-  MUST be rendered inside {% form 'product' %} ... {% endform %}, otherwise the
-  line item properties are not submitted.
+  The fields are bound to the product form with the HTML5 `form` attribute
+  instead of being nested inside it. On mobile the theme makes `.product-form`
+  `position: fixed` for the sticky add-to-cart bar, so anything nested inside it
+  would be dragged into that bar. `form="..."` keeps the widget in the normal
+  page flow while `new FormData(form)` still picks the fields up.
 
   Accepts:
   - product:         {Object} product object.
   - block:           {Object} the buy_buttons block (supplies the settings).
-  - product_form_id: {String} product form id, used to keep element ids unique.
+  - product_form_id: {String} id of the product form the fields belong to.
 
   Usage:
   {%- render 'gift-note', product: product, block: block, product_form_id: product_form_id -%}
@@ -69,6 +72,7 @@
         name="properties[{{ prop_flag }}]"
         value="{{ prop_flag_value }}"
         aria-controls="{{ gift_uid }}-panel"
+        {% if product_form_id != blank %}form="{{ product_form_id }}"{% endif %}
       >
       <span class="gift-note__switch" aria-hidden="true"><span></span></span>
       <span class="gift-note__labels">
@@ -89,6 +93,7 @@
         rows="3"
         maxlength="{{ gift_limit }}"
         placeholder="{{ gift_placeholder | escape }}"
+        {% if product_form_id != blank %}form="{{ product_form_id }}"{% endif %}
         disabled
       ></textarea>
       <div class="gift-note__meta">
