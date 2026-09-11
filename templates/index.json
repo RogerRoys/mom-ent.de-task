@@ -17,7 +17,7 @@
           "settings": {
             "btn_one_show": true,
             "btn_one_txt": "Button label",
-            "btn_one_link": "shopify://products/test-3",
+            "btn_one_link": "shopify://products/moment-of-balance",
             "btn_one_style": "button--solid",
             "btn_two_show": false,
             "btn_two_txt": "Button label",
@@ -42,7 +42,6 @@
       "settings": {
         "banner_size": "banner-style-fullscreen",
         "banner_full_link": "",
-        "image": "shopify://shop_images/Havenly_Hero_Desktop_08185b3a-aa41-49a5-959f-0c3d544d92a5_1.jpg",
         "primary_image_size": "dt-full-bleed",
         "image_padding": 0,
         "main_image_animation": "none",
