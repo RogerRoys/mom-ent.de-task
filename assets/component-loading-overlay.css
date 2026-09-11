@@ -1,0 +1,93 @@
+.loading-overlay {
+  position: absolute;
+  z-index: 1;
+  width: 1.4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .loading-overlay {
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .loading-overlay {
+    left: 0;
+  }
+}
+
+.loading-overlay__spinner, .loading__spinner {
+  width: 1.2rem;
+  display: inline-block;
+}
+
+.path {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  stroke: rgb(var(--color-foreground-rgb));
+  animation: dash 1.4s ease-in-out infinite;
+}
+
+.product-form__buttons .button.loading > .loading__spinner .path, 
+.button--solid.loading > .loading__spinner .path {
+  stroke: rgb(var(--color-button-foreground));
+}
+
+.product-form__buttons .button--outline.loading > .loading__spinner .path {
+  stroke: rgb(var(--color-outline-button-text));
+}
+
+.button.loading > .loading__spinner {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center; 
+}
+
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@media screen and (forced-colors: active) {
+  .path{
+    stroke: CanvasText;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(450deg);
+  }
+}
+
+.loading-overlay:not(.hidden) + .cart-item__price-wrapper,
+.loading-overlay:not(.hidden) ~ cart-remove-button {
+  opacity: 0.5;
+}
+
+.loading-overlay:not(.hidden) ~ cart-remove-button {
+  pointer-events: none;
+  cursor: default;
+}

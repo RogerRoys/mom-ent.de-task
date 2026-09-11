@@ -1,0 +1,123 @@
+.logo-placeholder {
+  width: 100px;
+  height: 60px;
+  background: rgba(var(--color-foreground-rgb),0.04);
+  color: rgba(var(--color-foreground-rgb),0.3);   
+  font-size: 0;
+  font-family: "Helvetica", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.0;
+  text-align: center;
+  border: 1px dashed;
+  border-radius: 6px;
+}
+
+.logo-grid {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 30px;
+  row-gap: 40px;
+}
+
+.align-left .logo-grid {
+  justify-content: flex-start;
+}
+
+.align-right .logo-grid {
+  justify-content: flex-end;
+}
+
+.logo-grid-image {
+  text-align: center;
+  border-radius: 6px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-grid-image-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 16.66%;
+}
+
+.logo-grid-image img {
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
+
+.align-left .logo-grid-image {
+  justify-content: flex-start;
+}
+
+.align-center .logo-grid-image img {
+  margin: 0 auto;
+}
+
+.grid-logo-sml img {
+  max-width: 80px;
+}
+
+.grid-logo-medium img {
+  max-width: 100px;
+}
+
+.grid-logo-large img {
+  max-width: 120px;
+}
+
+.logo-grid-greyscale, .logo-greyscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%); 
+}
+
+.logo-grid .placeholder {
+  min-height: 40px;
+}
+
+
+/* Animations */
+
+.logo-wall-ticker-wrapper {
+	display: flex;
+	column-gap: 0;
+	overflow: hidden;
+}
+
+.logo-wall-ticker-container {
+	display: grid;
+	grid-template-columns: repeat(8,1fr);
+  grid-template-rows: auto;
+  column-gap: 0;
+  overflow: visible;
+  animation: logoscroll linear infinite;
+  animation-duration: 24s;
+}
+
+.logo-wall-ticker-container .logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+@keyframes logoscroll {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

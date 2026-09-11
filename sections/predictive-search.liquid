@@ -1,0 +1,192 @@
+{% assign product_card_ratio = settings.card_img_aspect_ratio %}
+{% assign blog_card_ratio = settings.blog_card_image_ratio %}
+
+{% assign show_products_heading = true %}
+
+{%- if predictive_search.performed -%}
+<div id="predictive-search-results" class="predictive-search-results">
+
+{%- if predictive_search.resources.queries.size == 0 and predictive_search.resources.products.size == 0 and predictive_search.resources.collections.size == 0 and predictive_search.resources.articles.size == 0 and predictive_search.resources.pages.size == 0 -%}
+<div class="predictive-search-no-results-message">{{ 'templates.search.no_results' | t: terms: predictive_search.terms }}</div>
+{%- endif -%}
+    
+{%- if predictive_search.resources.queries.size > 0 or predictive_search.resources.collections.size > 0 -%}
+  <div class="predictive-search-queries-content">
+  <div class="predictive-search-category-heading">
+    <h3 id="predictive-search-queries">{{- 'templates.search.suggestions' | t -}}</h3>
+  </div>
+    <ul
+      id="predictive-search-results-queries-list"
+      class="predictive-search__results-list list-unstyled"
+      role="group"
+      aria-labelledby="predictive-search-queries"
+    >
+      {%- for query in predictive_search.resources.queries limit: 5 -%}
+        <li
+          id="predictive-search-option-query-{{ forloop.index }}"
+          class="predictive-search__list-item"
+          role="option"
+          aria-selected="false"
+        >
+          <a href="{{ query.url }}" class="predictive-search__item" tabindex="-1">
+            <div class="predictive-search__item-content">
+              <p
+                class="predictive-search__item-heading predictive-search__item-query-result"
+                aria-label="{{ query.text }}"
+              >
+                {{ query.styled_text }}
+              </p>
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+      {%- for collection in predictive_search.resources.collections -%}
+        <li
+          id="predictive-search-option-collection-{{ forloop.index }}"
+          class="predictive-search__list-item"
+          role="option"
+          aria-selected="false"
+        >
+          <a href="{{ collection.url }}" class="predictive-search__item" tabindex="-1">
+            <div class="predictive-search__item-content">
+              <p class="predictive-search__item-heading">{{ collection.title | escape }}</p>
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{%- if predictive_search.resources.products.size > 0 -%}
+  {% if show_products_heading %}
+  <div class="predictive-search-category-heading">
+    <h3 id="predictive-search-products">{{ 'templates.search.products' | t }}</h3>
+  </div>
+  {% endif %}
+  <ul role="listbox" class="predictive-search-list" aria-labelledby="predictive-search-products">
+    {%- for product in predictive_search.resources.products limit: 6 -%}
+      <li role="option" class="predictive-search-product-card">
+        <a href="{{ product.url }}">
+          {%- if product.featured_media != blank -%}
+          <div class="predictive-search-card-image ps-card-ratio-{{ product_card_ratio }}">
+          {% unless settings.card_badge_position == 'text-top' or settings.card_badge_position == 'text-bottom' %}
+          <div class="card-product--badges pc-badges-{{ settings.card_badge_position }}">  
+          {% for tag in product.tags %}  
+            {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+          {% endif %}
+          {% endfor %}
+
+          {% assign badges = product.metafields.custom.badges %}
+          {% if badges != blank %}
+            {% for badge in badges.value %}
+              <span>{{ badge }}</span>
+            {% endfor %}
+          {% endif %}
+
+          {% if settings.badges_show_sale %}
+            {% if product.compare_at_price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+          {% endif %}
+          </div>
+          {% endunless %}
+            {{ product.featured_media | image_url: width: 600 | image_tag }}
+          </div>
+          {%- endif -%}
+
+          {% if settings.card_badge_position == 'text-top' %}
+          <div class="card-product--badges card-badges--within-text-top">  
+          {% for tag in product.tags %}  
+            {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+          {% endif %}
+          {% endfor %}
+
+          {% assign badges = product.metafields.custom.badges %}
+          {% if badges != blank %}
+            {% for badge in badges.value %}
+              <span>{{ badge }}</span>
+            {% endfor %}
+          {% endif %}
+
+          {% if settings.badges_show_sale %}
+            {% if product.compare_at_price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+          {% endif %}
+          </div>
+          {% endif %}
+
+          {%- if settings.predictive_search_show_vendor -%}
+          <span class="predictive-search-card-vendor">{{ product.vendor }}</span>
+          {%- endif -%}
+          <span class="predictive-search-card-product-title">{{ product.title }}</span>
+          {%- if settings.predictive_search_show_price -%}
+          <span class="predictive-search-card-product-price">{% render 'price', product: product %}</span>
+          {%- endif -%}
+
+          {% if settings.card_badge_position == 'text-bottom' %}
+          <div class="card-product--badges card-badges--within-text-bottom">  
+          {% for tag in product.tags %}  
+            {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+          {% endif %}
+          {% endfor %}
+
+          {% assign badges = product.metafields.custom.badges %}
+          {% if badges != blank %}
+            {% for badge in badges.value %}
+              <span>{{ badge }}</span>
+            {% endfor %}
+          {% endif %}
+
+          {% if settings.badges_show_sale %}
+            {% if product.compare_at_price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+          {% endif %}
+          </div>
+          {% endif %}          
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+{%- if predictive_search.resources.articles.size > 0 and settings.predictive_search_show_articles -%}
+  <div class="predictive-search-category-heading">
+  <h3 id="predictive-search-articles">
+    {{ 'templates.search.articles' | t }}
+  </h3>
+  </div>
+  <ul role="listbox" class="predictive-search-list" aria-labelledby="predictive-search-articles">
+    {%- for article in predictive_search.resources.articles limit: 6 -%}
+      <li role="option" class="predictive-search-article-card">
+        <a href="{{ article.url }}">
+          {% if article.image %}<div class="predictive-search-card-image ps-card-ratio-{{ blog_card_ratio }}">{{ article.image | image_url: width: 720 | image_tag }}</div>{% endif %}
+          <span>{{ article.title }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+
+{%- if predictive_search.resources.pages.size > 0 and settings.predictive_search_show_pages -%}
+  <div class="predictive-search-category-heading">
+  <h3 id="predictive-search-pages">
+    {{ 'templates.search.pages' | t }}
+  </h3>
+  </div>
+  <ul role="listbox" class="predictive-search-list" aria-labelledby="predictive-search-pages">
+    {%- for page in predictive_search.resources.pages -%}
+      <li role="option" class="predictive-search-page-list">
+        <a href="{{ page.url }}">
+          <span>{{ page.title }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+  
+{%- unless predictive_search.resources.products.size == 0 and predictive_search.resources.articles.size == 0 -%}
+<div class="predictive-search-footer">
+  <button class="button">{{ 'templates.search.search_for' | t: terms: predictive_search.terms }}</button>
+</div>
+{%- endunless -%}
+  
+</div>
+{%- endif -%}

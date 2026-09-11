@@ -1,0 +1,260 @@
+{{ 'component-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}  
+  .header-announcement-bar {
+    color: {{ settings.announcement_txt_col }};
+    background: {{ settings.announcement_bg_col }};
+    border-bottom: 1px solid rgba(0,0,0,{{ section.settings.border_opacity | divided_by: 100.0 }});
+    font-size: {{ section.settings.font_size_mobile }}px;
+  }
+  .floating-announcement-bar {
+    border: 1px solid rgba(0,0,0,{{ section.settings.border_opacity | divided_by: 100.0 }});
+    border-radius: {{ section.settings.corner_radius }}px;
+  }
+
+  @media only screen and (min-width: 1025px) {
+    .header-announcement-bar {
+      font-size: {{ section.settings.font_size_desktop }}px; 
+    }
+  }
+{%- endstyle -%}
+
+{% assign numb_announcements = section.blocks.size %}
+
+{% assign interval = section.settings.anim_delay | times: 1000 %}
+
+<div id="HdrAnnouncementBar" class="header-announcement-bar hab-index-{{ section.index }} font-family--{{ section.settings.font_family }} ab-font-style--{{ section.settings.font_style }} ab-link-style-{{ section.settings.link_style }} {{ section.settings.bar_type }}-announcement-bar{% if numb_announcements > 1 %} header-announcement-bar-multi abma-{{ section.settings.anim_style }} abma-{{ numb_announcements }} announcement-bar-delay-{{ interval }}{% endif %}">
+{% if section.settings.close_btn_enable %}
+  <button id="AnnouncementBarCloseButton" class="ab-close-btn" aria-label="{{ 'accessibility.close' | t }}">
+    {% render 'icon-close' %}
+  </button>
+{% endif %}
+{% for block in section.blocks %}
+  {% if block.settings.link != blank %}
+    <div class="announcement-block ab-block-{{ forloop.index }}" {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">{{ block.settings.text }}</a></div>
+    {% else %}
+    <div class="announcement-block ab-block-{{ forloop.index }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+  {% endif %}
+{% endfor %}
+</div>
+
+{% if section.settings.close_btn_enable %}
+<script>
+  var abarBar = document.getElementById('HdrAnnouncementBar');
+  var abarClose = document.getElementById('AnnouncementBarCloseButton');
+
+  // Cookie
+  function setSessionCookie(name, value) {
+    document.cookie = name + "=" + encodeURIComponent(value) + "; path=/;";
+  }
+
+  function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var c = cookies[i].trim();
+      if (c.indexOf(name + "=") === 0) {
+        return decodeURIComponent(c.substring((name + "=").length));
+      }
+    }
+    return null;
+  }
+
+  // If previously closed in this tab session, remove immediately
+  if (abarBar && sessionStorage.getItem('lx_announcement_closed') === 'true') {
+    abarBar.remove();
+  }
+
+  // On close, remember + remove
+  if (abarBar && abarClose) {
+    abarClose.addEventListener('click', function () {
+      sessionStorage.setItem('lx_announcement_closed', 'true');
+      abarBar.remove();
+    });
+  }
+</script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "t:sections.announcement-bar.name",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "select",
+        "id": "bar_type",
+        "label": "t:sections.announcement-bar.settings.bar_type.label",
+        "options": [
+          {
+            "value": "full-width",
+            "label": "t:sections.announcement-bar.settings.bar_type.options__1.label"
+          },
+          {
+            "value": "floating",
+            "label": "t:sections.announcement-bar.settings.bar_type.options__2.label"
+          }
+        ],
+        "default": "full-width"
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "visible_if": "{{ section.settings.bar_type == 'floating' }}",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "default": 0,
+        "unit": "px",
+        "label": "t:sections.all.shape.corner_radius"
+      },
+      {
+        "type": "range",
+        "id": "border_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0,
+        "unit": "%",
+        "label": "t:sections.all.border_opacity"
+      },
+      {
+        "type": "select",
+        "id": "font_family",
+        "label": "t:sections.all.font",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:sections.all.body_font"
+          },
+          {
+            "value": "navigation",
+            "label": "t:sections.all.navigation_font"
+          }
+        ],
+        "default": "body"
+      },
+      {
+        "type": "select",
+        "id": "font_style",
+        "label": "t:settings_schema.global.settings.font_style.label",
+        "options": [
+          {
+            "value": "normal",
+            "label": "t:settings_schema.global.settings.font_style.normal.label"
+          },
+          {
+            "value": "italic",
+            "label": "t:settings_schema.global.settings.font_style.italic.label"
+          }
+        ],
+        "default": "normal"
+      },
+      {
+        "type": "range",
+        "id": "font_size_mobile",
+        "min": 9,
+        "max": 14,
+        "step": 1,
+        "default": 11,
+        "unit": "px",
+        "label": "t:sections.announcement-bar.settings.font_size_mobile.label"
+      },
+      {
+        "type": "range",
+        "id": "font_size_desktop",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "default": 12,
+        "unit": "px",
+        "label": "t:sections.announcement-bar.settings.font_size_desktop.label"
+      },
+      {
+        "type": "select",
+        "id": "link_style",
+        "label": "t:sections.all.buttons.link_style",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.all.none"
+          },
+          {
+            "value": "underline",
+            "label": "t:sections.all.buttons.button_style_underline"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "checkbox",
+        "id": "close_btn_enable",
+        "default": false,
+        "label": "t:sections.announcement-bar.settings.close_btn_enable.label",
+        "info": "t:sections.announcement-bar.settings.close_btn_enable.info"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.announcement-bar.settings.animation_header.content",
+        "info": "t:sections.announcement-bar.settings.animation_header.info"
+      },
+      {
+        "type": "select",
+        "id": "anim_style",
+        "label": "t:sections.announcement-bar.settings.animation_style.label",
+        "options": [
+          {
+            "value": "fade",
+            "label": "t:sections.announcement-bar.settings.animation_style.options__1.label"
+          },
+          {
+            "value": "slide",
+            "label": "t:sections.announcement-bar.settings.animation_style.options__2.label"
+          },
+          {
+            "value": "slidevert",
+            "label": "t:sections.announcement-bar.settings.animation_style.options__3.label"
+          }
+        ],
+        "default": "fade"
+      },
+      {
+        "type": "range",
+        "id": "anim_delay",
+        "min": 4,
+        "max": 8,
+        "step": 2,
+        "unit": "s",
+        "default": 6,
+        "label": "t:sections.announcement-bar.settings.animation_delay.label"
+      }      
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "An announcement about our store",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        }        
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "announcement"
+      }
+    ]
+  }
+}
+{% endschema %}

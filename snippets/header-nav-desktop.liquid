@@ -1,0 +1,285 @@
+{% assign menu_image_size = 1080 %}
+
+{% if section.settings.dd_image_size == 'small' %}
+{% assign menu_image_size = 900 %}
+{% endif %}
+
+{% if section.settings.dd_image_size == 'large' and section.settings.dd_image_ratio == 'landscape' %}
+{% assign menu_image_size = 1200 %}
+{% endif %}
+
+{% if section.settings.dd_image_size == 'large' and section.settings.header_dropdown_panel_width == 'dd-panel-drawer' %}
+{% assign menu_image_size = 1200 %}
+{% endif %}
+
+{% assign show_images = false %}
+{% if section.blocks.size > 0 %}
+{% assign show_images = true %}
+{% endif %}
+
+{% assign dropdown_exists = false %}
+
+{% assign show_dropdown_category_images = section.settings.images_dd_category %}
+
+<div class="hdr-nav-desktop">
+  <nav>
+    <ul role="list" class="hdr-nav-primary-level-ul">
+        {% for link in section.settings.main_menu.links %}
+          <li{% if link.links == blank and section.settings.menu_highlight_list contains link.title %} class="menu-item-special-highlight"{% endif %}{% if link.links != blank %} class="nav-desktop-li-dd-item{% if forloop.last %} last-item{% endif %}{% if section.settings.menu_highlight_list contains link.title %} menu-item-special-highlight{% endif %}"{% endif %}><a href="{{ link.url }}"{% if link.links != blank %} class="nav-desktop-dd-btn{% if section.settings.menu_dropdown_function == 'click' %} nav-desktop-dd-btn-clickable{% else %} nav-desktop-dd-btn-hover{% endif %}"{% endif %}>{{ link.title }}{% if link.links != blank and section.settings.dd_icon == 'arrow' %}{% render 'icon-caret' %}{% endif %}</a>
+          {% if link.links != blank %}
+          {% assign dropdown_exists = true %}
+          {% assign dd_menu_name = link.title | handleize %}
+          <div class="header-nav-desktop-dd-panel {{ section.settings.header_dropdown_panel_width }} drawer-layout--{{ section.settings.dropdown_drawer_layout }}{% if section.settings.header_dd_contents_width == 'fixed' %} dd-panel-fixed-width{% endif %}{% if section.settings.header_dd_contents_width == 'fixed-narrow' %} dd-panel-fixed-width-narrow{% endif %} header-dd-panel-justify-{{ section.settings.header_dd_contents_justify }} header-dd-panel-column-alignment-{{ section.settings.header_dd_column_alignment }} header-dd-panel-category-style-{{ section.settings.category_heading_font_style }}">
+            <div class="dd-nav-dd-contents{% if show_images %} dd-nav-contents-with-image{% endif %}">
+            {% assign multicol = false %}
+            {% assign columnsnumber = 0 %}
+            {% for childlink in link.links %}
+              {% assign columnsnumber = columnsnumber | plus: 1 %}
+            {% endfor %}
+            {% for childlink in link.links %}
+              {% if childlink.links.size > 0 %}
+                {% assign multicol = true %}
+                {% endif %}
+              {% endfor %}
+
+              {% if multicol %}
+               <ul class="header-nav-desktop-dd-list-multi header-dd-menu-multi-columns-{{ columnsnumber }} header-dd-menu-layout-optimize dd-list-link-highlight-style-{{ section.settings.dd_menu_link_rollover_style }}{% if section.settings.dd_column_borders %} dd-ul-borders{% endif %}" role="list">
+                {% for childlink in link.links %}
+                  <li class="header-nav-desktop-dd-panel-col{% if section.settings.dd_column_borders %} dd-panel-col-borders{% endif %}">
+                  {% if childlink.url contains '/collections/' and show_dropdown_category_images and section.settings.header_dropdown_panel_width != 'dd-panel-drawer' %}
+                    {% assign url_parts = childlink.url | split: '/collections/' %}
+                    {% assign remainder = url_parts[1] | split: '/' %}
+                    {% assign dd_col_collection_handle = remainder[0] %}
+                    {% assign dd_col_collection = collections[dd_col_collection_handle] %}
+                    <div class="dropdown-collection-image cddi-ratio-{{ section.settings.cddi_image_ratio }}">
+                    <a href="{{ childlink.url }}"{% if section.settings.menu_highlight_list contains childlink.title %} class="menu-item-special-highlight"{% endif %}>
+                    {% if dd_col_collection.featured_image %}
+                      {{ dd_col_collection.featured_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                    {% endif %}         
+                    </a>
+                    </div>
+                  {% endif %}
+                  {% if childlink.url contains '#' %}
+                  <span class="dd-nav-column-heading">{{ childlink.title }}</span>
+                  {% else %}
+                  <span class="dd-nav-column-heading"><a href="{{ childlink.url }}">{{ childlink.title }}</a></span>
+                  {% endif %}
+                  {% if childlink.links != blank %}
+                  <ul>
+                    {% for grandchildlink in childlink.links %}
+                    <li>
+                      {% if grandchildlink.url contains '/collections/' and section.settings.images_t_level == true and section.settings.header_dropdown_panel_width == 'dd-panel-drawer' %}
+                        <a href="{{ grandchildlink.url }}"{% if section.settings.menu_highlight_list contains grandchildlink.title %} class="menu-item-special-highlight"{% endif %}>
+                          {% assign url_parts = grandchildlink.url | split: '/collections/' %}
+                          {% assign remainder = url_parts[1] | split: '/' %}
+                          {% assign grandchild_collection_handle = remainder[0] %}
+                          {% assign grandchild_collection = collections[grandchild_collection_handle] %}
+                          {% if grandchild_collection %}
+                            <div class="nav-drawer--collection-image-row">
+                            <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+                            {% if grandchild_collection.featured_image %}
+                              {{ grandchild_collection.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+                            {% endif %}
+                            </div>
+                            <div class="nav-drawer--collection-title">{{ grandchildlink.title }}</div>
+                            </div>
+                          {% endif %}
+                        </a>
+                      {% else %}
+                        <a href="{{ grandchildlink.url }}"{% if section.settings.menu_highlight_list contains grandchildlink.title %} class="menu-item-special-highlight"{% endif %}>{{ grandchildlink.title }}</a>
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                  </li>
+                 {% endfor %}
+              </ul>
+                {% if show_images %}
+                {% assign image_count = 0 %}
+                <div class="dd-nav-image dd-image-size-{{ section.settings.dd_image_size }} dd-nav-image-ratio-{{ ratio }}">
+                {% for block in section.blocks %}
+                {% case block.type %}
+                {% when 'image' %}
+
+                {% assign match_name = block.settings.dd_name | handleize %}
+                
+                {% if match_name == dd_menu_name and block.settings.show_in_dropdown %}
+                {% assign image_count = image_count | plus: 1 %}
+                <div class="dd-nav-img-wrapper dd-image-count-{{ image_count }}">
+                {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+                {% if block.settings.badge != blank %}<div class="menu-drawer-feature-block--badge">{{ block.settings.badge }}</div>{% endif %}
+                <div class="dd-nav-img">{{ block.settings.image | image_url: width: menu_image_size | image_tag: loading: 'lazy' }}</div>
+                {% if block.settings.heading != blank %}
+                <div class="dd-nav-image-title dd-nav-image-title-{{ block.settings.text_color }} dd-nav-image-title-{{ block.settings.text_position }}">
+                <span class="dd-nav-image-title-span{% if block.settings.heading_weight == 'bold' %} dd-nav-image-title-bold{% endif %} text-{{ block.settings.heading_size }}">{{ block.settings.heading }}</span>
+                {% if block.settings.sub_heading != blank %}<div class="dd-nav-image-sub-title text-{{ block.settings.text_size }}">{{ block.settings.sub_heading }}</div>{% endif %}
+                {% if block.settings.button_show and block.settings.button_label != blank %}<div class="dd-nav-image--button button-style-{{ block.settings.button_style }} button-width-{{ block.settings.button_width }}">{{ block.settings.button_label }}</div>{% endif %}
+                </div>
+                {% endif %}
+                {% if block.settings.image_link != blank %}</a>{% endif %}
+                </div>
+                {% endif %}
+                
+                {% endcase %}
+                {% endfor %}
+                  
+                </div>
+              {% endif %}                
+              {% else %}
+                <ul class="header-nav-desktop-dd-list-single dd-list-link-highlight-style-{{ section.settings.dd_menu_link_rollover_style }}" role="list">
+                  {% for childlink in link.links %}
+                  <li data-list-number="{{ forloop.index }}">
+                    {% if childlink.url contains '/collections/' and section.settings.images_s_level == true and section.settings.header_dropdown_panel_width == 'dd-panel-drawer' %}
+                    <a class="" href="{{ childlink.url }}"{% if section.settings.menu_highlight_list contains childlink.title %} class="menu-item-special-highlight"{% endif %}>
+                    {% assign url_parts = childlink.url | split: '/collections/' %}
+                    {% assign remainder = url_parts[1] | split: '/' %}
+                    {% assign s_collection_handle = remainder[0] %}
+                    {% assign s_collection = collections[s_collection_handle] %}
+                    {% if s_collection %}
+                      <div class="nav-drawer--collection-image-row">
+                      <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+                      {% if s_collection.featured_image %}
+                        {{ s_collection.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+                      {% endif %}
+                      </div>
+                      <div class="nav-drawer--collection-title">{{ childlink.title }}</div>
+                      </div>
+                    {% endif %}  
+                    </a>
+                    {% else %}
+                    <a href="{{ childlink.url }}"{% if section.settings.menu_highlight_list contains childlink.title %} class="menu-item-special-highlight"{% endif %}>{{ childlink.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% if show_images %}
+                <div class="dd-nav-image dd-image-size-{{ section.settings.dd_image_size }} dd-nav-image-ratio-{{ ratio }}">
+                {% for block in section.blocks %}
+                {% case block.type %}
+                {% when 'image' %}
+                
+                {% assign match_name = block.settings.dd_name | handleize %}
+                
+                {% if match_name == dd_menu_name and block.settings.show_in_dropdown %}
+                <div class="dd-nav-img-wrapper">
+                {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+                {% if block.settings.badge != blank %}<div class="menu-drawer-feature-block--badge">{{ block.settings.badge }}</div>{% endif %}
+                {% if block.settings.image != blank %}<div class="dd-nav-img">{{ block.settings.image | image_url: width: menu_image_size | image_tag: loading: 'lazy' }}</div>{% endif %}
+                {% if block.settings.heading != blank %}
+                <div class="dd-nav-image-title dd-nav-image-title-{{ block.settings.text_color }} dd-nav-image-title-{{ block.settings.text_position }}">
+                <span class="dd-nav-image-title-span{% if block.settings.heading_weight == 'bold' %} dd-nav-image-title-bold{% endif %} text-{{ block.settings.heading_size }}">{{ block.settings.heading }}</span>
+                {% if block.settings.sub_heading != blank %}<div class="dd-nav-image-sub-title text-{{ block.settings.text_size }}">{{ block.settings.sub_heading }}</div>{% endif %}
+                {% if block.settings.button_show and block.settings.button_label != blank %}<div class="dd-nav-image--button button-style-{{ block.settings.button_style }} button-width-{{ block.settings.button_width }}">{{ block.settings.button_label }}</div>{% endif %}
+                </div>
+                {% endif %}
+                {% if block.settings.image_link != blank %}</a>{% endif %}
+                </div>
+                {% endif %}
+                
+                {% endcase %}
+                {% endfor %}
+                  
+                </div>
+                {% endif %}              
+              {% endif %}
+
+            </div>
+          </div>
+          {% endif %}
+          </li>
+        {% endfor %}
+   </ul>
+  </nav>
+</div>
+{% if section.settings.menu_dropdown_function == 'click' and dropdown_exists %}
+<div class="dd-click-drawer-bg"></div>  
+{% endif %}
+
+<script>
+const buttons = document.querySelectorAll('.nav-desktop-dd-btn-hover');
+const panels = document.querySelectorAll('.header-nav-desktop-dd-panel');
+
+buttons.forEach((button, index) => {
+  const panel = panels[index];
+
+  button.addEventListener('focus', () => {
+    if (panel) {
+      panel.classList.add('dd-visible');
+    }
+  });
+
+  button.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (!button.contains(document.activeElement) && !panel.contains(document.activeElement)) {
+        panel.classList.remove('dd-visible');
+      }
+    }, 0);
+  });
+
+  panel.addEventListener('focusin', () => {
+    if (panel) {
+      panel.classList.add('dd-visible');
+    }
+  });
+
+  panel.addEventListener('focusout', () => {
+    setTimeout(() => {
+      if (!button.contains(document.activeElement) && !panel.contains(document.activeElement)) {
+        panel.classList.remove('dd-visible');
+      }
+    }, 0);
+  });
+
+  panel.querySelectorAll('*').forEach(child => {
+    child.addEventListener('focus', () => {
+      panel.classList.add('dd-visible');
+    });
+    child.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (!button.contains(document.activeElement) && !panel.contains(document.activeElement)) {
+          panel.classList.remove('dd-visible');
+        }
+      }, 0);
+    });
+  });
+});
+
+// Set consistent height for dropdown menus
+if (
+  !document.querySelector('.nav-desktop-dd-btn-clickable') &&
+  !document.querySelector('.dd-panel-drawer')
+) {
+
+  const ddp = document.querySelectorAll('.header-nav-desktop-dd-panel');
+
+  // Only continue if panels exist
+  if (ddp.length > 0) {
+
+    let maxHeight = 0;
+    let minHeight = Infinity;
+
+    // Find tallest + shortest
+    ddp.forEach(panel => {
+      const panelHeight = panel.offsetHeight;
+
+      maxHeight = Math.max(maxHeight, panelHeight);
+      minHeight = Math.min(minHeight, panelHeight);
+    });
+
+    // Difference between tallest and shortest
+    const heightDifference = maxHeight - minHeight;
+
+    // Only apply if within threshold
+    if (heightDifference <= 180) {
+
+      ddp.forEach(panel => {
+        panel.style.minHeight = `${maxHeight}px`;
+      });
+
+    }
+
+  }
+}
+
+</script>

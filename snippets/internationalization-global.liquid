@@ -1,0 +1,95 @@
+{% assign lang_count = localization.available_languages | size %}
+{% assign market_count = localization.available_countries | size %}
+{% assign currency_count = shop.enabled_currencies | size %}
+{% unless lang_count < 2 and market_count < 2 and currency_count < 2 %}
+<script>
+
+var locselectoropeners = document.querySelectorAll('.market-selector--opener');
+var locselectorpanel = document.getElementById('locSelectorPanel');
+var locselectorpanelbg = document.getElementById('locSelectorPanelBg');
+var locselectorclose = document.getElementById('locSelectorCloseBtn');
+
+if (locselectoropeners.length > 0) {
+  locselectoropeners.forEach(function(opener) {
+    function openLocSelector(event) {
+      locselectorpanel.classList.add('open');
+      locselectorpanelbg.classList.add('open');
+      locselectorclose.focus();
+      event.preventDefault();
+    }
+
+    // Click event listener
+    opener.addEventListener('click', openLocSelector);
+
+    // Keydown event listener for 'Enter' key
+    opener.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.keyCode === 13) {
+        openLocSelector(event);
+      }
+    });
+});
+  
+if(locselectorclose) {
+  locselectorclose.addEventListener('click', function(event) {
+    locselectorpanel.classList.remove('open');
+    locselectorpanelbg.classList.remove('open');
+    event.preventDefault();
+  });
+
+  locselectorclose.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      locselectorpanel.classList.remove('open');
+      locselectorpanelbg.classList.remove('open');
+      event.preventDefault();
+    }
+  });
+} 
+  if(locselectorpanelbg) {
+    locselectorpanelbg.addEventListener('click', function() {
+      this.classList.remove('open');
+      locselectorpanel.classList.remove('open');
+    });
+  }
+}
+
+
+document.querySelectorAll('.market-selector-group-list .accordion-title').forEach((el) => {
+  // Enter fires on keydown (like native)
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      el.click();
+    }
+    if (e.key === ' ') e.preventDefault();
+  });
+
+  el.addEventListener('keyup', (e) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+      el.click();
+    }
+  });
+});
+
+class LocalizationForm extends HTMLElement {
+  constructor() {
+    super();
+    this.elements = {
+      input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
+      panel: this.querySelector('ul'),
+    };
+    this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+  }
+
+  onItemClick(event) {
+    event.preventDefault();
+    const form = this.querySelector('form');
+    this.elements.input.value = event.currentTarget.dataset.value;
+    if (form) form.submit();
+  }
+
+}
+
+customElements.define('localization-form', LocalizationForm);
+</script>
+{% endunless %}

@@ -1,0 +1,248 @@
+{% style %}
+
+.section-{{ section.id }} .bs {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+  
+@media only screen and (min-width: 750px) {
+  .section-{{ section.id }} .bs {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }  
+}
+  
+{% endstyle %}
+
+{% if request.page_type == 'collection' %}
+{% if collection.metafields.custom.breadcrumb != blank %}
+{% assign position_counter = 0 %}
+<nav aria-label="Breadcrumb">
+<div class="collection-breadcrumb section-{{ section.id }} section-index-{{ section.index }}">
+
+  {% if section.settings.top_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+
+    <div class="bs {{ section.settings.margin_width }} text-small align-{{ section.settings.alignment }}">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% if section.settings.homepage_link %}
+        {% assign position_counter = 1 %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="{{ routes.root_url }}"><span itemprop="name">{{ 'templates.home_page.home_page' | t }}</span></a> <span class="breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+          <meta itemprop="position" content="1" />
+        </li>
+        {% endif %}
+        {% for collection in collection.metafields.custom.breadcrumb.value %}
+        {% assign position_counter = position_counter | plus: 1 %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="{{ collection.url }}"><span itemprop="name">{{ collection.title }}</span></a> <span class="breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+          <meta itemprop="position" content="{{ position_counter }}" />
+        </li>
+        {% endfor %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="breadcrumb--page-title" aria-current="page"><span itemprop="name">{{ collection.title }}</span></span>
+          <meta itemprop="item" content="{{ canonical_url }}">
+          <meta itemprop="position" content="{{ position_counter | plus: 1 }}" />
+        </li>
+      </ol>
+    </div>
+
+  {% if section.settings.bottom_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+
+</div>
+</nav>
+{% endif %}
+{% endif %}
+
+{% if request.page_type == 'product' %}
+{% if product.metafields.custom.breadcrumb != blank %}
+{% assign position_counter = 0 %}
+<nav aria-label="Breadcrumb">
+<div class="collection-breadcrumb section-{{ section.id }} section-index-{{ section.index }}">
+
+  {% if section.settings.top_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+
+    <div class="bs {{ section.settings.margin_width }} text-small align-{{ section.settings.alignment }}">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% if section.settings.homepage_link %}
+          {% assign position_counter = 1 %}
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{{ routes.root_url }}"><span itemprop="name">{{ 'templates.home_page.home_page' | t }}</span></a> <span class="breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+          <meta itemprop="position" content="1" />
+          </li>
+        {% endif %}
+        {% for collection in product.metafields.custom.breadcrumb.value %}
+          {% assign position_counter = position_counter | plus: 1 %}
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a itemprop="item" href="{{ collection.url }}"><span itemprop="name">{{ collection.title }}</span></a> <span class="product-breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+            <meta itemprop="position" content="{{ position_counter }}" />
+          </li>
+        {% endfor %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span class="product-breadcrumb--product-title" aria-current="page"><span itemprop="name">{{ product.title }}</span></span>
+          <meta itemprop="item" content="{{ canonical_url }}">
+          <meta itemprop="position" content="{{ position_counter | plus: 1 }}" />
+        </li>
+      </ol>
+    </div>
+  
+  {% if section.settings.bottom_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+
+</div>
+</nav>
+{% endif %}
+{% endif %}
+
+{% if request.page_type == 'article' %}
+<nav aria-label="Breadcrumb">
+<div class="collection-breadcrumb section-{{ section.id }} section-index-{{ section.index }}">
+
+  {% if section.settings.top_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+
+    <div class="bs {{ section.settings.margin_width }} text-small align-{{ section.settings.alignment }}">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% if section.settings.homepage_link %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="{{ routes.root_url }}"><span itemprop="name">{{ 'templates.home_page.home_page' | t }}</span></a> <span class="breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+          <meta itemprop="position" content="1" />
+        </li>
+        {% endif %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="{{ blog.url }}"><span itemprop="name">{{ blog.title }}</span></a> <span class="breadcrumb--divider">{% if section.settings.divider_style == 'slash' %}/{% else %}&bull;{% endif %}</span>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span itemprop="item" class="breadcrumb--page-title" aria-current="page"><span itemprop="name">{{ article.title }}</span></span>
+          <meta itemprop="position" content="3" />
+        </li>
+      </ol>
+    </div>
+
+  {% if section.settings.bottom_border %}
+  <hr class="section-border section-border-color-dark section-border-width-{{ section.settings.border_width }}">
+  {% endif %}
+</div>
+</nav>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "t:sections.breadcrumb.name",
+    "class": "section",
+    "enabled_on": {
+    "templates": ["collection", "product", "article"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.breadcrumb.settings.paragraph.content"
+      },
+      {
+        "type": "text_alignment",
+        "id": "alignment",
+        "default": "left",
+        "label": "t:sections.all.alignment.alignment_header"
+      },
+      {
+        "type": "select",
+        "id": "margin_width",
+        "label": "t:sections.all.margin",
+        "options": [
+          {
+            "value": "page-width",
+            "label": "t:sections.all.default"
+          },
+          {
+            "value": "page-width-full-margin",
+            "label": "t:sections.all.full_width"
+          }
+      ],
+        "default": "page-width"
+      },
+      {
+        "type": "select",
+        "id": "divider_style",
+        "label": "t:sections.breadcrumb.settings.divider_style.label",
+        "options": [
+          {
+            "value": "bullet",
+            "label": "t:sections.breadcrumb.settings.divider_style.options__1.label"
+          },
+          {
+            "value": "slash",
+            "label": "t:sections.breadcrumb.settings.divider_style.options__2.label"
+          }
+      ],
+        "default": "bullet"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_link",
+        "default": false,
+        "label": "t:sections.breadcrumb.settings.homepage_link.label"
+      },
+      {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 20,
+      "label": "t:sections.all.padding.padding_top"
+      },
+      {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 20,
+      "label": "t:sections.all.padding.padding_bottom"
+      },
+    {
+      "type": "checkbox",
+      "id": "top_border",
+      "default": false,
+      "label": "t:sections.all.border_top"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_border",
+      "default": false,
+      "label": "t:sections.all.border_bottom"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "label": "t:sections.all.width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.all.normal"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.full_width"
+        }
+        ],
+      "default": "normal"
+    }
+    ],
+  "presets": [
+    {
+      "name": "t:sections.breadcrumb.name"
+    }
+  ]
+}
+{% endschema %}

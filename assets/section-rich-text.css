@@ -1,0 +1,294 @@
+.section-rich-text {
+  z-index: 1;
+  position: relative;
+}
+
+.rich-text-content {
+  display: flex;
+  justify-content: center;
+}
+
+.rich-text .rich-text-content {
+  margin: auto;
+}
+
+.rich-text__blocks {
+  width: 100%;
+}
+
+.rich-text__image {
+  width: 100px;
+  height: auto;
+  line-height: 1;
+}
+
+.rich-text__image img {
+  width: 100%;
+  height: auto;
+}
+
+.rich-text__image.align-right {
+  margin-left: auto;
+}
+
+.rt-img-micro {
+  width: 80px;
+  height: auto;
+}
+
+.rt-img-sml {
+  width: 100px;
+  height: auto;
+}
+
+.rt-img-med {
+  width: 160px;
+  height: auto;
+}
+
+.rt-img-large {
+  width: 200px;
+  height: auto;
+}
+
+.rt-img-full {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .rich-text-style--left {
+    justify-content: flex-start;
+  }
+  .rich-text-style--right {
+    justify-content: flex-end;
+  }
+  .rt-img-micro {
+    width: 80px;
+    height: auto;
+  }
+  .rt-img-sml {
+    width: 120px;
+    height: auto;
+  }
+  .rt-img-med {
+    width: 200px;
+    height: auto;
+  }
+  .rt-img-large {
+    width: 400px;
+    height: auto;
+  }
+  
+}
+
+.rich-text__blocks * {
+  overflow-wrap: break-word;
+}
+
+.rich-text__blocks > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.rich-text__buttons {
+  word-break: break-word;
+}
+
+.rich-text-content .center .button {
+  margin: 0 auto;
+}
+
+.rich-text__buttons + .rich-text__buttons {
+  margin-top: 1rem;
+}
+
+.rich-text__blocks.left .rich-text__buttons {
+  justify-content: flex-start;
+}
+
+.rich-text__blocks.right .rich-text__buttons {
+  justify-content: flex-end;
+}
+
+.rich-text__buttons.align-right {
+  margin-left: auto;
+}
+
+.rich-text__buttons .link--underlined {
+  width: fit-content;
+}
+
+.rich-text__buttons.align-center .link--underlined {
+  margin: 0 auto;
+}
+
+.rich-text__buttons.buttons-layout-stacked .link--underlined:first-child {
+  margin-bottom: 15px;
+}
+
+.rich-text__buttons.buttons-layout-stacked .link--underlined:last-child {
+  margin-top: 15px;
+}
+
+.rich-text__buttons.buttons-layout-inline {
+  width: fit-content;
+  display: flex;
+  column-gap: 12px;  
+}
+
+.rich-text__buttons.buttons-layout-inline .button, .rich-text__buttons.buttons-layout-inline .link--underlined {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.rich-text__buttons.buttons-layout-inline:has(.link--underlined) {
+  column-gap: 20px;
+  align-items: center;
+}
+
+.rich-text__pindent p:first-child {
+  text-indent: 4rem;
+}
+
+.rich-text__pindent_medium p:first-child {
+  text-indent: 8rem;
+}
+
+.rich-text__pindent_large p:first-child {
+  text-indent: calc(50% + var(--grid-mobile-horizontal-spacing));
+}
+
+@media only screen and (min-width: 750px) {
+  .rich-text__pindent p:first-child {
+    text-indent: 6rem;
+  }
+  .rich-text__pindent_medium p:first-child {
+    text-indent: 10rem;
+  }
+  .rich-text__pindent_large p:first-child {
+    text-indent: calc(50% + var(--grid-desktop-horizontal-spacing));
+  }  
+}
+
+.rich-text-section-bg-image {
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.rich-text-section-bg-image img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.rich-text-section-bg-image-overlay {
+  display: block !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 1;  
+}
+
+.countdown-timer {
+  display: flex;
+  column-gap: 1rem;
+  justify-content: center;
+  line-height: 1.0;
+}
+
+.countdown-font--accent .countdown-timer {
+  font-family: var(--font-accent-family);
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight); 
+}
+
+.align-left .countdown-timer {
+  justify-content: flex-start;
+}
+
+.align-right .countdown-timer {
+  justify-content: flex-end;
+}
+
+.countdown-days, .countdown-hours, .countdown-minutes, .countdown-seconds {
+  text-align: inherit;
+}
+
+.countdown-days:has(.text-xxxl), .countdown-hours:has(.text-xxxl), .countdown-minutes:has(.text-xxxl), .countdown-seconds:has(.text-xxxl) {
+  min-width: 60px;
+}
+
+.align-left .countdown-timer:has(.text-xxxl) .digit-colon, .align-right .countdown-timer:has(.text-xxxl) .digit-colon {
+  min-width: 30px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .countdown-days:has(.text-xxxl), .countdown-hours:has(.text-xxxl), .countdown-minutes:has(.text-xxxl), .countdown-seconds:has(.text-xxxl) {
+    min-width: 80px;
+  }
+  .align-left .countdown-timer:has(.text-xxxl) .digit-colon, .align-right .countdown-timer:has(.text-xxxl) .digit-colon {
+    min-width: 40px;
+  }
+}
+
+
+.digit-label {
+  display: none;
+}
+
+.countdown-timer.countdown-timer--digit-labels .digit-label {
+  display: block;
+  margin-top: 15px;
+}
+
+.countdown-timer--digit-colons {
+  column-gap: 0.3rem;  
+}
+
+.countdown-seconds {
+  visibility: hidden;
+  width: 0;
+}
+
+.countdown-timer--seconds .countdown-seconds {
+  visibility: visible;
+  width: auto;
+}
+
+.countdown-timer-expired-message {
+  display: none;
+}
+
+.ct-expired .countdown-timer-expired-message {
+  display: block;
+}
+
+.countdown-timer-expired-message--button {
+  padding-top: 3rem;
+}
+
+.ct-expired .countdown-timer {
+  visibility: hidden;
+  height: 0;
+  font-size: 0;
+}
+
+.ct-expired .countdown-timer--seconds {
+  visibility: hidden;
+  display: none !important;
+}

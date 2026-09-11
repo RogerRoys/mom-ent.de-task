@@ -1,0 +1,89 @@
+.template-search__header {
+  margin-bottom: 3rem;
+}
+
+.template-search__search {
+  margin: 0 auto 4rem;
+  max-width: 60rem;
+  padding: 0 var(--page-margin-mobile);
+}
+
+.template-search__search .search {
+  margin-top: 3rem;
+  position: relative;
+}
+
+.template-search--empty {
+  padding-bottom: 18rem;
+}
+
+.main-search-predictive-search {
+    position: absolute;
+    width: 100%;
+    max-width: calc(60rem - var(--page-margin-mobile) - var(--page-margin-mobile));
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 0 2rem;
+    border: 1px solid var(--color-foreground);
+    margin-top: 5px;
+    z-index: 3;
+    border-radius: var(--inputs-radius);
+}
+
+.main-search-predictive-search .predictive-search__result-group:first-child {
+  margin-top: 0;
+}
+
+.template-search__search input {
+  position: relative;
+  width: 100%;
+  padding: 16px 32px !important;
+  border: 1px solid var(--color-foreground);
+  outline: 0 !important;
+}
+
+.template-search__search input:focus {
+  box-shadow: none !important;
+}
+
+
+/* clears the ‘X’ from Internet Explorer */
+.template-search__search input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+.template-search__search input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+/* clears the ‘X’ from Chrome */
+.template-search__search input[type="search"]::-webkit-search-decoration,
+.template-search__search input[type="search"]::-webkit-search-cancel-button,
+.template-search__search input[type="search"]::-webkit-search-results-button,
+.template-search__search input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+/* Remove extra spacing for search inputs in Safari */
+input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+@media screen and (min-width: 750px) {
+  .template-search__header {
+    margin-bottom: 5rem;
+  }
+}
+
+.search__button .icon {
+  height: 1.6rem;
+}
+
+.page-card {
+  height: 100%;
+  border: 1px solid rgba(var(--color-foreground-rgb),0.15);
+}
+
+.page-card--text-link {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.page-card .caption {
+  margin-bottom: 1.5rem;
+}

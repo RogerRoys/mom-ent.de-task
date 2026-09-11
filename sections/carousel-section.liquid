@@ -1,0 +1,317 @@
+{% schema %}
+{
+  "name": "Carousel Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "block_text_color",
+      "label": "Block Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "role_color",
+      "label": "Role Color",
+      "default": "#555555"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_block",
+      "name": "Carousel Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Block Text"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="carousel-section" style="background-color: {{ section.settings.background_color }}">
+  <div class="carousel-container">
+    {% for block in section.blocks %}
+    <div class="carousel-item">
+      <div class="image-container">
+        <img src="{{ block.settings.image | img_url: '600x600' }}" alt="{{ block.settings.name }}">
+      </div>
+      <div class="content">
+              <div class="now">
+        <p class="block-text" style="color: {{ section.settings.block_text_color }}">{{ block.settings.text }}</p>
+        <h4 class="block-name" style="color: {{ section.settings.name_color }}">{{ block.settings.name }}</h4> </div>
+        <p class="block-role" style="color: {{ section.settings.role_color }}">{{ block.settings.role }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <button class="arrow left-arrow">&#8249;</button>
+  <button class="arrow right-arrow">&#8250;</button>
+</div>
+
+<style>
+.carousel-section {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.5, 1); /* Smooth easing */
+  will-change: transform; /* Optimize rendering */
+}
+
+.carousel-item {
+  flex: 0 0 50%; /* 2 items on desktop */
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: left;
+  gap: 2rem;
+}
+
+.image-container img {
+  width: 400px;
+  height: auto;
+  object-fit: cover;
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.block-text {
+  font-size: 20px;
+  
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 5rem;
+}
+
+.block-name {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.block-role {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+
+ .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #9386A6;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    display:none ;
+}
+
+  .carousel-section:hover .arrow {
+  display: flex; /* Show arrows on hover */
+}
+
+
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 100%; /* Show 1 block at a time on mobile */
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+   .arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: #9386A6;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.block-text {
+  font-size: 20px;
+     
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 2rem !important;
+}
+  .image-container img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+
+  .block-text {
+    font-size: 0.9rem;
+  }
+
+  .block-name {
+    font-size: 1.1rem;
+  }
+
+  .block-role {
+    font-size: 0.8rem;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.carousel-container');
+  const items = document.querySelectorAll('.carousel-item');
+  const leftArrow = document.querySelector('.left-arrow');
+  const rightArrow = document.querySelector('.right-arrow');
+
+  let currentIndex = 0;
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+
+  function setPositionByIndex() {
+    const itemWidth = container.offsetWidth / (window.innerWidth <= 768 ? 1 : 2); // 1 block on mobile, 2 on desktop
+    currentTranslate = -currentIndex * itemWidth;
+    container.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  function handleGestureEnd() {
+    const itemWidth = container.offsetWidth / (window.innerWidth <= 768 ? 1 : 2);
+    const movedBy = currentTranslate - prevTranslate;
+
+    // Adjust currentIndex based on swipe threshold
+    if (movedBy < -itemWidth / 3 && currentIndex < items.length - (window.innerWidth <= 768 ? 1 : 2)) {
+      currentIndex++;
+    } else if (movedBy > itemWidth / 3 && currentIndex > 0) {
+      currentIndex--;
+    }
+
+    setPositionByIndex();
+    prevTranslate = currentTranslate;
+  }
+
+  function startDrag(e) {
+    isDragging = true;
+    startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    container.style.transition = 'none'; // Disable transition during drag
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const movement = currentX - startX;
+
+    // Prevent overswipe
+    const maxTranslate = 0;
+    const minTranslate = -(container.offsetWidth / (window.innerWidth <= 768 ? 1 : 2)) * (items.length - (window.innerWidth <= 768 ? 1 : 2));
+
+    currentTranslate = Math.max(minTranslate, Math.min(maxTranslate, prevTranslate + movement));
+    container.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  function endDrag() {
+    isDragging = false;
+    container.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.8, 0.5, 1)'; // Smooth transition
+    handleGestureEnd();
+  }
+
+  // Desktop events
+  container.addEventListener('mousedown', startDrag);
+  container.addEventListener('mousemove', drag);
+  container.addEventListener('mouseup', endDrag);
+  container.addEventListener('mouseleave', () => isDragging && endDrag());
+
+  // Mobile events
+  container.addEventListener('touchstart', startDrag);
+  container.addEventListener('touchmove', drag);
+  container.addEventListener('touchend', endDrag);
+
+  // Arrow functionality
+  leftArrow.addEventListener('click', () => {
+    if (currentIndex > 0) currentIndex--;
+    setPositionByIndex();
+  });
+
+  rightArrow.addEventListener('click', () => {
+    if (currentIndex < items.length - (window.innerWidth <= 768 ? 1 : 2)) currentIndex++;
+    setPositionByIndex();
+  });
+
+  // Update layout on resize
+  window.addEventListener('resize', setPositionByIndex);
+  setPositionByIndex(); // Initialize position
+});
+</script>

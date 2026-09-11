@@ -1,0 +1,63 @@
+{% assign hide_flags = false %}
+{% assign unsupported_flags = "af,hi,pa,bn,ta,mr" | split: "," %}
+{% if settings.enable_language_flags == false %}
+  {% assign hide_flags = true %}
+{% endif %}
+<div class="market-selector-list">
+  <localization-form>
+    {% form 'localization' %}
+  <ul id="CountryList-NA" role="list" class="vert-list ui-icon-list ui-nav-element">   
+      {% for language in localization.available_languages %}
+        {% assign coun = language.iso_code %}
+        {% if language.iso_code == 'en' %}{% assign coun = 'gb' %}{% endif %}
+        {% if language.iso_code == 'ja' %}{% assign coun = 'jp' %}{% endif %}
+        {% if language.iso_code == 'ko' %}{% assign coun = 'kr' %}{% endif %}
+        {% if language.iso_code == 'cs' %}{% assign coun = 'cz' %}{% endif %}
+        {% if language.iso_code == 'da' %}{% assign coun = 'dk' %}{% endif %}
+        {% if language.iso_code == 'el' %}{% assign coun = 'gr' %}{% endif %}
+        {% if language.iso_code == 'sv' %}{% assign coun = 'se' %}{% endif %}
+        {% if language.iso_code == 'sl' %}{% assign coun = 'si' %}{% endif %}
+        {% if language.iso_code == 'sr' %}{% assign coun = 'rs' %}{% endif %}
+        {% if language.iso_code == 'vi' %}{% assign coun = 'vn' %}{% endif %}
+        {% if language.iso_code == 'zh-CN' %}{% assign coun = 'cn' %}{% endif %}
+        {% if language.iso_code == 'uk' %}{% assign coun = 'ua' %}{% endif %}
+        {% if language.iso_code == 'rm' %}{% assign coun = 'ch' %}{% endif %}
+        {% if language.iso_code == 'ar' %}{% assign coun = 'arabic' %}{% endif %}
+        {% if language.iso_code == localization.language.iso_code %}
+        <li class="vert-list-item{% if unsupported_flags contains language.iso_code or hide_flags %} ms-item-no-flag{% endif %} list-countries market-list-current" tabindex="-1">
+          <a href="#" aria-current="true" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}" data-value="{{ language.iso_code }}">
+            {% unless hide_flags %}{% render 'internationalization-flag', flag: coun %}{% endunless %}<span class="list-countries-name">{{ language.endonym_name | capitalize }}</span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for language in localization.available_languages %}
+        {% assign coun = language.iso_code %}
+        {% if language.iso_code == 'en' %}{% assign coun = 'gb' %}{% endif %}
+        {% if language.iso_code == 'ja' %}{% assign coun = 'jp' %}{% endif %}
+        {% if language.iso_code == 'ko' %}{% assign coun = 'kr' %}{% endif %}
+        {% if language.iso_code == 'cs' %}{% assign coun = 'cz' %}{% endif %}
+        {% if language.iso_code == 'da' %}{% assign coun = 'dk' %}{% endif %}
+        {% if language.iso_code == 'el' %}{% assign coun = 'gr' %}{% endif %}
+        {% if language.iso_code == 'sv' %}{% assign coun = 'se' %}{% endif %}
+        {% if language.iso_code == 'sl' %}{% assign coun = 'si' %}{% endif %}
+        {% if language.iso_code == 'sr' %}{% assign coun = 'rs' %}{% endif %}
+        {% if language.iso_code == 'vi' %}{% assign coun = 'vn' %}{% endif %}
+        {% if language.iso_code == 'zh-CN' %}{% assign coun = 'cn' %}{% endif %}
+        {% if language.iso_code == 'uk' %}{% assign coun = 'ua' %}{% endif %}
+        {% if language.iso_code == 'rm' %}{% assign coun = 'ch' %}{% endif %}
+        {% if language.iso_code == 'ar' %}{% assign coun = 'arabic' %}{% endif %}
+        {% unless language.iso_code == localization.language.iso_code %}
+            <li class="vert-list-item{% if unsupported_flags contains language.iso_code or hide_flags %} ms-item-no-flag{% endif %} list-countries" tabindex="-1">
+              <a href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}" data-value="{{ language.iso_code }}">
+                {% unless hide_flags %}{% render 'internationalization-flag', flag: coun %}{% endunless %}<span class="list-countries-name">{{ language.endonym_name | capitalize }}</span>
+              </a>
+            </li>
+        {% endunless %}
+        {% endfor %}    
+  </ul>
+  <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+    {% endform %}
+  </localization-form>
+</div>

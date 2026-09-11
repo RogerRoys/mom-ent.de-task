@@ -1,0 +1,121 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.8 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.8 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer account section-{{ section.id }}-padding">
+<div class="account-sub-navigation">
+  <div class="account-sub-navigation-left">
+    <ul>
+      <li><a class="account-nav-active" href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a></li>
+      <li><a href="{{ routes.account_addresses_url }}">{{ 'customer.account.details' | t }}</a></li>
+    </ul>
+  </div>
+  <div class="account-sub-navigation-right">
+    <ul>
+        <li><a class="" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a></li>
+    </ul>    
+  </div>
+</div>
+  <div class="account-home-summary">
+      <div class="account-home-avatar">{{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}</div>
+      <div class="account-home-info">
+      {% if customer.first_name != blank %}<h1 class="h4">{{ customer.first_name }} {{ customer.last_name }}</h1>
+        {% else %}
+      <h1 class="h4">{{ 'customer.account.title' | t }}</h1>
+      {% endif %}
+      {% if customer.email %}{{ customer.email }}<br>{% endif %}
+      <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses.size }})</a>
+    </div>
+  </div>
+
+  <div class="account-section">
+    <div>
+      <h2>{{ 'customer.orders.title' | t }}</h2>
+
+
+{%- paginate customer.orders by 25 -%}      
+{% if customer.orders.size > 0 %}
+<div class="account-orders-table">
+
+{%- for order in customer.orders -%}
+<div class="account-orders-table-row">
+
+<div class="account-orders-table-cell-info">
+<div class="account-orders-table-cell-image">
+	{%- for line_item in order.line_items limit: 1 -%}
+	{% if line_item.image %}<a href="{{ order.customer_url }}">{{ line_item.image | image_url: width: 300 | image_tag: loading: 'lazy' }}</a>{% endif %}
+	{%- endfor -%}
+</div>
+<div class="account-orders-table-order-info">
+	<a href="{{ order.customer_url }}"><h4>{{ 'customer.order.title' | t: name: order.name }}</h4></a><br>
+	{{ order.created_at | time_tag: format: 'date' }}<br>
+	{{ order.financial_status_label }}<br>
+	{{ order.fulfillment_status_label }}<br>
+    {{ order.line_items.size }} Item{% if order.line_items.size > 1 %}s{% endif %}
+  <br><br>
+  <a class="link-with-underline" href="{{ order.customer_url }}">{{ 'customer.order.view_order' | t }}</a>
+</div>
+</div>
+
+</div>
+{%- endfor -%}
+
+</div>
+{% else %}
+
+<p>{{ 'customer.orders.none' | t }}</p>
+{% endif %}  
+
+{%- if paginate.pages > 1 -%}
+  {% render 'pagination', paginate: paginate, anchor: '' %}
+{%- endif -%}
+  
+{%- endpaginate -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-account.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 80
+    }
+  ]
+}
+{% endschema %}

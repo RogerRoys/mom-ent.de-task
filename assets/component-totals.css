@@ -1,0 +1,54 @@
+.totals {
+  display: block;
+}
+
+.cart__footer .totals {
+  padding-bottom: 1rem;
+}
+
+.totals > * {
+  margin: 0;
+}
+
+.totals * {
+  line-height: 1;
+}
+
+.cart__ctas + .totals {
+  margin-top: 2rem;
+}
+
+.totals-row {
+  width: 100%;
+  display: flex;
+}
+
+.totals-column {
+  width: 50%;
+}
+
+.totals-column-fw {
+  width: 100%;
+}
+
+.totals-column:first-child {
+  text-align: left;
+}
+
+.totals-column:last-child {
+  text-align: right;
+}
+
+.totals-column p {
+  margin: 0.5rem 0;
+}
+
+.font-weight-bold .grand-total-row {
+  font-weight: var(--font-body-weight-bold);
+}
+
+.grand-total-row-border-top {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.2); 
+}

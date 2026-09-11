@@ -1,0 +1,331 @@
+{% assign group_by_region = settings.enable_region_grouping %}
+{% assign use_accordions = false %}
+
+{% if settings.region_layout == 'accordions' %}
+  {% assign use_accordions = true %}
+{% endif %}
+
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+
+<div class="market-selector-list{% if localization.available_countries.size > 4 %} market-selector-list-rs{% endif %}">
+{% if localization.available_countries.size > 1 %}
+
+{% if localization.available_countries.size > 14 and group_by_region == false and settings.enable_country_search %}
+<div class="country-search-input-wrapper">
+<input class="country-search-input" type="text" id="countrySearch" onkeyup="filterCountryList()" placeholder="{{ 'general.search.search' | t }}">
+{% render 'icon-search' %}
+</div>
+{% endif %}
+  <localization-form>
+    {% form 'localization' %}
+
+{% if group_by_region %}
+
+{% assign namerica_list = 'us,ca' | split: ',' %}
+{% assign camerica_list = 'mx,ai,ag,bb,bl,bq,bs,cu,dm,gd,gp,ht,mf,kn,ky,jm,lc,mq,ms,pm,pr,tc,tt,um,vc,vg,bz,hn,cr,ht,gt,ni,pa,pr,sv' | split: ',' %}
+{% assign samerica_list = 'ar,aw,bm,br,bo,cl,co,cw,ec,fk,gf,gs,gy,pe,py,sr,uy,ve' | split: ',' %}
+{% assign europe_list = 'gb,ad,al,at,ax,ba,be,bg,by,ch,cy,cz,de,dk,gl,ee,es,fr,fi,fo,gg,gi,gr,hr,hu,ie,im,is,it,je,li,lt,lu,lv,me,mc,md,mk,mt,nl,no,pl,pt,se,sm,ro,rs,si,sk,sj,ua,xk' | split: ',' %}
+{% assign africa_list = 'ao,bj,bf,bi,bw,dz,cd,cf,cg,ci,cm,cv,dj,eg,eh,er,et,gh,gq,gn,gw,ke,km,lr,ls,ma,mr,mu,mw,mz,na,ng,re,rw,sc,sd,sh,sl,sn,ss,st,sz,td,tg,tn,tz,ug,yt,za,zm,zw' | split: ',' %}
+{% assign asia_list = 'af,am,az,bd,bn,bt,cc,cn,ge,jp,hk,kh,kg,kp,kr,kz,id,in,la,lk,mm,mn,mo,mv,my,np,ph,pk,ru,sg,th,tj,tm,tw,vn,uz' | split: ',' %}
+{% assign meast_list = 'ae,bh,jo,kw,lb,ps,il,iq,ir,om,qa,tr,sa,sy,ye' | split: ',' %}
+{% assign oceania_list = 'au,nz,ck,cx,fj,gu,ki,nf,nr,nu,pg,pf,pn,sb,tf,tk,tl,to,vu,wf,ws' | split: ',' %}
+
+  <div class="market-selector-groups-list-container region-layout--{{ settings.region_layout }}">
+
+  {% comment %}NORTH AMERICA{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Namerica">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-NA" id="AccHeading-NA">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.north_america' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+  <span class="market-selector-group-heading">{{ 'general.regions.north_america' | t }}</span>
+  {% endif %}
+
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-NA" id="AccContent-NA">{% endif %}
+  
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+  {% comment %}List USA and Canada first{% endcomment %}
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if namerica_list contains iso_lower %}
+          {% if iso_lower == 'us' or iso_lower == 'ca' %}
+          <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span>{% if settings.show_country_currency %}<span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span>{% endif %}</span>
+          </a>
+          </li>
+        {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if namerica_list contains iso_lower and iso_lower != 'us' and iso_lower != 'ca' %}
+          <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span>{% if settings.show_country_currency %}<span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span>{% endif %}</span>
+          </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for country in localization.available_countries %}
+      {% assign iso_lower = country.iso_code | downcase %}
+      {% if camerica_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span>{% if settings.show_country_currency %}<span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span>{% endif %}</span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+  {% comment %}SOUTH AMERICA{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Samerica">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-SA" id="AccHeading-SA">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.south_america' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.south_america' | t }}</span>
+  {% endif %}
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-SA" id="AccContent-SA">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if samerica_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+  {% comment %}EUROPE{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Europe">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-EU" id="AccHeading-EU">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.europe' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.europe' | t }}</span>
+  {% endif %}
+
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-EU" id="AccContent-EU">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if europe_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+
+  {% comment %}MIDDLE EAST{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Middle East">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-EU" id="AccHeading-EU">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.middle_east' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.middle_east' | t }}</span>
+  {% endif %}
+
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-AF" id="AccContent-AF">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if meast_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+
+  {% comment %}AFRICA{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Africa">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-EU" id="AccHeading-EU">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.africa' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.africa' | t }}</span>
+  {% endif %}
+
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-AF" id="AccContent-AF">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if africa_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+  {% comment %}ASIA{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Asia">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-AS" id="AccHeading-AS">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.asia' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.asia' | t }}</span>
+  {% endif %}
+
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-AS" id="AccContent-AS">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if asia_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+
+  {% comment %}OCEANIA{% endcomment %}
+  <div class="market-selector-group-list{% if use_accordions %} accordion accordion-title-font--heading{% endif %}" data-market-list="Oceania">
+  {% if use_accordions %}
+  <div class="accordion-title" role="button" tabindex="0" aria-expanded="false" role="button" aria-controls="AccContent-OC" id="AccHeading-OC">
+    <span class="text-ms-ac-region-label">{{ 'general.regions.oceania' | t }}</span>
+    <span class="accordion-icons-wrapper">
+    <div class="accordion-icon-open">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    <div class="accordion-icon-close">{% if settings.accordion_icon == 'plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</div>
+    </span>
+  </div>
+  {% else %}
+    <span class="market-selector-group-heading">{{ 'general.regions.oceania' | t }}</span>
+  {% endif %}
+  {% if use_accordions %}<div class="accordion-panel" role="region" aria-hidden="true" aria-labelledby="AccHeading-OC" id="AccContent-OC">{% endif %}
+
+  <ul role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% assign iso_lower = country.iso_code | downcase %}
+        {% if oceania_list contains iso_lower %}
+        <li class="vert-list-item list-countries{% if country.iso_code == localization.country.iso_code %} market-list-current{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span><span class="list-countries-name">{{ country.name }}</span><span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span></span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+  </ul>
+  {% if use_accordions %}</div>{% endif %}
+  </div>
+  </div>
+  
+{% else %}
+    
+  <ul id="CountryList-NA" role="list" class="vert-list ui-icon-list ui-nav-element">
+      {% for country in localization.available_countries %}
+        {% if country.iso_code == localization.country.iso_code %}
+        <li class="vert-list-item list-countries market-list-current{% if country.popular? %} country--popular{% endif %}" tabindex="-1">
+          <a href="#" aria-current="true" class="country-list-current" data-value="{{ country.iso_code }}">
+            {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span class="list-countries-name">{{ country.name }}</span>{% if settings.show_country_currency %}<span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span>{% endif %}
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+       
+      {% for country in localization.available_countries %}
+        {% unless country.iso_code == localization.country.iso_code %}
+            <li class="vert-list-item list-countries{% if country.popular? %} country--popular{% endif %}" tabindex="-1">
+              <a href="#" data-value="{{ country.iso_code }}">
+                {% if settings.enable_country_flags %}{{ country | image_url: width: 24, height: 18 | image_tag: loading: 'lazy', class: 'icon-country-flag' }}{% endif %}<span class="list-countries-name">{{ country.name }}</span>{% if settings.show_country_currency %}<span class="list-countries-currency">{{ country.currency.iso_code }} ({{ country.currency.symbol }})</span>{% endif %}
+              </a>
+            </li>
+          {% endunless %}
+      {% endfor %}
+    </ul>
+
+{% endif %}
+  
+  <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+    {% endform %}
+  </localization-form>
+{% endif %}
+</div>
+
+<script>
+function filterCountryList() {
+  var cinput = document.getElementById('countrySearch');
+  if (!cinput) return;
+
+  var filter = cinput.value.toUpperCase();
+  var ul = document.getElementById("CountryList-NA");
+  var li = ul.getElementsByTagName('li');
+
+  for (var i = 0; i < li.length; i++) {
+    var a = li[i].getElementsByTagName("a")[0];
+    if (a) {
+      var txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

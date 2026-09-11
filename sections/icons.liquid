@@ -1,0 +1,100 @@
+{% schema %}
+{
+  "name": "Icons Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "unit": "px",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "unit": "px",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_text",
+      "name": "Icon with Text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Sample Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Icons Grid",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="icons-grid" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {% for block in section.blocks %}
+    <div class="icon-block">
+      {% if block.settings.icon %}
+        <img src="{{ block.settings.icon | image_url }}" alt="Icon">
+      {% endif %}
+      <p>{{ block.settings.text }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .icon-block img {
+       width: 40px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .icon-block p {
+    margin-top: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .icons-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .icons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .icon-block img {
+       width: 90px!important;
+  }}
+</style>

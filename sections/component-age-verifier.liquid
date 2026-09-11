@@ -1,0 +1,352 @@
+{{ 'component-popup.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .age-verifier-logo {
+    margin-bottom: {{ section.settings.logo_margin }}px;
+    max-width: {{ section.settings.logo_size }}px;
+  }
+{% endstyle %}
+
+<div id="siteAgeVerifier" class="site-age-verifier-lx popup--overlay popup-layout-vertical pop-up-position-center color-scheme-{{ section.settings.text_color }} color-scheme-{{ section.settings.bg_color }}" role="dialog" aria-modal="true">
+  <div class="popup--modal">
+    <div class="popup--modal-content">
+      
+      {% if section.settings.logo_show %}
+        {% assign logo_render_size = section.settings.logo_size | times: 2 %}
+      {% unless settings.logo_main == blank and settings.logo_inverted == blank %}
+          <div class="age-verifier-logo align-{{ section.settings.content_alignment }}">
+          {%- if settings.logo_main != blank and section.settings.logo_type == 'default' -%}
+              {%- assign logo_alt = settings.logo_main.alt | default: shop.name | escape -%}
+              {{ settings.logo_main | image_url: width: logo_render_size | image_tag: alt: logo_alt }}
+          {%- endif -%}
+          {%- if settings.logo_inverted != blank and section.settings.logo_type == 'inverted' -%}
+              {%- assign logo_alt = settings.logo_inverted.alt | default: shop.name | escape -%}
+              {{ settings.logo_inverted | image_url: width: logo_render_size | image_tag: alt: logo_alt }}
+          {%- endif -%}
+          </div>
+      {% endunless %}
+      {% endif %}
+
+      {% if section.settings.image != blank %}
+      <div class="popup--modal-image-wrapper">
+        <div class="popup--modal-image pmi-ratio--{{ section.settings.image_ratio }}">
+          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'eager' }}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="popup--modal-text align-{{ section.settings.content_alignment }}">
+        <span class="{{ section.settings.heading_size }}">{{ section.settings.heading }}</span>
+        {% if section.settings.description != blank %}<div class="text-{{ section.settings.text_size }} rte">{{ section.settings.description }}</div>{% endif %}
+        <button id="ageVerifierButton" class="button button--{{ section.settings.btn_style }} button--{{ section.settings.button_width }} button--solid">{{ section.settings.btn_txt_submit }}</button>
+        {% if section.settings.legal_text != blank %}
+        <div class="text-small rte">{{ section.settings.legal_text }}</div>
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var ageVerifier = document.getElementById('siteAgeVerifier');
+  var ageVerifiedButton = document.getElementById('ageVerifierButton');
+
+  if (!ageVerifier) return;
+
+  // Function to get cookie value by name
+  function getCookie(cookieName) {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie || "");
+    var cookieArray = decodedCookie.split(';');
+
+    for (var i = 0; i < cookieArray.length; i++) {
+      var cookie = cookieArray[i].trim();
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
+    }
+    return "";
+  }
+
+  // Check if the ageVerified cookie exists
+  var ageVerified = getCookie("lx-age-verified");
+
+  // If cookie does not exist, display the age verifier
+  if (!ageVerified) {
+    ageVerifier.classList.add('active');
+  }
+
+  if (ageVerifiedButton) {
+    ageVerifiedButton.addEventListener('click', function () {
+      // Hide the age verifier
+      ageVerifier.classList.remove('active');
+
+      // Set the cookie to prevent the age verifier from showing for the next 72 hours
+      var expiryDate = new Date();
+      expiryDate.setTime(expiryDate.getTime() + (72 * 60 * 60 * 1000));
+      document.cookie = "lx-age-verified=true; expires=" + expiryDate.toUTCString() + "; path=/;";
+    });
+  }
+});
+</script>
+
+
+{% schema %}
+  {
+    "name": "t:sections.age_verifier.name",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.age_verifier.settings.header__logo.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "logo_show",
+        "default": true,
+        "label": "t:sections.age_verifier.settings.logo_show.label"
+      },
+      {
+      "type": "select",
+      "id": "logo_type",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.age_verifier.settings.logo_type.options__1.label"
+        },
+        {
+          "value": "inverted",
+          "label": "t:sections.age_verifier.settings.logo_type.options__2.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.age_verifier.settings.logo_type.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_size",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "default": 200,
+      "label": "t:sections.all.size.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_margin",
+      "unit": "px",
+      "min": 20,
+      "max": 60,
+      "step": 10,
+      "default": 30,
+      "label": "t:sections.all.margin"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.image"
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "t:sections.all.image",
+        "info": "t:sections.all.optional"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.all.ratio.image_ratio",
+      "options": [
+        {
+          "value": "landscape-21x9",
+          "label": "t:sections.all.ratio.landscape_21_9"
+        },
+        {
+          "value": "landscape-16x9",
+          "label": "t:sections.all.ratio.landscape_16_9"
+        },
+        {
+          "value": "landscape-6x4",
+          "label": "t:sections.all.ratio.landscape_6_4"
+        }
+		],
+      "default": "landscape-16x9"
+    },
+    {
+    "type": "header",
+    "content": "t:sections.all.text"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "t:sections.all.alignment.text_alignment_heading",
+      "default": "center"
+    },
+    {
+    "type": "text",
+    "id": "heading",
+    "label": "t:sections.all.heading",
+    "default": "Please confirm your age"
+	  },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.all.heading_size.label",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.size.normal"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.size.large"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "info": "t:sections.all.optional",
+      "default": "<p>Are you over 18? You must be over the age of 18 to access our store.</p>"
+	  },   
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.all.size.text_size",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.all.size.normal"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.all.size.large"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "richtext",
+      "id": "legal_text",
+      "label": "t:sections.age_verifier.settings.footnote.label",
+      "info": "t:sections.all.optional"
+	  },
+    {
+      "type": "text",
+      "id": "btn_txt_submit",
+      "label": "t:sections.all.buttons.button_label",
+      "default": "Confirm and Enter"
+	  },
+    {
+      "type": "select",
+      "id": "button_width",
+      "label": "t:sections.all.buttons.button_width",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "full-width",
+          "label": "t:sections.all.size.wide"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "select",
+      "id": "btn_style",
+      "label": "t:sections.all.buttons.button_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.all.buttons.button_style_solid"
+        },
+        {
+          "value": "outline",
+          "label": "t:sections.all.buttons.button_style_outline"
+        }
+    ],
+      "default": "solid"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "options": [
+        {
+          "value": "fg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "fg-01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "fg-02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "fg-03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "fg-04",
+          "label": "t:sections.all.colors.accent_4.label"
+        },
+        {
+          "value": "fg-05",
+          "label": "t:sections.all.colors.accent_5.label"
+        }
+      ],
+      "default": "fg-body",
+      "label": "t:sections.all.colors.text_color.label"
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "options": [
+        {
+          "value": "bg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "bg-01",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "bg-02",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "bg-03",
+          "label": "t:sections.all.colors.background_3.label"
+        },
+        {
+          "value": "bg-04",
+          "label": "t:sections.all.colors.background_4.label"
+        },
+        {
+          "value": "bg-05",
+          "label": "t:sections.all.colors.background_5.label"
+        }
+      ],
+      "default": "bg-body",
+      "label": "t:sections.all.colors.background_color.label"
+    }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.age_verifier.name"
+      }
+    ]
+}
+{% endschema %}

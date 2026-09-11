@@ -1,0 +1,281 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-collection-cards.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+.main-list-collections-page {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+
+.main-list-collections {
+  padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+}
+
+{% if section.settings.card_layout == 'overlay' %}
+.main-list-collections .card-collection, .main-list-collections .card-collection h2, .main-list-collections .card-collection h3 {
+  color: #ffffff;
+}
+{% endif %}
+  
+{% endstyle %}
+
+{% assign card_image_res = 'standard' %}
+{% if section.settings.columns_desktop == 2 %}
+{% assign card_image_res = 'high' %}
+{% endif %}
+
+<div class="main-list-collections-page">
+  <div class="main-list-collections-header page-width align-{{ section.settings.title_alignment }}">
+  <h1>{{ section.settings.title | escape }}</h1>
+    {% if section.settings.description != blank %}
+    <p>{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+  <div class="main-list-collections page-width">
+
+  {%- liquid
+    case section.settings.sort
+      when 'products_high', 'products_low'
+        assign collections = collections | sort: 'all_products_count'
+      when 'date', 'date_reversed'
+        assign collections = collections | sort: 'published_at'
+    endcase
+
+    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+      assign collections = collections | reverse
+    endif
+
+    assign modulo_result = 28 | modulo: section.settings.columns_desktop
+    assign paginate_by = 30
+    if modulo_result == 0
+      assign paginate_by = 28
+    endif
+  -%}
+
+  {%- paginate collections by paginate_by -%}
+    <ul
+      class="collection-list grid-std grid-mobile-{{ section.settings.columns_mobile }}-column grid-tablet-{{ section.settings.columns_tablet }}-column grid-desktop-{{ section.settings.columns_desktop }}-column{% if section.settings.media_radius_top_only %} media-radius-top-only{% endif %}"
+      role="list"
+    >
+      {%- for collection in collections -%}
+        <li class="collection-list__item grid__item">
+          {% render 'card-collection',
+            card_collection: collection,
+            card_type: section.settings.card_layout,
+            title_position: section.settings.card_heading_position,
+            heading_size: section.settings.card_heading_size,
+            media_aspect_ratio: section.settings.image_ratio,
+            image_resolution: card_image_res
+          %}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.main-list-collections.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main-list-collections.settings.title.label",
+      "default": "Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:sections.all.sub_heading"
+    },
+    {
+      "type": "text_alignment",
+      "id": "title_alignment",
+      "default": "center",
+      "label": "t:sections.all.alignment.alignment_header"
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        {
+          "value": "alphabetical",
+          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
+        },
+        {
+          "value": "date_reversed",
+          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
+        },
+        {
+          "value": "date",
+          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
+        },
+        {
+          "value": "products_high",
+          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
+        },
+        {
+          "value": "products_low",
+          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
+        }
+      ],
+      "default": "alphabetical",
+      "label": "t:sections.main-list-collections.settings.sort.label"
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "t:sections.main-list-collections.settings.card_type.label",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "t:sections.main-list-collections.settings.card_type.options__1.label"
+        },
+        {
+          "value": "overlay",
+          "label": "t:sections.main-list-collections.settings.card_type.options__2.label"
+        }
+        ],
+      "default": "stacked"
+    },
+    {
+      "type": "select",
+      "id": "card_heading_size",
+      "label": "t:sections.all.heading_size.label",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.all.heading_size.normal.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.small.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.xl.label"
+        }
+        ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "card_heading_position",
+      "label": "t:sections.main-list-collections.settings.card_heading_position.label",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.all.alignment.top"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.alignment.middle"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.all.alignment.bottom"
+        }
+        ],
+      "default": "center",
+      "info": "t:sections.main-list-collections.settings.card_heading_position.info"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "portrait",
+          "label": "t:sections.all.ratio.portrait_4_5"
+        },
+        {
+          "value": "portrait-4x6",
+          "label": "t:sections.all.ratio.portrait_4_6"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.ratio.square"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.all.ratio.landscape"
+        },
+        {
+          "value": "adapt",
+          "label": "t:sections.all.ratio.adapt_to_image"
+        }
+      ],
+      "default": "portrait",
+      "label": "t:sections.all.ratio.ratio_heading"
+    },
+    {
+    "type": "checkbox",
+    "id": "media_radius_top_only",
+    "default": false,
+    "label": "t:sections.main-list-collections.settings.card_media_top_only.label",
+    "info": "t:sections.main-list-collections.settings.card_media_top_only.info"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.all.layouts.columns_mobile"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.all.layouts.columns_tablet"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.all.layouts.columns_desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 10,
+      "default": 40,
+      "label": "t:sections.all.padding.padding_top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 10,
+      "default": 40,
+      "label": "t:sections.all.padding.padding_bottom"
+    }
+  ]
+}
+{% endschema %}

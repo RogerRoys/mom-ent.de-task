@@ -1,0 +1,48 @@
+.section-recently-viewed:not(:has(.card-product)) {
+  display: none;
+}
+
+.card-recently-viewed-product {
+  text-align: var(--product-card-text-alignment);
+}
+
+.card-recently-viewed-product .on-sale--true .price-item--on-sale {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.card-recently-viewed-product .price-item--on-sale {
+  display: none;
+}
+
+.card-recently-viewed-product .on-sale--true .price-item--on-sale {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.card-recently-viewed-product .on-sale--true .price-item--regular {
+  color: rgb(var(--color-price-sale));
+}
+
+@media only screen and (min-width: 750px) {
+  .section-recently-viewed .grid__item {
+    width: calc(25% - ((var(--grid-mobile-horizontal-spacing) * 3) / 4));
+  } 
+}
+
+@media only screen and (min-width: 1025px) {
+  .section-recently-viewed .grid__item {
+    width: calc(16.66% - ((var(--grid-desktop-horizontal-spacing) * 5) / 6));
+  }
+  .align-center .recent-products-grid {
+    justify-content: center;
+  }
+  .align-right .recent-products-grid {
+    justify-content: flex-end;
+  }
+}
+
+.section-recently-viewed .card-product a, 
+.section-recently-viewed .card-product a:active {
+  text-decoration: none;
+}

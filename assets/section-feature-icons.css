@@ -1,0 +1,85 @@
+.feature-icon-grid {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.align-left .feature-icon-grid {
+  justify-content: flex-start;
+}
+
+.align-right .feature-icon-grid {
+  justify-content: flex-end;
+}
+
+.feature-icon--item {
+  width: 100%;
+  display: block;
+}
+
+.feature-icon--item.layout--horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  column-gap: 12px;
+}
+
+.feature-icon--item.icon-alignment--top {
+  align-items: flex-start;
+}
+
+.feature-icon--image img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.align-center .feature-icon-grid .logo-placeholder {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eeeeee;
+  color: #666666;
+  font-size: 1.1rem;
+  font-family: "Helvetica", Arial, sans-serif;
+  line-height: 1.0;
+}
+
+.feature-icon--text {
+  line-height: 1.3;
+}
+
+.align-center .feature-icon--text {
+  margin: 0 auto;
+}
+
+.align-center .feature-icon--item.layout--horizontal .feature-icon--text {
+  margin: 0;
+}
+
+.feature-icon--text h3, .feature-icon--text .h3, .feature-icon--text .h4 {
+  margin-bottom: 0;
+}
+
+.feature-icon--text-description {
+  display: inline-block;
+  margin: 0;
+}
+
+.feature-icon--text-description p {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.feature-icon--image .logo-placeholder {
+  color: inherit;
+  border: 1px dotted;
+  border-radius: 4px;
+  font-size: 10px;
+}

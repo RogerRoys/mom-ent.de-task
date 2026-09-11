@@ -1,0 +1,35 @@
+<style type="text/css">
+  .template-404 .title + * {
+    margin-top: 1rem;
+  }
+
+  .template-404 p {
+    margin-bottom: 4rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404 .title + * {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<div class="template-404 page-width page-margin {{ section.settings.txt_alignment }}">
+  <h1 class="title">{{ 'templates.404.title' | t }}</h1>
+  <p class="text-body">{{ 'templates.404.subtext' | t }}</p>
+  <a href="{{ routes.all_products_collection_url }}" class="button button--outline">{{ 'general.continue_shopping' | t }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    {
+      "type": "text_alignment",
+      "id": "txt_alignment",
+      "label": "t:sections.all.alignment.text_alignment_heading",
+      "default": "center"
+    }
+  ]
+}
+{% endschema %}

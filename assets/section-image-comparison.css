@@ -1,0 +1,240 @@
+.before-after-section-inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.before-after-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 0;  
+}
+
+.before-after-container .global-image-placeholder {
+  position: absolute;
+  overflow: hidden;
+}
+
+.before-after-container .global-image-placeholder .image-placeholder-lifestyle {
+  position: absolute;
+  height: 800px;
+  left: 100px;
+  top: 100px;
+}
+
+.page-width .before-after-container {
+  border-radius: var(--media-radius);
+}
+
+.image-before {
+  position: relative;
+}
+
+.image-after {
+  position: absolute;
+}
+
+.image-before, .image-after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  padding-bottom: 66%;
+}
+
+.image-before img, .image-after img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+  top: 0;
+  left: 0;
+}
+
+.ba-image-ratio--landscape-16x9 .image-before, .ba-image-ratio--landscape-16x9 .image-after {
+  padding-bottom: 56%;
+}
+
+.ba-image-ratio--square .image-before, .ba-image-ratio--square .image-after {
+  padding-bottom: 100%;
+}
+
+.ba-image-ratio--portrait .image-before, .ba-image-ratio--portrait .image-after {
+  padding-bottom: 125%;
+}
+
+.ba-image-ratio--portrait-4x6 .image-before, .ba-image-ratio--portrait-4x6 .image-after {
+  padding-bottom: 140%;
+}
+
+.image-after {
+  width: 50%; /* Initial width, revealing half of the "after" image */
+  overflow: hidden;
+  z-index: 2;
+}
+
+.align-center .ba-max-width {
+  margin: 0 auto;
+}
+
+.align-right .ba-max-width {
+  margin-left: auto;
+}
+
+.dragger {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  cursor: ew-resize;
+  width: 1px;
+  background: #fff;
+}
+
+.drag-button {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+  background: #fff;
+  border: 0;
+  outline: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  font-size: 10px;
+  padding: 0;
+  cursor: pointer;
+  margin-left: -24px;
+}
+
+.dragger.ba-dragger-bg--01, .dragger.ba-dragger-bg--01 .drag-button {
+  background: var(--color-bg-one);
+}
+
+.dragger.ba-dragger-bg--02, .dragger.ba-dragger-bg--02 .drag-button {
+  background: var(--color-bg-two);
+}
+
+.dragger.ba-dragger-bg--03, .dragger.ba-dragger-bg--03 .drag-button {
+  background: var(--color-bg-three);
+}
+
+.dragger.ba-dragger-bg--04, .dragger.ba-dragger-bg--04 .drag-button {
+  background: var(--color-bg-four);
+}
+
+.ba-dragger-fg--white .drag-button {
+  color: #ffffff;
+}
+
+.ba-dragger-fg--01 .drag-button {
+  color: var(--color-accent-one);
+}
+
+.ba-dragger-fg--02 .drag-button {
+  color: var(--color-accent-two);
+}
+
+.ba-dragger-fg--03 .drag-button {
+  color: var(--color-accent-three);
+}
+
+.ba-dragger-fg--04 .drag-button {
+  color: var(--color-accent-four);
+}
+
+.drag-button .icon {
+  color: inherit;
+  width: 10px;
+  height: 10px;
+}
+
+.drag-button .icon:first-child {
+  transform: rotate(90deg);
+}
+
+.drag-button .icon:last-child {
+  transform: rotate(-90deg);
+}
+
+.image-caption-before, .image-caption-after {
+  position: absolute;
+  top: 12px;
+  color: #ffffff;
+  line-height: 1.0;
+  z-index: 1;
+}
+
+.ba-caption-position--middle .image-caption-before, .ba-caption-position--middle .image-caption-after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ba-caption-position--bottom .image-caption-before, .ba-caption-position--bottom .image-caption-after {
+  top: auto;
+  bottom: 12px;
+}
+
+.image-caption-before {
+  left: 12px;
+  z-index: 3;
+}
+
+.image-caption-after {
+  right: 12px;
+  top: 12px;
+}
+
+.ba-caption-color--fg-01 {
+  color: var(--color-accent-one);
+}
+
+.ba-caption-color--fg-02 {
+  color: var(--color-accent-two);
+}
+
+.ba-caption-color--fg-03 {
+  color: var(--color-accent-three);
+}
+
+.ba-caption-color--fg-04 {
+  color: var(--color-accent-four);
+}
+
+.ba-caption-bg--bg-01 {
+  background: var(--color-bg-one);
+  padding: 6px 8px;
+}
+
+.ba-caption-bg--bg-02 {
+  background: var(--color-bg-two);
+  padding: 6px 8px;
+}
+
+.ba-caption-bg--bg-03 {
+  background: var(--color-bg-three);
+  padding: 6px 8px;
+}
+
+.ba-caption-bg--bg-04 {
+  background: var(--color-bg-four);
+  padding: 6px 8px;
+}
+
+.ba-caption-bg--bg-01.lbr, .ba-caption-bg--bg-02.lbr, .ba-caption-bg--bg-03.lbr, .ba-caption-bg--bg-04.lbr {
+  padding: 6px 12px;
+}

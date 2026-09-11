@@ -1,0 +1,330 @@
+{{ 'section-text-ticker.css' | asset_url | stylesheet_tag }}
+
+{% assign anim_speed = section.settings.anim_speed %}
+{% assign numb_items = section.blocks.size %}
+
+{% assign total_char_count = 0 %}
+
+{%- style -%}
+.section-{{ section.id }} .ticker-section-items-container {
+  animation-duration: {{ anim_speed }}s;
+}
+
+.section-{{ section.id }} .ticker-item {
+  padding: 0 {{ section.settings.horizontal_padding | divided_by: 2 | round: 1 }}px;
+}
+
+@media only screen and (min-width: 760px) {
+  .section-{{ section.id }} .ticker-section-items-container {
+    animation-duration: calc({{ anim_speed }}s * 1.25);
+  }  
+}
+
+@media only screen and (min-width: 1025px) {
+  .section-{{ section.id }} .ticker-section-items-container {
+    animation-duration: calc({{ anim_speed }}s * 1.5);
+  }  
+}  
+  
+{% if numb_items == 1 %}
+.section-{{ section.id }} .ticker-item {
+  min-width: 100%;
+}
+{% endif %}
+{% if numb_items == 2 %}
+@media only screen and (min-width: 900px) {
+  .section-{{ section.id }} .ticker-item {
+    margin-left: 140px;
+    margin-right: 140px;
+  }  
+}  
+
+{% endif %} 
+{% if numb_items == 3 or numb_items == 4 %}
+@media only screen and (min-width: 900px) {
+  .section-{{ section.id }} .ticker-item {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+{% endif %} 
+  
+{%- endstyle -%}
+
+{% assign vertical_padding = section.settings.vertical_padding %}
+
+<div id="{{ section.id }}" class="section-{{ section.id }} color-scheme-{{ section.settings.text_color }} color-scheme-{{ section.settings.bg_color }}">
+
+{% if section.settings.top_border %}
+<hr class="section-border section-border-color-{{ section.settings.border_color }} section-border-width-{{ section.settings.border_width }}">
+{% endif %}
+  
+<div class="section-inner" style="padding: {{ vertical_padding }}px 0">
+  
+<div class="ticker-section-outer-container">
+  
+<div class="ticker-section-items-container">
+{% for block in section.blocks %}
+  {% assign char_count = block.settings.text | size %}
+  {% assign total_char_count = total_char_count | plus: char_count %}
+<div class="ticker-item {{ section.settings.font_size | escape }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+  
+{% endfor %}
+</div>
+
+<div class="ticker-section-items-container">
+{% for block in section.blocks %}
+<div class="ticker-item {{ section.settings.font_size | escape }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+{% endfor %}
+</div>
+
+<div class="ticker-section-items-container">
+{% for block in section.blocks %}
+<div class="ticker-item {{ section.settings.font_size | escape }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+{% endfor %}
+</div>
+
+<div class="ticker-section-items-container">
+{% for block in section.blocks %}
+<div class="ticker-item {{ section.settings.font_size | escape }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+{% endfor %}
+</div>
+
+{% if total_char_count < 100 %}
+  
+<div class="ticker-section-items-container">
+{% for block in section.blocks %}
+<div class="ticker-item {{ section.settings.font_size | escape }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+{% endfor %}
+</div>
+
+{% endif %}
+  
+</div>
+
+</div>
+
+{% if section.settings.bottom_border %}
+<hr class="section-border section-border-color-{{ section.settings.border_color }} section-border-width-{{ section.settings.border_width }}">
+{% endif %}
+
+</div>
+  
+{% schema %}
+  {
+    "name": "t:sections.text-ticker.name",
+  	"tag": "section",
+  	"class": "section",    
+    "disabled_on": {
+      "groups": ["header", "footer"],
+      "templates": ["password", "cart"]
+    },
+    "max_blocks": 4,
+    "settings": [
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:sections.text-ticker.settings.font_size.label",
+      "options": [
+        {
+          "value": "text-sml",
+          "label": "t:sections.all.size.small"
+        },
+        {
+          "value": "text-std",
+          "label": "t:sections.all.size.normal"
+        },
+        {
+          "value": "text-large",
+          "label": "t:sections.all.size.large"
+        },
+        {
+          "value": "text-xl",
+          "label": "t:sections.all.size.xl"
+        }
+		],
+      "default": "text-std"
+    },
+    {
+    "type": "range",
+    "id": "vertical_padding",
+    "min": 5,
+    "max": 120,
+    "step": 5,
+    "unit": "px",
+    "default": 20,
+    "label": "t:sections.all.layouts.vertical_padding"
+    },
+    {
+    "type": "range",
+    "id": "horizontal_padding",
+    "min": 10,
+    "max": 120,
+    "step": 5,
+    "unit": "px",
+    "default": 30,
+    "label": "t:sections.all.layouts.horizontal_spacing"
+    },
+    {
+    "type": "range",
+    "id": "anim_speed",
+    "min": 4,
+    "max": 28,
+    "step": 2,
+    "unit": "s",
+    "default": 8,
+    "label": "t:sections.text-ticker.settings.animation_speed.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "options": [
+        {
+          "value": "fg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "fg-01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "fg-02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "fg-03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "fg-04",
+          "label": "t:sections.all.colors.accent_4.label"
+        },
+        {
+          "value": "fg-05",
+          "label": "t:sections.all.colors.accent_5.label"
+        }
+      ],
+      "default": "fg-body",
+      "label": "t:sections.all.colors.text_color.label"
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "options": [
+        {
+          "value": "bg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "bg-01",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "bg-02",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "bg-03",
+          "label": "t:sections.all.colors.background_3.label"
+        },
+        {
+          "value": "bg-04",
+          "label": "t:sections.all.colors.background_4.label"
+        },
+        {
+          "value": "bg-05",
+          "label": "t:sections.all.colors.background_5.label"
+        }
+      ],
+      "default": "bg-body",
+      "label": "t:sections.all.colors.background_color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border"
+    },
+    {
+    "type": "checkbox",
+    "id": "top_border",
+    "default": false,
+    "label": "t:sections.all.border_top"
+    },
+    {
+    "type": "checkbox",
+    "id": "bottom_border",
+    "default": false,
+    "label": "t:sections.all.border_bottom"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "label": "t:sections.all.width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.all.normal"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.full_width"
+        }
+        ],
+      "default": "full"
+    },
+    {
+      "type": "select",
+      "id": "border_color",
+      "label": "t:sections.all.border_color",
+      "options": [
+        {
+          "value": "dark",
+          "label": "t:sections.all.colors.dark.label"
+        },
+        {
+          "value": "light",
+          "label": "t:sections.all.colors.light.label"
+        }
+        ],
+      "default": "dark"
+    }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "t:sections.text-ticker.blocks.text.name",
+        "settings": [
+          {
+          "type": "text",
+          "id": "text",
+          "default": "An announcement or message about our brand or store",
+          "label": "t:sections.text-ticker.blocks.text.settings.text.label"
+          }
+        ]
+      }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.text-ticker.presets.name",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+.related-products {
+  display: block;
+}
+
+.comp-products-grid-wrapper {
+  position: relative;
+}
+
+.related-products__heading {
+  margin: 0 0 5rem;
+  font-family: var(--font-heading-family);
+  text-transform: none;
+  font-style: italic;
+  letter-spacing: 0;
+  font-weight: 300;
+}
+
+.related-products .slider-arrows, .product-recommendations .slider-arrows {
+  max-width: none;
+}
+
+.related-products .arrow-style-solid-inverted .slider-arrow-left, .related-products .arrow-style-solid-inverted .slider-arrow-right {
+  background: rgb(var(--color-tertiary-button-color));
+  color: rgb(var(--color-tertiary-button-background));
+  border: 1px solid transparent;
+}
+
+.related-products .arrow-style-outline .slider-arrow-left, .related-products .arrow-style-outline .slider-arrow-right {
+  background: none;
+  border: 1px solid rgb(var(--color-tertiary-button-background));
+  color: rgb(var(--color-tertiary-button-background));
+}
+
+.related-products .arrow-style-outline-inverted .slider-arrow-left, .related-products .arrow-style-outline-inverted .slider-arrow-right {
+  background: none;
+  border: 1px solid rgb(var(--color-tertiary-button-color));
+  color: rgb(var(--color-tertiary-button-color));
+}
+
+.product-recommendations .arrow-style-solid-inverted .slider-arrow-left, .product-recommendations .arrow-style-solid-inverted .slider-arrow-right {
+  background: rgb(var(--color-tertiary-button-color));
+  color: rgb(var(--color-tertiary-button-background));
+  border: 1px solid transparent;
+}
+
+.product-recommendations .arrow-style-outline .slider-arrow-left, .product-recommendations .arrow-style-outline .slider-arrow-right {
+  background: none;
+  border: 1px solid rgb(var(--color-tertiary-button-background));
+  color: rgb(var(--color-tertiary-button-background));
+}
+
+.product-recommendations .arrow-style-outline-inverted .slider-arrow-left, .product-recommendations .arrow-style-outline-inverted .slider-arrow-right {
+  background: none;
+  border: 1px solid rgb(var(--color-tertiary-button-color));
+  color: rgb(var(--color-tertiary-button-color));
+}

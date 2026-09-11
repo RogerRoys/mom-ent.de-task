@@ -1,0 +1,23 @@
+{% assign logo_image_size = logo_size | times: 2 %}
+<div class="header--logo{% if settings.logo_main.width > settings.logo_main.height %} hl-ratio-landscape{% endif %}{% if settings.logo_main.width == settings.logo_main.height %} hl-ratio-square{% endif %}{% if settings.logo_main.width < settings.logo_main.height %} hl-ratio-portrait{% endif %}">
+{% unless template == 'gift_card' %}<a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">{% endunless %}
+  {%- if settings.logo_main != blank -%}
+    {%- assign logo_alt = settings.logo_main.alt | default: shop.name | escape -%}
+    <div class="header--logo-std">{{ settings.logo_main | image_url: width: logo_image_size | image_tag: alt: logo_alt }}</div>
+    {%- if settings.logo_inverted != blank and header_transparent -%}
+    <div class="header--logo-inverted">
+    {{ settings.logo_inverted | image_url: width: logo_image_size | image_tag: alt: logo_alt }}
+    </div>
+    {% endif %}
+
+    {%- if settings.logo_inverted == blank and settings.logo_main != blank and header_transparent -%}
+    <div class="header--logo-inverted">
+    {{ settings.logo_main | image_url: width: logo_image_size | image_tag: alt: logo_alt }}
+    </div>
+    {% endif %}
+    
+  {%- else -%}
+    <span class="logo-shop-name{% if shop.name.size > 30 %} logo-shop-name-sml{% endif %}">{{ shop.name }}</span>
+  {%- endif -%}
+{% unless template == 'gift_card' %}</a>{% endunless %}
+</div>

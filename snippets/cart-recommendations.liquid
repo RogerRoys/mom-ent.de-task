@@ -1,0 +1,355 @@
+{{ 'component-cart-recommendations.css' | asset_url | stylesheet_tag }}
+
+{% assign cart_rec_size = 0 %}
+
+{% assign cart_rec_image_size = 600 %}
+
+{% if settings.cart_recommendations_product_layout == 'horizontal' %}
+{% assign cart_rec_image_size = 240 %}
+{% endif %}
+
+{% if settings.cart_recommendations_product_source == 'static' %}
+    {% for product in settings.cart_recommendations_collection.products %}
+        {% assign cart_rec_size = cart_rec_size | plus: 1 %}
+    {% endfor %}
+{% else %}
+    {% for item in cart.items %}
+    {% for product in item.product.metafields.custom.cart_upsell_products.value %}
+        {% assign cart_rec_size = cart_rec_size | plus: 1 %}
+    {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% if cart_rec_size > 0 %}
+<div class="cart-items--recommendations-container cr-card-layout--{{ settings.cart_recommendations_product_layout }}">
+
+<div class="cart-items--recommendations--header">
+{% if source == 'cart-drawer' %}
+<span class="h3">{{ settings.cart_recommendations_heading }}</span>
+{% else %}
+<span class="text-medium">{{ settings.cart_recommendations_heading }}</span>
+{% endif %}
+{% if cart_rec_size > 1 %}
+<div class="cart-items--recommendations--pagination">
+    <div class="cart-items--recommendations--pagination-left" aria-label="{{ 'accessibility.left' | t }}" role="button">{% render 'icon-arrow-slider' %}</div>
+    <div class="cart-items--recommendations--pagination-right" aria-label="{{ 'accessibility.right' | t }}" role="button">{% render 'icon-arrow-slider' %}</div>
+</div>
+{% endif %}
+</div>
+
+{% if settings.cart_recommendations_product_source == 'static' %}
+
+<ul class="cart-items--recommendations-grid cr-products-source--static">
+
+{% assign rendered_products = '' %}
+{% assign count = 0 %}
+{% assign max_items = 12 %}
+
+{% for product in settings.cart_recommendations_collection.products %}
+
+    {% assign product_key = '|' | append: product.id | append: '|' %}
+    {% assign matching_items = cart | line_items_for: product %}
+
+    {% unless rendered_products contains product_key or matching_items.size > 0 or count > max_items %}
+
+    {% assign rendered_products = rendered_products | append: product_key %}
+    {% assign count = count | plus: 1 %}
+
+    <li class="cart-items--recommendations-list-item">
+    <a class="cart-items--recommendations-list-item--link" href="{{ product.url }}">
+    <div class="cart-items--recommendations-list-item-image cart-rec-image-ratio--{{ settings.card_img_aspect_ratio }}">
+
+    {% unless settings.card_badge_position == 'text-top' or settings.card_badge_position == 'text-bottom' %}
+    <div class="card-product--badges pc-badges-{{ settings.card_badge_position }}">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+    
+    </div>
+    {% endunless %}
+
+    {{ product.featured_image | image_url: width: cart_rec_image_size | image_tag: loading: 'lazy' }}
+    </div>
+    </a>
+    <div class="cart-items--recommendations-list-item-text">
+
+    {% if settings.card_badge_position == 'text-top' %}
+    <div class="card-product--badges card-badges--within-text-top">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+    
+    </div>
+    {% endif %}   
+
+    {% if settings.show_vendor and settings.card_show_vendor_inline == false %}<span class="cr-vendor text-body text-{{ settings.card_vendor_text_style }}">{{ product.vendor }}</span>{% endif %}
+    <span class="cr-product-title product-title-{{ settings.card_title_font }} h4 text-body">{% if settings.show_vendor and settings.card_show_vendor_inline == true %}{{ product.vendor }} {% endif %}{{ product.title }}</span>
+    {% render 'price', product: product %}
+
+    {% if product.metafields.custom.card_promo_text != blank and source == 'main-cart-items' %}
+    <div class="card-product--promo-text text-small rte"{% if product.metafields.custom.card_promo_text_color != blank %} style="color: {{ product.metafields.custom.card_promo_text_color }}"{% endif %}>{{ product.metafields.custom.card_promo_text | metafield_tag }}</div>
+    {% endif %}
+
+    {% if settings.card_badge_position == 'text-bottom' %}
+    <div class="card-product--badges card-badges--within-text-bottom">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+    
+    </div>
+    {% endif %} 
+
+    {% if source == 'main-cart-items' %}
+    {% if product.available %}
+        {% if product.variants.size > 1 %}
+        <a class="cart-recommendations--quick-add-button link--underlined" href="{{ product.url }}">
+            {{ 'products.product.choose_options' | t }}
+        </a>
+        {% else %}
+        {% assign product_variant_id = product.first_available_variant.id %}
+        <a class="cart-recommendations--quick-add-button link--underlined" href="{{ routes.cart_add_url }}?id={{ product_variant_id }}" onclick="this.classList.add('cqa-loading')">
+            <span>{{ 'products.product.add_to_cart' | t }}</span>
+            <div class="loading__spinner">
+            <svg
+            aria-hidden="true"
+            focusable="false"
+            class="spinner"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+            >
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+            </div>
+        </a>
+        {% endif %}                  
+    {% else %}
+        <span class="cart-items--recommendations-list-item-text--sold-out">{{ 'products.product.sold_out' | t }}</span>
+    {% endif %}
+    {% endif %}
+    </div>
+    </li>
+
+    {% endunless %}
+{% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% if settings.cart_recommendations_product_source == 'dynamic' %}
+<ul class="cart-items--recommendations-grid cr-products-source--dynamic">
+
+{% assign rendered_products = '' %}
+{% assign count = 0 %}
+{% assign max_items = 12 %}
+
+{% for item in cart.items %}
+    {% for product in item.product.metafields.custom.cart_upsell_products.value %}
+    {% assign matching_items = cart | line_items_for: product %}
+    {% assign product_key = '|' | append: product.id | append: '|' %}
+
+    {% unless rendered_products contains product_key %}
+    {% if matching_items.size == 0 and count < max_items %}
+
+        {% assign rendered_products = rendered_products | append: product_key %}
+        {% assign count = count | plus: 1 %}
+
+    <li class="cart-items--recommendations-list-item">
+    <a class="cart-items--recommendations-list-item--link" href="{{ product.url }}">
+    <div class="cart-items--recommendations-list-item-image cart-rec-image-ratio--{{ settings.card_img_aspect_ratio }}">
+
+    {% unless settings.card_badge_position == 'text-top' or settings.card_badge_position == 'text-bottom' %}
+    <div class="card-product--badges pc-badges-{{ settings.card_badge_position }}">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+
+    </div>
+    {% endunless %}
+
+    {{ product.featured_image | image_url: width: cart_rec_image_size | image_tag: loading: 'lazy' }}
+    </div>
+    </a>
+    <div class="cart-items--recommendations-list-item-text">
+
+    {% if settings.card_badge_position == 'text-top' %}
+    <div class="card-product--badges card-badges--within-text-top">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+    
+    </div>
+    {% endif %} 
+        
+    {% if settings.show_vendor and settings.card_show_vendor_inline == false %}<span class="cr-vendor text-body text-{{ settings.card_vendor_text_style }}">{{ product.vendor }}</span>{% endif %}
+    <span class="cr-product-title product-title-{{ settings.card_title_font }} h4 text-body">{% if settings.show_vendor and settings.card_show_vendor_inline == true %}{{ product.vendor }} {% endif %}{{ product.title }}</span>
+
+    {% if settings.card_badge_position == 'text-bottom' %}
+    <div class="card-product--badges card-badges--within-text-bottom">  
+    {% for tag in product.tags %}  
+    {% if tag contains 'Badge:' %}<span>{{ tag | remove: 'Badge: '}}</span>
+    {% endif %}
+    {% endfor %}
+
+    {% assign badges = product.metafields.custom.badges %}
+    {% if badges != blank %}
+    {% for badge in badges.value %}
+        <span>{{ badge }}</span>
+    {% endfor %}
+    {% endif %}
+
+    {% if settings.badges_show_sale %}
+    {% if product.compare_at_price and product.compare_at_price > product.price %}<span>{{ 'products.product.on_sale' | t }}</span>{% endif %}  
+    {% endif %}
+    
+    </div>
+    {% endif %} 
+
+    {% render 'price', product: product %}
+
+    {% if product.metafields.custom.card_promo_text != blank and source == 'main-cart-items' %}
+    <div class="card-product--promo-text text-small rte"{% if product.metafields.custom.card_promo_text_color != blank %} style="color: {{ product.metafields.custom.card_promo_text_color }}"{% endif %}>{{ product.metafields.custom.card_promo_text | metafield_tag }}</div>
+    {% endif %}
+
+    {% if source == 'main-cart-items' %}
+    {% if product.available %}
+        {% if product.variants.size > 1 %}
+        <a class="cart-recommendations--quick-add-button link--underlined" href="{{ product.url }}">
+            {{ 'products.product.choose_options' | t }}
+        </a>
+        {% else %}
+        {% assign product_variant_id = product.first_available_variant.id %}
+        <a class="cart-recommendations--quick-add-button link--underlined" href="{{ routes.cart_add_url }}?id={{ product_variant_id }}" onclick="this.classList.add('cqa-loading')">
+            <span>{{ 'products.product.add_to_cart' | t }}</span>
+            <div class="loading__spinner">
+            <svg
+            aria-hidden="true"
+            focusable="false"
+            class="spinner"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+            >
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+            </div>
+        </a>
+        {% endif %}                  
+    {% else %}
+        <span class="cart-items--recommendations-list-item-text--sold-out">{{ 'products.product.sold_out' | t }}</span>
+    {% endif %}
+    {% endif %}
+    </div>
+    </li>
+{% endif %}
+{% endunless %}
+    {% endfor %}
+{% endfor %}
+</ul>
+{% endif %} 
+
+</div>
+{% endif %}        
+
+<script defer>
+function initCartRecommendationsArrows() {
+    const cartRecsContainer = document.querySelector('.cart-items--recommendations-grid');
+    const cartRecsLeftArrow = document.querySelector('.cart-items--recommendations--pagination-left');
+    const cartRecsRightArrow = document.querySelector('.cart-items--recommendations--pagination-right');
+
+    if (cartRecsContainer) {
+    const item = cartRecsContainer.querySelector('.cart-items--recommendations-list-item');
+    const styles = window.getComputedStyle(cartRecsContainer);
+    const gap = parseFloat(styles.columnGap || styles.gap || 20);
+
+    if (item) {
+        const itemWidth = item.getBoundingClientRect();
+        const scrollAmount = itemWidth.width + gap;
+
+        function updateRecArrows() {
+        const scrollLeft = cartRecsContainer.scrollLeft;
+        const maxScroll = cartRecsContainer.scrollWidth - cartRecsContainer.clientWidth;
+        const tolerance = 2;
+
+        cartRecsLeftArrow?.classList.toggle('disabled', scrollLeft <= tolerance);
+        cartRecsRightArrow?.classList.toggle('disabled', scrollLeft >= maxScroll - tolerance);
+        }
+
+        cartRecsLeftArrow?.addEventListener('click', () => {
+        cartRecsContainer.scrollBy({ top: 0, left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        cartRecsRightArrow?.addEventListener('click', () => {
+        cartRecsContainer.scrollBy({ top: 0, left: scrollAmount, behavior: 'smooth' });
+        });
+
+        cartRecsContainer.addEventListener('scroll', updateRecArrows);
+        updateRecArrows();
+    }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  initCartRecommendationsArrows();
+});
+
+</script>

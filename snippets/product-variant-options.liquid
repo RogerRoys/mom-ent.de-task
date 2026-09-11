@@ -1,0 +1,140 @@
+{% comment %}
+  Renders product variant options
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+  - picker_type: {String} type of picker to dispay
+  - selector_order: The order of this selector (in reference to multiple variant selectors within the block)
+
+
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+    picker_type: picker_type
+  %}
+{% endcomment %}
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+{%- liquid
+  assign longest_value = 0
+-%}
+{%- for value in option.values -%}
+  {%- liquid
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+  -%}
+
+  {%- capture input_id -%}
+    {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+  {%- endcapture -%}
+
+  {%- capture input_name -%}
+    {{ option.name }}-{{ option.position }}
+  {%- endcapture -%}
+
+  {%- capture input_dataset -%}
+    data-product-url="{{ value.product_url }}"
+    data-option-value-id="{{ value.id }}"
+  {%- endcapture -%}
+
+  {%- capture label_unavailable -%}
+    <span class="visually-hidden label-unavailable">
+      {{- 'products.product.unavailable' | t -}}
+    </span>
+  {%- endcapture -%}
+  {% if value.size > longest_value %}
+    {% assign longest_value = value.size %}
+  {% endif %}
+  {% if picker_type == 'button' or picker_type == 'minimal' %}
+  {% if thumbnail_variants contains option.name and show_variant_images and selector_order == 1 %}<div class="option-thumbnail-picker-wrapper">{% endif %}
+  {% if visual_variants contains option.name and swatches == true %}<div class="option-color-picker-wrapper swatch-style-{{ swatch_style }}">{% endif %}
+    <input
+      type="radio"
+      id="{{ input_id }}"
+      name="{{ input_name | escape }}"
+      value="{{ value | escape }}"
+      form="{{ product_form_id }}"
+      {% if value.selected %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+      {{ input_dataset }}
+    >
+    <label for="{{ input_id }}"{% if thumbnail_variants contains option.name and show_variant_images %} class="variant-picker-image"{% endif %}{% if visual_variants contains option.name and swatches == true %} class="variant-picker-colour-swatch picker-swatch-{{ value | handleize }}"{% endif %}>
+    {%- comment -%} VARIANT SWATCH {%- endcomment -%} 
+      {% if visual_variants contains option.name and swatches == true and show_variant_images == false %}{% render 'swatch', swatch: value.swatch, swatch_size: swatch_size %}{% endif %}
+    
+    {%- comment -%} VARIANT IMAGES {%- endcomment -%}
+      {% if thumbnail_variants contains option.name and show_variant_images and value.variant.featured_media %}
+        <div class="variant-featured-image ratio-{{ section.settings.gallery_aspect_ratio }}">
+          {{ value.variant.featured_media | image_url: width: 120 | image_tag: loading: 'lazy' }}
+        </div>
+      {% endif %}
+      <span class="variant-label--text">{{ value }}</span>
+      {{ label_unavailable }}
+    </label>
+    {% if thumbnail_variants contains option.name and show_variant_images and selector_order == 1 %}</div>{% endif %}
+    {% if visual_variants contains option.name and swatches == true %}</div>{% endif %}
+
+  {% endif %}
+  {% if picker_type == 'dropdown' %}   
+    <option
+      id="{{ input_id }}"
+      value="{{ value | escape }}"
+      {% if value.selected %}
+        selected="selected"
+      {% endif %}
+      {% if swatch_value and picker_type == 'swatch_dropdown' %}
+        data-option-swatch-value="{{ swatch_value }}"
+        {% if swatch_focal_point %}
+          data-option-swatch-focal-point="{{ swatch_focal_point }}"
+        {% endif %}
+      {% endif %}
+      {{ input_dataset }}
+    >
+      {% if option_disabled -%}
+        {{- 'products.product.value_unavailable' | t: option_value: value -}}
+      {%- else -%}
+        {{- value -}}
+      {%- endif %}
+    </option>
+  {% endif %}
+{%- endfor -%}
+
+
+
+{% if longest_value < 10 %}
+<style>
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(calc(44px + {{ longest_value }}ch), 100%), 1fr));
+  }
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper:has(.swatch), 
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper:has(.variant-featured-image), 
+  .variant-picker-button.pill-layout--flex-grow .radio-options-wrapper.pvp-row-{{ option.position }}:has(.option-thumbnail-picker-wrapper) {
+    display: flex;
+  }
+</style>
+{% endif %}
+{% if longest_value >= 10 %}
+<style>
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(calc(4px + {{ longest_value }}ch), 100%), 1fr));
+  }
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper:has(.swatch), 
+  .variant-picker-button.pill-layout--flex-grow .pvp-row-{{ option.position }}.radio-options-wrapper:has(.variant-featured-image), 
+  .variant-picker-button.pill-layout--flex-grow .radio-options-wrapper.pvp-row-{{ option.position }}:has(.option-thumbnail-picker-wrapper) {
+    display: flex;
+  }
+</style>
+{% endif %}

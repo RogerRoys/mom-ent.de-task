@@ -1,0 +1,150 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+
+{% if swatches == true %}
+  {% assign swatch_state = true %}
+  {% assign swatch_style = swatch_style %}
+  {% assign visual_variants = visual_variants %}
+{% endif %}
+
+{% if show_variant_images %}
+  {% assign swatch_state = false %}
+{% endif %}
+
+{%- unless product.has_only_default_variant -%}
+
+{% assign optionscount = 0 %}
+
+{% assign optionsdisplaytype = pill_options_display %}
+
+<variant-selects
+  id="variant-selects-{{ section.id }}"
+  data-section="{{ section.id }}"
+  {{ block.shopify_attributes }}
+>
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign picker_type = block.settings.picker_type
+      assign optionscount = 0
+      for value in option.values 
+        assign optionscount = optionscount | plus: 1
+      endfor
+    -%}
+
+{%- if block.settings.picker_type == 'button' or block.settings.picker_type == 'minimal' -%}
+    <fieldset class="js product-form__input product-form__input--pill">
+      <legend class="form__label{% if labels == false %} visually-hidden{% endif %}">{{ option.name }}{% if block.settings.show_puncuation %}:{% endif %}
+        {% if thumbnail_variants contains option.name and show_variant_images and swatch_label_position == 'inline' %}
+          <span class="caption product-color-swatch-label">{{ option.selected_value }}</span>
+        {% endif %}
+        {% if visual_variants contains option.name and swatch_state == true and swatch_label_position == 'inline' %}
+          <span class="caption product-color-swatch-label">{{ option.selected_value }}</span>
+        {% endif %}
+      </legend>
+      {% assign isopener = false %}
+      {% if optionscount > pill_threshold %}
+        {% assign isopener = true %}
+        <button class="radio-drawer--opener ro-opener-type--{{ optionsdisplaytype }}{% unless option.selected_value.available %} ro-opener-unavailable{% endunless %}">
+          {% if visual_variants contains option.name and swatches == true and show_variant_images == false %}<span class="swatch-wrapper">{% render 'swatch', swatch: option.selected_value.swatch, swatch_size: swatch_size %}</span>{% endif %}
+          {% if show_variant_images == true and swatches == false and option.selected_value.variant.featured_media %}
+            <span class="radio-drawer--opener-featured-image ratio-{{ section.settings.gallery_aspect_ratio }}">
+            {{ option.selected_value.variant.featured_media | image_url: width: 50 | image_tag: loading: 'lazy' }}
+            </span>
+          {% endif %}
+          <span class="text">{{ option.selected_value }}</span>
+          <span class="options-count">
+            <a href="{{ product.url }}">{{ 'products.product.choose_options' | t }}
+            {% if optionsdisplaytype == 'accordion' and settings.accordion_icon == 'arrow' %}{% render 'icon-caret' %}{% endif %}
+            {% if optionsdisplaytype == 'accordion' and settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% render 'icon-minus' %}{% endif %}
+            {% if optionsdisplaytype == 'drawer' %}{% render 'icon-caret' %}{% endif %}
+            </a>
+        </span>
+        </button>
+      {% endif %}
+      {% if optionscount > pill_threshold %}
+      <div class="radio-options-drawer ro-display-type--{{ optionsdisplaytype }}">
+        {% if optionsdisplaytype == 'drawer' %}
+        <div class="rod--drawer-header">
+          <div class="rod--drawer-title dialog-title drawer__title">{{  option.name }}</div>
+          <button class="rod--drawer-close" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+        </div>
+        {% endif %}
+      {% endif %}
+      <div class="radio-options-wrapper pvp-row-{{ option.position }}">
+      {% render 'product-variant-options',
+        product: product,
+        option: option,
+        block: block,
+        picker_type: picker_type, 
+        selector_order: forloop.index, 
+        show_variant_images: show_variant_images, 
+        thumbnail_variants: thumbnail_variants, 
+        visual_variants: visual_variants, 
+        swatches: swatch_state, 
+        swatch_style: swatch_style, 
+        swatch_size: swatch_size
+      %}
+      </div>
+      {% if optionscount > pill_threshold %}
+      </div>
+      {% endif %}
+      {% if optionscount > pill_threshold and optionsdisplaytype == 'drawer' %}
+      <div class="radio-options-drawer--background"></div>
+      {% endif %}
+    </fieldset>
+
+{% if thumbnail_variants contains option.name and show_variant_images and swatch_label_position == 'below' and isopener == false %}
+  <div class="caption product-color-swatch-label">{{ option.selected_value }}</div>
+{% endif %}
+{% if visual_variants contains option.name and swatch_state == true and swatch_label_position == 'below' and isopener == false %}
+  <div class="caption product-color-swatch-label">{{ option.selected_value }}</div>
+{% endif %}
+
+
+{%- endif -%}
+
+{%- if block.settings.picker_type == 'dropdown' -%}
+    <div class="product-form__input product-form__input--dropdown">
+      <label class="form__label{% if labels == false %} visually-hidden{% endif %}" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+        {{ option.name }}{% if block.settings.show_puncuation %}:{% endif %}
+      </label>
+      <div class="select">
+        {% if visual_variants contains option.name and swatch_state == true and show_variant_images == false %}
+          <span class="swatch-wrapper">{% render 'swatch', swatch: option.selected_value.swatch, swatch_size: swatch_size %}</span>
+        {% endif %}
+        <select
+          id="Option-{{ section.id }}-{{ forloop.index0 }}"
+          class="select__select"
+          name="options[{{ option.name | escape }}]"
+          form="{{ product_form_id }}"
+        >
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type, 
+            show_variant_images: show_variant_images, 
+            thumbnail_variants: thumbnail_variants
+          %}
+        </select>
+        {% render 'icon-caret' %}
+      </div>
+    </div>
+  
+{%- endif -%}
+{%- endfor -%}
+
+<script type="application/json" data-selected-variant>
+      {{ product.selected_or_first_available_variant | json }}
+</script>
+
+</variant-selects>
+{%- endunless -%}

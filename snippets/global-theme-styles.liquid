@@ -1,0 +1,347 @@
+    {%- liquid
+      assign body_font_bold_default = settings.type_accent_font | font_modify: 'weight', 'bolder' | default: accent_font
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', '+200' | default: body_font_bold_default
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      assign header_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
+      assign accent_font = settings.type_accent_font
+      assign accent_font_bold_default = settings.type_accent_font | font_modify: 'weight', 'bolder' | default: accent_font
+      assign accent_font_bold = settings.type_accent_font | font_modify: 'weight', '+100' | default: accent_font_bold_default
+      assign accent_font_italic = settings.type_accent_font | font_modify: 'style', 'italic'
+      assign accent_font_bold_italic = accent_font_bold | font_modify: 'style', 'italic'
+      assign caption_scale_factor = settings.caption_font_size
+    %}
+    
+    {% style %}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+      
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ header_font_italic | font_face: font_display: 'swap' }}
+      
+      {{ settings.type_accent_font | font_face: font_display: 'swap' }}
+      {{ accent_font_bold | font_face: font_display: 'swap' }}
+      {{ accent_font_italic | font_face: font_display: 'swap' }}
+      {{ accent_font_bold_italic | font_face: font_display: 'swap' }}
+
+      :root {
+        --font-body-scale: 1;
+
+        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-style: {{ settings.type_body_font.style }};
+        --font-body-weight: {{ settings.type_body_font.weight }};
+        --font-body-weight-bold: {{ body_font_bold.weight }};
+        
+        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-style: {{ settings.type_header_font.style }};
+        --font-heading-weight: {{ settings.type_header_font.weight }};
+  
+        --font-accent-family: {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
+        --font-accent-style: {{ settings.type_accent_font.style }};
+        --font-accent-weight: {{ settings.type_accent_font.weight }};
+        
+        --font-body-base-size-mobile: {{ settings.body_font_size_mobile }}px;
+        --font-body-base-size-tablet: {{ settings.body_font_size_tablet }}px;
+        --font-body-base-size-desktop: {{ settings.body_font_size_desktop }}px;
+        --font-ui-size-mobile: {{ settings.body_font_size_mobile | minus: 2 | at_least: 10 | at_most: 15 }}px;
+        --font-ui-size-desktop: {{ settings.body_font_size_desktop | minus: 2 | at_least: 10 | at_most: 15 }}px;
+        --font-ui-size-small-mobile: {{ settings.body_font_size_mobile | minus: 2 | at_least: 10 | at_most: 13 }}px;
+        --font-ui-size-small-desktop: {{ settings.body_font_size_desktop | minus: 2 | at_least: 10 | at_most: 13 }}px;
+        --font-size-micro-mobile: {{ settings.body_font_size_mobile | minus: 4 | at_least: 10 | at_most: 12 }}px;
+        --font-size-micro-desktop: {{ settings.body_font_size_desktop | minus: 4 | at_least: 10 | at_most: 12 }}px;
+        --font-form-placeholder-size-mobile: {{ settings.body_font_size_mobile | minus: 1 | at_least: 13 | at_most: 16 }}px;
+        --font-form-placeholder-size-desktop: {{ settings.body_font_size_desktop | minus: 1 | at_least: 13 | at_most: 18 }}px;
+
+        --font-size-cart-drawer-mobile: {{ settings.body_font_size_mobile | minus: 1 | at_least: 14 | at_most: 16 }}px;
+        --font-size-cart-drawer-desktop: {{ settings.body_font_size_desktop | minus: 0 | at_least: 14 | at_most: 16 }}px;
+
+        --font-size-product-badge-mobile: {{ settings.body_font_size_mobile | minus: settings.badges_text_size | at_least: 9 | at_most: 13 }}px;
+        --font-size-product-badge-desktop: {{ settings.body_font_size_desktop | minus: settings.badges_text_size | at_least: 10 | at_most: 15 }}px;
+
+        --body-letter-spacing: {{ settings.body_letter_spacing }}em;
+        --base-line-height: {{ settings.body_line_height | divided_by: 100.0 }};
+        
+        --font-caption-size-mobile: {{ settings.body_font_size_mobile | minus: caption_scale_factor | at_least: 10 | at_most: 15 }}px;
+        --font-caption-size-desktop: {{ settings.body_font_size_desktop | minus: caption_scale_factor | at_least: 10 | at_most: 15 }}px;
+        --font-caption-style: {{ settings.section_captions_font_style }};
+
+        --font-hxxl-size-mobile: {{ settings.h1_size_mobile | times: 1.8 | round }}px;
+        --font-hxxl-size-tablet: {{ settings.h1_size_tablet | times: 2 | round }}px;
+        --font-hxxl-size-desktop: {{ settings.h1_size_desktop | times: 2 | round }}px;
+        
+        --font-hxl-size-mobile: {{ settings.h1_size_mobile | times: 1.4 | round }}px;
+        --font-hxl-size-tablet: {{ settings.h1_size_tablet | times: 1.4 | round }}px;
+        --font-hxl-size-desktop: {{ settings.h1_size_desktop | times: 1.4 | round }}px;
+        
+        --font-h0-size-mobile: {{ settings.h1_size_mobile | times: 1.2 | round }}px;
+        --font-h0-size-tablet: {{ settings.h1_size_tablet | times: 1.2 | round }}px;
+        --font-h0-size-desktop: {{ settings.h1_size_desktop | times: 1.2 | round }}px;
+        
+        --font-h1-size-mobile: {{ settings.h1_size_mobile }}px;
+        --font-h1-size-tablet: {{ settings.h1_size_tablet }}px;
+        --font-h1-size-desktop: {{ settings.h1_size_desktop }}px;
+
+        --font-h2-size-mobile: {{ settings.h2_size_mobile }}px;
+        --font-h2-size-tablet: {{ settings.h2_size_tablet }}px;
+        --font-h2-size-desktop: {{ settings.h2_size_desktop }}px;
+
+        --font-h3-size-mobile: {{ settings.h3_size_mobile }}px;
+        --font-h3-size-tablet: {{ settings.h3_size_tablet }}px;
+        --font-h3-size-desktop: {{ settings.h3_size_desktop }}px; 
+
+        --font-h4-size-mobile: {{ settings.h4_size_mobile }}px;
+        --font-h4-size-tablet: {{ settings.h4_size_tablet }}px;
+        --font-h4-size-desktop: {{ settings.h4_size_desktop }}px;  
+
+        --font-h5-size-mobile: {{ settings.h5_size_mobile }}px;
+        --font-h5-size-tablet: {{ settings.h5_size_tablet }}px;
+        --font-h5-size-desktop: {{ settings.h5_size_desktop }}px;        
+
+        --font-h6-size-mobile: {{ settings.body_font_size_mobile | minus: 2 | at_least: 10 }}px;
+        --font-h6-size-tablet: {{ settings.body_font_size_tablet | minus: 2 | at_least: 10 }}px;
+        --font-h6-size-desktop: {{ settings.body_font_size_desktop | minus: 2 | at_least: 10 }}px;
+        
+        --font-h1-case: {{ settings.h1_case }};
+        --font-h2-case: {{ settings.h2_case }};
+        --font-h3-case: {{ settings.h2_case }};
+        
+        --font-h1-ls: {{ settings.h1_letter_spacing }}em;
+        --font-h2-ls: {{ settings.h2_letter_spacing }}em;
+        --font-h3-ls: {{ settings.h3_letter_spacing }}em;
+        --font-h4-ls: {{ settings.body_letter_spacing }}em;
+        
+        {% if settings.styled_link_style == 'italic' %}
+        --font-styled-link-style: {{ settings.styled_link_style }};
+        {% else %}
+        --font-styled-link-style: {{ settings.type_body_font.style }};
+        {% endif %}
+
+        --page-margin-mobile: {{ settings.page_margin_mobile | times: 1.0 | divided_by: 10 }}rem;
+        --page-margin-tablet: {{ settings.page_margin_tablet | times: 1.0 | divided_by: 10 }}rem;
+        --page-margin-desktop: {{ settings.page_margin_desktop | times: 1.0 | divided_by: 10 }}rem;
+        --page-margin-desktop-limited: {{ settings.page_margin_desktop | times: 1.0 | divided_by: 10 | at_most: 8 }}rem;
+        --page-margin-desktop-large: {{ settings.page_margin_desktop | times: 1.0 | divided_by: 10 | at_least: 8 }}rem;
+        --page-margin-desktop-xl: {{ settings.page_margin_desktop | times: 1.0 | divided_by: 10 | at_least: 10 }}rem;
+        --page-margin-desktop-xxl: {{ settings.page_margin_desktop | times: 1.0 | divided_by: 10 | at_least: 16 }}rem;
+
+        --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical_mobile }}px;
+        --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal_mobile }}px;
+        --grid-tablet-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+        --grid-tablet-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
+        --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+        --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
+
+        --section-header-vertical-spacing-mobile: {{ settings.section_header_spacing | divided_by: 1.6 | round: 0 }}px;
+        --section-header-vertical-spacing-desktop: {{ settings.section_header_spacing }}px;
+        --section-header-arrow-spacing: {{ settings.section_header_spacing | minus: 58 | at_least: 10 }}px;
+        --section-header-arrow-spacing-large: {{ settings.section_header_spacing | minus: 48 | at_least: 20 }}px;
+        --section-footer-vertical-spacing-mobile: {{ settings.section_footer_spacing | divided_by: 1.6 | round: 0 }}px;
+        --section-footer-vertical-spacing-desktop: {{ settings.section_footer_spacing }}px;
+        --section-border-opacity: {{ settings.section_border_opacity | divided_by: 100.0 }};
+
+        --color-background: {{ settings.color_body_bg }};
+        --color-background-rgb: {{ settings.color_body_bg.red }},{{ settings.color_body_bg.green }}, {{ settings.color_body_bg.blue }};
+        --color-foreground: {{ settings.color_body_text }};
+        --color-foreground-rgb: {{ settings.color_body_text.red }}, {{ settings.color_body_text.green }}, {{ settings.color_body_text.blue }};
+
+        --color-accent-one: {{ settings.color_text_accent_01 }};
+        --color-accent-two: {{ settings.color_text_accent_02 }};
+        --color-accent-three: {{ settings.color_text_accent_03 }};
+        --color-accent-four: {{ settings.color_text_accent_04 }};
+        --color-accent-five: {{ settings.color_text_accent_05 }};
+
+        --color-accent-one-rgb: {{ settings.color_text_accent_01.red }}, {{ settings.color_text_accent_01.green }}, {{ settings.color_text_accent_01.blue }};
+        --color-accent-two-rgb: {{ settings.color_text_accent_02.red }}, {{ settings.color_text_accent_02.green }}, {{ settings.color_text_accent_02.blue }};
+        --color-accent-three-rgb: {{ settings.color_text_accent_03.red }}, {{ settings.color_text_accent_03.green }}, {{ settings.color_text_accent_03.blue }};
+        --color-accent-four-rgb: {{ settings.color_text_accent_04.red }}, {{ settings.color_text_accent_04.green }}, {{ settings.color_text_accent_04.blue }};
+        --color-accent-five-rgb: {{ settings.color_text_accent_05.red }}, {{ settings.color_text_accent_05.green }}, {{ settings.color_text_accent_05.blue }};
+        
+        --color-bg-one: {{ settings.color_background_01 }};
+        --color-bg-two: {{ settings.color_background_02 }};
+        --color-bg-three: {{ settings.color_background_03 }};
+        --color-bg-four: {{ settings.color_background_04 }};
+        --color-bg-five: {{ settings.color_background_05 }};
+        
+        --color-button-foreground: {{ settings.color_button_text.red }}, {{ settings.color_button_text.green }}, {{ settings.color_button_text.blue }};
+        --color-button-background: {{ settings.color_button_background.red }}, {{ settings.color_button_background.green }}, {{ settings.color_button_background.blue }};        
+
+        --color-outline-button-text: {{ settings.color_outline_button_border.red }}, {{ settings.color_outline_button_border.green }}, {{ settings.color_outline_button_border.blue }};
+        --color-outline-button-border: {{ settings.color_outline_button_border.red }}, {{ settings.color_outline_button_border.green }}, {{ settings.color_outline_button_border.blue }};
+        
+        --color-tertiary-button-color: {{ settings.color_tertiary_button_text.red }} {{ settings.color_tertiary_button_text.green }} {{ settings.color_tertiary_button_text.blue }};
+        --color-tertiary-button-background: {{ settings.color_tertiary_button_background.red }} {{ settings.color_tertiary_button_background.green }} {{ settings.color_tertiary_button_background.blue }};        
+
+        --color-button-checkout-color: {{ settings.color_checkout_button_color }};
+        --color-button-checkout-background: {{ settings.color_checkout_button_background }};        
+        --color-button-checkout-hover-color: {{ settings.color_checkout_button_color_hover }};
+        --color-button-checkout-hover-background: {{ settings.color_checkout_button_background_hover }};
+        --color-button-checkout-outline: {{ settings.color_checkout_outline_button }};
+
+        --color-price-sale: {{ settings.color_price_sale.red }} {{ settings.color_price_sale.green }} {{ settings.color_price_sale.blue }};
+        --color-success: {{ settings.color_success.red }} {{ settings.color_success.green }} {{ settings.color_success.blue }};
+        --color-amber: {{ settings.color_amber }};
+        --color-star-rating: {{ settings.color_star_rating.red }}, {{ settings.color_star_rating.green }}, {{ settings.color_star_rating.blue }};
+
+        --color-menu-text: {{ settings.bar_fg_col }};
+        --color-menu-bar-background: {{ settings.bar_bg_col }};
+        --color-menu-dropdown-text: {{ settings.dd_txt_col }};
+        --color-menu-dropdown-text-rgb: {{ settings.dd_txt_col.red }}, {{ settings.dd_txt_col.green }}, {{ settings.dd_txt_col.blue }};
+        --color-menu-dropdown-background: {{ settings.dd_bg_col }};
+        --color-menu-drawer-background: {{ settings.dd_bg_col }};
+        --color-menu-dropdown-background-solid: {{ settings.dd_bg_col.red }}, {{ settings.dd_bg_col.green }}, {{ settings.dd_bg_col.blue }};
+        --color-menu-text-accent: {{ settings.header_accent_color }};
+
+        --video-play-button-opacity: {{ settings.video_play_button_background_opacity | divided_by: 100.0 }};
+        --video-play-button-opacity-inverted-value: {{ 100 | minus: settings.video_play_button_background_opacity }}%;
+        --video-play-button-radius: {{ settings.video_play_button_radius }}%;
+        --media-radius: {{ settings.media_radius }}px;
+        --media-radius-small: {{ settings.media_radius | at_most: 8 }}px;
+        --pagination-radius: {{ settings.pagination_radius }}px;
+        --slider-arrow-radius: {{ settings.pagination_radius }}px;
+        --list-radius: {{ settings.list_radius }}px;
+        --media-pagination-thickness: {{ settings.media_pagination_thickness }}px;
+        --slider-scrolltrack-thickness: {{ settings.carousel_scrollbar_thickness }}px;
+        
+        --product-card-text-top-padding: {{ settings.card_text_top_padding }}px;
+        --product-card-text-bottom-padding: {{ settings.card_text_btm_padding }}px;
+        --product-card-text-hoz-padding: {{ settings.card_text_padding }}px;
+        --product-card-title-margin: {{ settings.card_title_btm_margin | at_least: 2}}px;
+        --product-card-media-bg-col: {{ settings.card_media_bg_col }};
+        --product-card-media-aspect-ratio: {{ settings.card_img_aspect_ratio }};
+        --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --product-card-image-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --product-card-image-radius-small: {{ settings.card_corner_radius | divided_by: 10.0 | at_most: 0.8 }}rem;
+        --product-card-text-alignment: {{ settings.card_text_alignment }};
+        --product-card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+        --product-card-bg-col: {{ settings.card_bg_col }};
+        --quick-add-button-padding: {{ settings.quick_add_button_padding }}px;
+
+        --collection-card-bg-col: {{ settings.collection_card_bg_color }};
+        --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+        --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
+        --collection-card-horizontal-padding: {{ settings.collection_card_horizontal_padding }}px;
+        --collection-card-top-padding: {{ settings.collection_card_top_padding }}px;
+        --collection-card-bottom-padding: {{ settings.collection_card_bottom_padding }}px;
+        --collection-card-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
+        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+
+        --blog-card-text-alignment: {{ settings.blog_card_text_alignment }};
+        --blog-card-image-ratio: {{ settings.blog_card_image_ratio }};
+        --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+
+        --badge-vertical-padding: {{ settings.badge_vertical_padding }}px;
+        --badge-horizontal-padding: {{ settings.badge_horizontal_padding }}px;
+        --badge-vertical-padding-desktop: {{ settings.badge_vertical_padding | plus: 1 }}px;
+        --badge-horizontal-padding-desktop: {{ settings.badge_horizontal_padding | plus: 1 }}px;
+        --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 1.0 }}px;
+        --badge-txt-color: {{ settings.badge_txt_color }};
+        --badge-bg-color: {{ settings.badge_bg_color }};
+        --badge-border-width: {{ settings.badge_border_width }}px;
+        --badge-border: {{ settings.badge_txt_color.red }}, {{ settings.badge_txt_color.green }}, {{ settings.badge_txt_color.blue }}, {{ settings.badge_border_opacity | divided_by: 100.0 }};
+        --badge-text-case: {{ settings.badges_text_case }};
+        
+        --tag-vertical-padding: {{ settings.tag_vertical_padding | default: 8 }}px;
+        --tag-horizontal-padding: {{ settings.tag_horizontal_padding | default: 8 }}px;
+        --tag-corner-radius: {{ settings.tag_corner_radius | divided_by: 1.0 }}px;
+        --tag-border-width: {{ settings.tag_border_width }}px;
+        --tag-border-opacity: {{ settings.tag_border_opacity | divided_by: 100.0 }};
+        --tag-border-color: {{ settings.tag_txt_color.red }}, {{ settings.tag_txt_color.green }}, {{ settings.tag_txt_color.blue }}, {{ settings.tag_border_opacity | divided_by: 100.0 }};
+        --tag-txt-color: {{ settings.tag_txt_color }};
+        --tag-bg-color: {{ settings.tag_bg_color }};
+        --tag-text-case: normal;
+
+        --filter-active-facet-border-radius: {{ settings.active_filter_tag_radius | divided_by: 1.0 }}px;
+
+        --dialog-title-size-mobile: {{ settings.body_font_size_mobile | plus: 1 | at_least: 11 | at_most: 18 }}px;
+        --dialog-title-size-tablet: {{ settings.body_font_size_tablet | plus: 1 | at_least: 11 | at_most: 18 }}px;
+        --dialog-title-size-desktop: {{ settings.body_font_size_desktop | plus: 1 | at_least: 11 | at_most: 18 }}px;
+        
+        --pop-up-header-alignment: {{ settings.popup_header_alignment }};
+        --popup-background-color: {{ settings.popup_background_color }};
+        --popup-border-width: {{ settings.popup_border_thickness }}px;
+        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+        --popup-corner-radius: {{ settings.popup_corner_radius }}px;
+        --popup-corner-radius-small: {{ settings.popup_corner_radius | at_most: 16 }}px;
+        --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
+        --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+        --popup-bg-darkness: {{ settings.popup_bg_darkness | divided_by: 100.0 }};
+        --cart-popup-border-opacity: {{ settings.popup_border_opacity | at_least: 10 | divided_by: 100.0 }};
+
+        --drawer-width-mobile: {{ settings.drawer_width_mobile }}vw;
+        --drawer-width-tablet: {{ settings.drawer_width_tablet }}vw;
+        --drawer-width: {{ settings.drawer_width }}vw;
+        --drawer-width-offset: -{{ settings.drawer_width }}vw;
+        --drawer-background-color: {{ settings.popup_background_color }};
+        --drawer-margin: {{ settings.drawer_margin }}px;
+        --drawer-margin-offset: {{ settings.drawer_margin | times: 2 }}px;
+        --drawer-corner-radius: {{ settings.drawer_corner_radius }}px;
+        --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
+        --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+        --drawer-bg-darkness: {{ settings.drawer_bg_darkness | divided_by: 100.0 }};
+        --drawer-bg-blur: {{ settings.drawer_bg_blur }}px;
+        --drawer-header-alignment: {{ settings.drawer_header_alignment | replace: 'left', 'flex-start' }};
+        --drawer-header-border-opacity: {{ settings.drawer_header_border_opacity | divided_by: 100.0 }};
+
+        --buttons-padding: {{ settings.buttons_padding }}px;
+        --buttons-horizontal-padding: {{ settings.buttons_horizontal_padding }}px;
+        --buttons-radius: {{ settings.buttons_radius }}px;
+        --buttons-border-width: {{ settings.buttons_border_thickness }}px;
+        --buttons-font-size-mobile: {{ settings.buttons_font_size }}px;
+        --buttons-font-size-desktop: {{ settings.buttons_font_size_desktop }}px;
+
+        {% if settings.buttons_font_weight == 'bold' %}
+          --buttons-font-weight: {{ accent_font_bold.weight }};
+        {% else %}
+          --buttons-font-weight: {{ settings.type_accent_font.weight }};
+        {% endif %}
+
+        --buttons-text-case: {{ settings.buttons_case }};
+        --buttons-letter-spacing: {{ settings.buttons_letter_spacing | divided_by: 100.00 }}em;
+        --buttons-underline-hoz-offset: {{ settings.buttons_letter_spacing | divided_by: 100.00 | minus: 0.1 | round: 2 }}em;
+
+        --accordions-spacing: {{ settings.accordion_spacing_vertical }}px;
+        --accordions-spacing-large: {{ settings.accordion_spacing_vertical | at_least: 18 }}px;
+        --accordions-border-opacity: {{ settings.accordion_border_opacity | divided_by: 100.0 }};
+
+        {% if settings.price_font_weight == 'bold' %}
+        --price-font-weight: {{ body_font_bold.weight }};
+          {% else %}
+        --price-font-weight: {{ settings.type_body_font.weight }};
+        {% endif %}
+        
+        --inputs-radius: {{ settings.inputs_radius }}px;
+        --inputs-radius-with-max: {{ settings.inputs_radius | at_most: 12 }}px;
+        --inputs-border-width: {{ settings.inputs_border_thickness }}px;
+        --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+        --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+
+        --menu-pills-radius: {{ settings.menu_pills_radius }}px;
+        --menu-pills-border-width: {{ settings.menu_pills_border_thickness }}px;
+        --menu-pills-border-opacity: 1;
+        
+        --variant-pills-radius: {{ settings.variant_pills_radius }}px;
+        --variant-pills-border-width: {{ settings.variant_pills_border_thickness | at_least: 1 }}px;
+        --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
+        --variant-pills-border-opacity-with-max: {{ settings.variant_pills_border_opacity | at_most: 30 | divided_by: 100.0 }};
+
+        --cart-message-border-opacity: {{ settings.cart_message_border_opacity | divided_by: 100.0 }};
+        --cart-message-border-radius: {{ settings.cart_message_border_radius }}px;
+        
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: calc(1 * 62.5%);
+        height: 100%;
+      }
+      
+    {% endstyle %}

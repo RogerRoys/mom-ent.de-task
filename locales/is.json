@@ -1,0 +1,596 @@
+{
+  "general": {
+    "regions": {
+      "north_america": "Norður Ameríku",
+      "central_america": "Mið-America",
+      "south_america": "Suður Ameríku",
+      "europe": "Evrópu",
+      "middle_east": "Mið-Austurlönd",
+      "africa": "Afríku",
+      "asia": "Asíu",
+      "oceania": "Eyjaálfa"
+    },
+    "password_page": {
+      "login_form_heading": "Sláðu inn verslun með lykilorði:",
+      "login_password_button": "Sláðu inn með því að nota lykilorð",
+      "login_form_password_label": "Lykilorð",
+      "login_form_password_placeholder": "Lykilorðið þitt",
+      "login_form_error": "Rangt lykilorð",
+      "login_form_submit": "Sláðu inn",
+      "admin_link_html": "Ert þú verslunareigandinn? <a href=\"/admin\" class=\"link underlined-link\">Skráðu þig inn hér</a>",
+      "powered_by_shopify_html": "Þessi búð verður knúin af {{ shopify }}"
+    },
+    "social": {
+      "alt_text": {
+        "share_on_facebook": "Deildu á Facebook",
+        "share_on_twitter": "Tweet á Twitter",
+        "share_on_pinterest": "Festu á Pinterest",
+        "share_on_linkedin": "Deildu á LinkedIn",
+        "share_on_whatsapp": "Deildu á WhatsApp"
+      },
+      "links": {
+        "twitter": "Twitter",
+        "facebook": "Facebook",
+        "pinterest": "Pinterest",
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn",
+        "tumblr": "Tumblr",
+        "snapchat": "Snapchat",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo",
+        "spotify": "Spotify",
+        "strava": "Strava",
+        "tiktok": "TikTok"
+      }
+    },
+    "continue_shopping": "Halda áfram að versla",
+    "pagination": {
+      "label": "Síðuskipting",
+      "all": "Allt",
+      "page": "Bls {{ number }}",
+      "next": "Næsta síða",
+      "previous": "Fyrri síða"
+    },
+    "search": {
+      "search": "Leita",
+      "reset": "Hreinsa leitarorð"
+    },
+    "cart": {
+      "view": "Skoða körfu",
+      "view_empty_cart": "Skoða körfu",
+      "item_added": "Vöru bætt í körfuna þína"
+    }
+  },
+  "newsletter": {
+    "label": "Tölvupóstur",
+    "success": "Þakka þér fyrir að gerast áskrifandi",
+    "button_label": "Gerast áskrifandi"
+  },
+  "accessibility": {
+    "skip_to_text": "Fara í efni",
+    "products": "Vörur",
+    "forward": "Áfram",
+    "back": "Til baka",
+    "left": "Vinstri",
+    "right": "Rétt",
+    "play": "Spila",
+    "open": "Opið",
+    "close": "Loka",
+    "unit_price_separator": "pr",
+    "vendor": "Seljandi:",
+    "error": "Villa",
+    "refresh_page": "Að velja val leiðir til endurnýjunar á fullri síðu.",
+    "link_messages": {
+      "new_window": "Opnast í nýjum glugga.",
+      "external": "Opnar ytri vefsíðu."
+    },
+    "loading": "Hleður...",
+    "skip_to_product_info": "Farðu í vöruupplýsingar",
+    "total_reviews": "alls umsagnir",
+    "star_reviews_info": "{{ rating_value }} út af {{ rating_max }} stjörnur",
+    "collapsible_content_title": "Samanbrjótanlegt efni",
+    "complementary_products": "Viðbótarvörur"
+  },
+  "blogs": {
+    "article": {
+      "blog": "Blogg",
+      "read_more_title": "Lestu meira",
+      "comments": {
+        "one": "{{ count }} athugasemd",
+        "other": "{{ count }} athugasemdir",
+        "many": "{{ count }} athugasemdir"
+      },
+      "moderated": "Athugið að samþykkja þarf athugasemdir áður en þær eru birtar.",
+      "comment_form_title": "Skildu eftir athugasemd",
+      "name": "Nafn",
+      "email": "Tölvupóstur",
+      "message": "Athugasemd",
+      "post": "Sendu athugasemd",
+      "back_to_blog": "Aftur á bloggið",
+      "share": "Deildu þessari grein",
+      "success": "Athugasemd þín var sett inn. ",
+      "success_moderated": "Athugasemd þín var sett inn. "
+    }
+  },
+  "onboarding": {
+    "product_title": "Dæmi um vöruheiti",
+    "collection_title": "Nafn safnsins þíns"
+  },
+  "products": {
+    "product": {
+      "add": "Bæta við",
+      "add_to_cart": "Bæta í körfu",
+      "pre_order": "Forpanta",
+      "color": "Litur",
+      "colors": "Litir",
+      "choose_options": "Veldu valkosti",
+      "choose_product_options": "Veldu valkosti fyrir {{ product_name }}",
+      "description": "Lýsing",
+      "read_more": "Lestu meira",
+      "read_less": "Lesið minna",
+      "inventory_in_stock": "Til á lager",
+      "inventory_in_stock_show_count": "{{ quantity }} á lager",
+      "inventory_low_stock": "Lítið lager",
+      "inventory_low_stock_show_count": "Lítið lager: {{ quantity }} vinstri",
+      "inventory_out_of_stock": "Uppselt",
+      "inventory_out_of_stock_continue_selling": "Til á lager",
+      "sku": "SKU",
+      "on_sale": "Útsala",
+      "product_variants": "Vöruafbrigði",
+      "media": {
+        "gallery_viewer": "Gallerískoðari",
+        "load_image": "Hlaða mynd {{ index }} í myndasafni",
+        "load_model": "Hlaða 3D líkan {{ index }} í myndasafni",
+        "load_video": "Spila myndband {{ index }} í myndasafni",
+        "image_available": "Mynd {{ index }} er nú fáanlegt í myndasafni",
+        "open_media": "Opinn miðill {{ index }} í módel",
+        "play_model": "Spilaðu 3D Viewer",
+        "play_video": "Spila myndband"
+      },
+      "quantity": {
+        "label": "Magn:",
+        "input_label": "Magn fyrir {{ product }}",
+        "increase": "Auka magn fyrir {{ product }}",
+        "decrease": "Minnka magn fyrir {{ product }}",
+        "minimum_of": "Lágmark af {{ quantity }}",
+        "maximum_of": "Hámark af {{ quantity }}",
+        "multiples_of": "Hækkun á {{ quantity }}",
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> í körfu",
+        "note": "Skoða magnreglur"
+      },
+      "volume_pricing": {
+        "title": "Magnverð",
+        "note": "Magnverð í boði",
+        "minimum": "{{ quantity }}+",
+        "price_at_each": "kl {{ price }}/ea",
+        "price_range": "{{ minimum }} - {{ maximum }}"
+      },
+      "pickup_availability": {
+        "view_store_info": "Skoða verslunarupplýsingar",
+        "check_other_stores": "Athugaðu framboð í öðrum verslunum",
+        "title": "Afhending",
+        "phone": "Sími:",
+        "pick_up_available": "Afhending í boði",
+        "pick_up_unavailable": "Afhending ekki í boði",
+        "pick_up_available_at_html": "Afhending í boði kl <span>{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "Afhending ekki í boði sem stendur kl <span>{{ location_name }}</span>",
+        "unavailable": "Ekki tókst að hlaða framboði á afhendingum",
+        "refresh": "Endurnýja"
+      },
+      "price": {
+        "from_price_html": "Frá {{ price }}",
+        "regular_price": "Venjulegt verð",
+        "sale_price": "Útsöluverð",
+        "unit_price": "Einingarverð",
+        "save": "Vista"
+      },
+      "share": "Deildu þessari vöru",
+      "sold_out": "Uppselt",
+      "unavailable": "Ekki tiltækt",
+      "reviews": "Umsagnir",
+      "vendor": "Vörumerki",
+      "value_unavailable": "{{ option_value }} - Ekki tiltækt",
+      "variant_sold_out_or_unavailable": "Afbrigði uppselt eða ófáanlegt",
+      "video_exit_message": "{{ title }} opnar myndband á öllum skjánum í sama glugga.",
+      "view_full_details": "Skoða allar upplýsingar",
+      "xr_button": "Skoðaðu í rýminu þínu",
+      "xr_button_label": "Skoðaðu í rýminu þínu, hleður hlut í aukinn veruleikaglugga",
+      "include_taxes": "Skattur innifalinn.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Sending</a> reiknað út við kassa."
+    },
+    "modal": {
+      "label": "Fjölmiðlasafn"
+    },
+    "facets": {
+      "filter_and_operator_subtitle": "Passaðu allt",
+      "apply": "Sækja um",
+      "clear": "Hreinsa",
+      "clear_all": "Fjarlægðu allt",
+      "from": "Frá",
+      "filter": "Sía",
+      "filter_and_sort": "Sía og flokka",
+      "filter_by_label": "Sía:",
+      "filter_button": "Sía",
+      "filters_selected": {
+        "one": "{{ count }} valin",
+        "other": "{{ count }} valin",
+        "many": "{{ count }} valin"
+      },
+      "show_more": "Sýna meira",
+      "show_less": "Sýna minna",
+      "filter_selected_accessibility": "{{ type }} ({{ count }} síur valdar)",
+      "max_price": "Hæsta verðið er {{ price }}",
+      "product": "Vara",
+      "products": "Vörur",
+      "reset": "Endurstilla",
+      "sort_button": "Raða",
+      "sort_by_label": "Raða eftir:",
+      "to": "Til",
+      "clear_filter": "Fjarlægðu síuna"
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "Síða fannst ekki",
+      "subtext": "404"
+    },
+    "home_page": {
+      "home_page": "Forsíða"
+    },
+    "search": {
+      "no_results": "Engar niðurstöður fundust fyrir “{{ terms }}“. ",
+      "results_pages_with_count": {
+        "one": "{{ count }} síðu",
+        "other": "{{ count }} síður",
+        "many": "{{ count }} síður"
+      },
+      "results_suggestions_with_count": {
+        "one": "{{ count }} tillögu",
+        "other": "{{ count }} tillögur",
+        "many": "{{ count }} tillögur"
+      },
+      "results_products_with_count": {
+        "one": "{{ count }} vöru",
+        "other": "{{ count }} vörur",
+        "many": "{{ count }} vörur"
+      },
+      "results_with_count": {
+        "one": "{{ count }} niðurstöðu",
+        "other": "{{ count }} úrslit",
+        "many": "{{ count }} úrslit"
+      },
+      "results_with_count_and_term": {
+        "one": "{{ count }} Niðurstaða fannst fyrir “{{ terms }}”",
+        "other": "{{ count }} niðurstöður fundust fyrir “{{ terms }}”",
+        "many": "{{ count }} niðurstöður fundust fyrir “{{ terms }}”"
+      },
+      "articles": "Greinar",
+      "page": "Bls",
+      "products": "Vörur",
+      "collections": "Söfn",
+      "result": "Niðurstaða",
+      "results": "Niðurstöður",
+      "title": "Leitarniðurstöður",
+      "search_for": "Leitaðu að “{{ terms }}”",
+      "suggestions": "Tillögur",
+      "pages": "Síður"
+    },
+    "cart": {
+      "cart": "Karfa"
+    },
+    "contact": {
+      "form": {
+        "title": "Hafðu samband",
+        "name": "Nafn",
+        "email": "Tölvupóstur",
+        "phone": "Símanúmer",
+        "comment": "Athugasemd",
+        "send": "Senda",
+        "post_success": "Þakka þér fyrir að hafa samband við okkur. ",
+        "error_heading": "Vinsamlegast stilltu eftirfarandi:"
+      }
+    }
+  },
+  "sections": {
+    "announcements": {
+      "announcement": "Tilkynning",
+      "announcement_bar": "Tilkynningarstika"
+    },
+    "header": {
+      "announcement": "Tilkynning",
+      "menu": "Matseðill",
+      "cart_count": {
+        "one": "{{ count }} atriði",
+        "other": "{{ count }} atriði",
+        "many": "{{ count }} atriði"
+      }
+    },
+    "cart": {
+      "title": "Taskan þín",
+      "summary_title": "Pantanayfirlit",
+      "caption": "Körfuvörur",
+      "remove_title": "Fjarlægja",
+      "estimated_total": "Áætlað samtals",
+      "new_estimated_total": "Ný áætluð heildarfjöldi",
+      "note": "Bættu við pöntunarnótu",
+      "note_placeholder": "Skilaboð",
+      "note_save": "Vista",
+      "note_clear": "Hreinsa",
+      "checkout": "Skoðaðu",
+      "empty": "Pokinn þinn er tómur",
+      "empty_button_label": "Verslaðu núna",
+      "cart_error": "Villa kom upp við að uppfæra töskuna þína. ",
+      "cart_quantity_error_html": "Þú getur aðeins bætt við {{ quantity }} af þessum hlut í töskuna þína.",
+      "taxes_and_shipping_policy_at_checkout_html": "Skattar, Afslættir og <a href=\"{{ link }}\">sendingarkostnaður</a> reiknað út við kassa",
+      "taxes_included_but_shipping_at_checkout": "Skattur innifalinn og sendingarkostnaður og afsláttur reiknaður út við kassa",
+      "taxes_included_and_shipping_policy_html": "Skattur innifalinn. <a href=\"{{ link }}\">Sending</a> og afslættir reiknaðir við kassa.",
+      "taxes_and_shipping_at_checkout": "Skattar, afslættir og sendingarkostnaður reiknast við kassa",
+      "headings": {
+        "product": "Vara",
+        "price": "Verð",
+        "total": "Samtals",
+        "subtotal": "Undir heild",
+        "discount": "Afsláttur",
+        "quantity": "Magn",
+        "image": "Vörumynd"
+      },
+      "update": "Uppfærsla",
+      "login": {
+        "title": "Ertu með reikning?",
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Skráðu þig inn</a> til að kíkja hraðar út."
+      }
+    },
+    "footer": {
+      "payment": "Greiðslumáta"
+    },
+    "featured_blog": {
+      "view_all": "Skoða allt",
+      "onboarding_title": "Bloggfærsla",
+      "onboarding_content": "Gefðu viðskiptavinum þínum samantekt á bloggfærslunni þinni"
+    },
+    "featured_product": {
+      "onboarding_shop_now": "Verslaðu núna"
+    },
+    "featured_collection": {
+      "view_all": "Skoða allt"
+    },
+    "collection_list": {
+      "view_all": "Skoða allt"
+    },
+    "collection_template": {
+      "empty": "Engar vörur fundust",
+      "title": "Safn",
+      "use_fewer_filters_html": "Notaðu færri síur eða <a class=\"{{ class }}\" href=\"{{ link }}\">fjarlægja allt</a>"
+    },
+    "video": {
+      "load_video": "Hlaða myndband: {{ description }}"
+    },
+    "slideshow": {
+      "load_slide": "Hlaða rennibraut",
+      "previous_slideshow": "Fyrri glæra",
+      "next_slideshow": "Næsta glæra",
+      "carousel": "Hringekja",
+      "slide": "Renna"
+    },
+    "page": {
+      "title": "Titill síðu"
+    },
+    "quick_order_list": {
+      "product_total": "Heildarupphæð vöru",
+      "view_cart": "Skoða körfu",
+      "each": "{{ money }}/ea",
+      "product": "Vara",
+      "variant": "Afbrigði",
+      "variant_total": "Afbrigði samtals",
+      "items_added": {
+        "one": "{{ quantity }} atriði bætt við",
+        "other": "{{ quantity }} atriði bætt við",
+        "many": "{{ quantity }} atriði bætt við"
+      },
+      "items_removed": {
+        "one": "{{ quantity }} hlutur fjarlægður",
+        "other": "{{ quantity }} hlutir fjarlægðir",
+        "many": "{{ quantity }} hlutir fjarlægðir"
+      },
+      "product_variants": "Vöruafbrigði",
+      "total_items": "Samtals atriði",
+      "remove_all_items_confirmation": "Fjarlægðu allt {{ quantity }} hlutir úr körfunni þinni?",
+      "remove_all": "Fjarlægðu allt",
+      "cancel": "Hætta við"
+    }
+  },
+  "localization": {
+    "country_label": "Land/svæði",
+    "language_label": "Tungumál",
+    "update_language": "Uppfærðu tungumál",
+    "update_country": "Uppfærðu land/svæði"
+  },
+  "customer": {
+    "account": {
+      "title": "Reikningur",
+      "details": "Reikningsupplýsingar",
+      "view_addresses": "Skoða heimilisföng",
+      "return": "Aftur á reikningsheimilið"
+    },
+    "account_fallback": "Reikningur",
+    "activate_account": {
+      "title": "Virkjaðu reikning",
+      "subtext": "Búðu til lykilorðið þitt til að virkja reikninginn þinn.",
+      "password": "Lykilorð",
+      "password_confirm": "Staðfestu lykilorð",
+      "submit": "Virkjaðu reikning",
+      "cancel": "Afþakka boð"
+    },
+    "addresses": {
+      "title": "Heimilisföng",
+      "default": "Sjálfgefið",
+      "add_new": "Bættu við nýju heimilisfangi",
+      "edit_address": "Breyta heimilisfangi",
+      "first_name": "Fornafn",
+      "last_name": "Eftirnafn",
+      "company": "Fyrirtæki",
+      "address1": "Heimilisfang 1",
+      "address2": "Heimilisfang 2",
+      "city": "Borg",
+      "country": "Land/svæði",
+      "province": "Hérað",
+      "zip": "Póstnúmer/póstnúmer",
+      "phone": "Sími",
+      "set_default": "Stillt sem sjálfgefið heimilisfang",
+      "add": "Bæta við heimilisfangi",
+      "update": "Uppfæra heimilisfang",
+      "cancel": "Hætta við",
+      "edit": "Breyta",
+      "delete": "Eyða",
+      "delete_confirm": "Ertu viss um að þú viljir eyða þessu heimilisfangi?"
+    },
+    "log_in": "Skráðu þig inn",
+    "log_out": "Skráðu þig út",
+    "login_page": {
+      "cancel": "Hætta við",
+      "create_account": "Búðu til reikning",
+      "email": "Tölvupóstur",
+      "forgot_password": "Gleymt lykilorðinu þínu?",
+      "guest_continue": "Halda áfram",
+      "guest_title": "Haltu áfram sem gestur",
+      "password": "Lykilorð",
+      "title": "Innskráning",
+      "sign_in": "Skráðu þig inn",
+      "submit": "Sendu inn"
+    },
+    "order": {
+      "title": "Panta {{ name }}",
+      "view_order": "Skoða eða stjórna",
+      "date_html": "Sett á {{ date }}",
+      "cancelled_html": "Hætt við pöntun þann {{ date }}",
+      "cancelled_reason": "Ástæða: {{ reason }}",
+      "billing_address": "Heimilisfang innheimtu",
+      "payment_status": "Greiðslustaða",
+      "shipping_address": "Sendingar heimilisfang",
+      "fulfillment_status": "Uppfyllingarstaða",
+      "discount": "Afsláttur",
+      "shipping": "Sending",
+      "tax": "Skattur",
+      "product": "Vara",
+      "sku": "SKU",
+      "price": "Verð",
+      "quantity": "Magn",
+      "total": "Samtals",
+      "total_refunded": "Endurgreitt",
+      "fulfilled_at_html": "Uppfyllt {{ date }}",
+      "track_shipment": "Fylgstu með sendingu",
+      "tracking_url": "Rekja hlekkur",
+      "tracking_company": "Flytjandi",
+      "tracking_number": "Rakningarnúmer",
+      "subtotal": "Samtala",
+      "total_duties": "Skyldur"
+    },
+    "orders": {
+      "title": "Pöntunarsaga",
+      "order_number": "Panta",
+      "order_number_link": "Pöntunarnúmer {{ number }}",
+      "date": "Dagsetning",
+      "payment_status": "Greiðslustaða",
+      "fulfillment_status": "Uppfyllingarstaða",
+      "total": "Samtals",
+      "none": "Þú hefur ekki lagt inn neinar pantanir ennþá."
+    },
+    "recover_password": {
+      "title": "Endurstilltu lykilorðið þitt",
+      "subtext": "Við munum senda þér tölvupóst til að endurstilla lykilorðið þitt",
+      "success": "Við höfum sent þér tölvupóst með hlekk til að uppfæra lykilorðið þitt."
+    },
+    "register": {
+      "title": "Búðu til reikning",
+      "first_name": "Fornafn",
+      "last_name": "Eftirnafn",
+      "email": "Tölvupóstur",
+      "password": "Lykilorð",
+      "submit": "Búa til"
+    },
+    "reset_password": {
+      "title": "Endurstilla lykilorð reiknings",
+      "subtext": "Sláðu inn nýtt lykilorð",
+      "password": "Lykilorð",
+      "password_confirm": "Staðfestu lykilorð",
+      "submit": "Endurstilla lykilorð"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "how_to_use_gift_card": "Notaðu gjafakortskóðann á netinu eða QR kóðann í verslun",
+      "title": "Hér er þitt {{ value }} gjafakortsstaða fyrir {{ shop }}!",
+      "subtext": "Gjafakortið þitt",
+      "gift_card_code": "Gjafakortskóði",
+      "shop_link": "Farðu í netverslun",
+      "add_to_apple_wallet": "Bæta við Apple Wallet",
+      "qr_image_alt": "QR kóða - skannaðu til að innleysa gjafakort",
+      "copy_code": "Afritaðu kóða gjafakortsins",
+      "expiration_date": "Rennur út {{ expires_on }}",
+      "copy_code_success": "Kóði afritaður",
+      "expired": "Útrunnið"
+    }
+  },
+  "recipient": {
+    "form": {
+      "checkbox": "Mig langar að senda þetta að gjöf",
+      "expanded": "Eyðublað viðtakanda gjafakorts stækkað",
+      "collapsed": "Eyðublað viðtakanda gjafakorts hrundi saman",
+      "email_label": "Netfang viðtakanda",
+      "email_label_optional_for_no_js_behavior": "Netfang viðtakanda (valfrjálst)",
+      "email": "Tölvupóstur",
+      "name_label": "Nafn viðtakanda (valfrjálst)",
+      "name": "Nafn",
+      "message_label": "Skilaboð (valfrjálst)",
+      "message": "Skilaboð",
+      "max_characters": "{{ max_chars }} stafir max",
+      "send_on": "ÁÁÁÁ-MM-DD",
+      "send_on_label": "Senda áfram (valfrjálst)"
+    }
+  },
+  "pagefly": {
+    "products": {
+      "product": {
+        "regular_price": "Regular price",
+        "sold_out": "Sold out",
+        "unavailable": "Unavailable",
+        "on_sale": "Sale",
+        "quantity": "Quantity",
+        "add_to_cart": "Add to cart",
+        "back_to_collection": "Back to {{ title }}",
+        "view_details": "View details"
+      }
+    },
+    "article": {
+      "tags": "Tags:",
+      "all_topics": "All topics",
+      "by_author": "by {{ author }}",
+      "posted_in": "Posted in",
+      "read_more": "Read more",
+      "back_to_blog": "Back to {{ title }}"
+    },
+    "comments": {
+      "title": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "post": "Post comment",
+      "moderated": "Please note, comments must be approved before they are published",
+      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+      "success": "Your comment was posted successfully! Thank you!",
+      "comments_with_count": {
+        "one": "{{ count }} comment",
+        "other": "{{ count }} comments"
+      }
+    },
+    "password_page": {
+      "login_form_message": "Enter store using password:",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "We will send you an email right before we open!",
+      "password_link": "Enter using password"
+    }
+  }
+}

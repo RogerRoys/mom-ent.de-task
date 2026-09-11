@@ -1,0 +1,56 @@
+{% comment %}
+  Renders cart notification
+
+  Usage:
+  {% render 'cart-notification' %}
+{% endcomment %}
+
+{% if settings.cart_show_payment_methods %}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<cart-notification>
+  <div class="cart-notification-wrapper">
+    <div
+      id="cart-notification"
+      class="cart-notification focus-inset"
+      aria-modal="true"
+      aria-label="{{ 'general.cart.item_added' | t }}"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div class="cart-notification__header">
+        <h2 class="cart-notification__heading dialog-title drawer__title">
+          {{ 'general.cart.item_added' | t }}
+        </h2>
+        <button
+          type="button"
+          class="cart-notification__close modal__close-button focus-inset"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {% render 'icon-close' %}
+        </button>
+      </div>
+      <div id="cart-notification-product" class="cart-notification-product"></div>
+      <div class="cart-notification__links">
+        <a
+          href="{{ routes.cart_url }}"
+          id="cart-notification-button"
+          class="button button--full-width"
+        >
+          {{- 'general.cart.view_empty_cart' | t -}}
+        </a>
+        <button type="button" class="button button--cs button--full-width button--outline">{{ 'general.continue_shopping' | t }}</button>
+      </div>
+      {% if settings.cart_show_payment_methods %}
+      <div class="cart-footer__payment-methods">
+        <ul class="payments_list_cart" role="list">
+        {% for type in shop.enabled_payment_types %}
+          <li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon' }}</li>
+        {% endfor %}  
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</cart-notification>

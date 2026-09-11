@@ -1,0 +1,702 @@
+.collection-list-section .section-header {
+  position: relative;
+  z-index: 2;
+}
+
+.collection-typographic-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.collection-typographic-list a {
+  text-decoration: none;
+}
+
+.collection-typographic-list--layout-horizontal ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.collection-typographic-list--layout-horizontal.align-left ul {
+  margin-left: -5px;
+}
+
+.collection-typographic-list--layout-horizontal.align-center ul {
+  justify-content: center;
+}
+
+.collection-typographic-list--layout-horizontal a {
+  display: block;
+  padding: 5px;
+}
+
+.ctl-list-item {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.align-center .ctl-list-item {
+  justify-content: center;
+}
+
+.align-right .collection-typographic-list {
+  justify-content: flex-end;
+}
+
+.align-right .ctl-list-item {
+  justify-content: flex-end;
+}
+
+.align-center .collection-typographic-list {
+  margin: 0 auto;
+}
+
+.collection-typographic-list--layout-vertical .ctl-list-item {
+  padding: 5px 0;
+}
+
+.ctl-list-item-dash {
+  display: flex;
+  align-items: center;
+  width: 25px;
+  height: 1px;
+  background: var(--color-foreground);
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.ctl-list-item-bullet {
+  display: flex;
+  align-items: center;
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background: var(--color-foreground);
+  margin-left: 8px;
+  margin-right: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.color-scheme-fg-01 .ctl-list-item-dash, .color-scheme-fg-01 .ctl-list-item-bullet {
+  background: var(--color-accent-one);
+}
+
+.color-scheme-fg-02 .ctl-list-item-dash, .color-scheme-fg-02 .ctl-list-item-bullet {
+  background: var(--color-accent-two);
+}
+
+.color-scheme-fg-03 .ctl-list-item-dash, .color-scheme-fg-03 .ctl-list-item-bullet {
+  background: var(--color-accent-three);
+}
+
+.color-scheme-fg-04 .ctl-list-item-dash, .color-scheme-fg-04 .ctl-list-item-bullet {
+  background: var(--color-accent-four);
+}
+
+.color-scheme-fg-05 .ctl-list-item-dash, .color-scheme-fg-05 .ctl-list-item-bullet {
+  background: var(--color-accent-five);
+}
+
+.color-scheme-fg-white .ctl-list-item-dash, .color-scheme-fg-white .ctl-list-item-bullet {
+  background: #ffffff;
+}
+
+.ctl-list-item-none {
+  display: flex;
+  align-items: center;
+  width: 10px;
+  height: 5px;
+  background: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.collection-list--separator-style-none .ctl-list-item-none {
+  display: none;
+  width: 0;
+}
+
+.collection-typographic-card:has(.collection-typographic-card-inline-image) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 2rem;
+}
+
+@media only screen and (min-width: 1025px) {
+  .collection-typographic-card:has(.collection-typographic-card-inline-image) {
+    column-gap: 2rem;
+  }
+}
+
+.collection-typographic-list--layout-vertical .ctl-list-item:has(.collection-typographic-card-inline-image) .collection-typographic-card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.collection-typographic-list--layout-vertical .ctl-list-item:has(.collection-typographic-card-inline-image):first-child .collection-typographic-card {
+  padding-top: 0;
+}
+
+.collection-typographic-list--layout-vertical .ctl-list-item:has(.collection-typographic-card-inline-image):last-child .collection-typographic-card {
+  padding-top: 0;
+}
+
+.collection-typographic-list--layout-asymmetric .ctl-list-item:has(.collection-typographic-card-inline-image) .collection-typographic-card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.collection-typographic-list--layout-asymmetric .ctl-list-item:has(.collection-typographic-card-inline-image):first-child .collection-typographic-card {
+  padding-top: 0;
+}
+
+.collection-typographic-list--layout-asymmetric .ctl-list-item:has(.collection-typographic-card-inline-image):last-child .collection-typographic-card {
+  padding-top: 0;
+}
+
+.align-center .collection-typographic-card:has(.collection-typographic-card-inline-image) {
+  justify-content: center;
+}
+
+.align-left .collection-typographic-card:has(.tci-position--inline-justified), 
+.align-right .collection-typographic-card:has(.tci-position--inline-justified) {
+  justify-content: space-between;
+}
+
+.collection-typographic-card-inline-image {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.align-left .tci-position--inline-justified {
+  order: 2;
+}
+
+@media only screen and (min-width: 1025px) {
+  .align-left .tci-visibility-hover.tci-position--inline {
+    order: 2;  
+  }  
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-landscape {
+  height: 54px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-landscape.tci-image-size-large {
+  width: 90px;
+  height: 60px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-landscape.tci-image-size-small {
+  width: 68px;
+  height: 45px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-square {
+  height: 80px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-square.tci-image-size-large {
+  width: 90px;
+  height: 90px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-square.tci-image-size-small {
+  width: 60px;
+  height: 60px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait {
+  height: 100px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait.tci-image-size-large {
+  width: 90px;
+  height: 112px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait.tci-image-size-small {
+  width: 60px;
+  height: 75px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait-4x6 {
+  height: 120px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait-4x6.tci-image-size-large {
+  width: 90px;
+  height: 135px;
+}
+
+.collection-typographic-card-inline-image.tci-image-ratio-portrait-4x6.tci-image-size-small {
+  width: 60px;
+  height: 90px;
+}
+
+@media only screen and (min-width: 750px) {
+  .collection-typographic-card-inline-image.tci-image-ratio-landscape.tci-image-size-large {
+    width: 120px;
+    height: 80px;
+  }
+  .collection-typographic-card-inline-image.tci-image-ratio-square.tci-image-size-large {
+    width: 120px;
+    height: 120px;
+  }
+  .collection-typographic-card-inline-image.tci-image-ratio-portrait.tci-image-size-large {
+    width: 120px;
+    height: 150px;
+  }
+  .collection-typographic-card-inline-image.tci-image-ratio-portrait-4x6.tci-image-size-large {
+    width: 120px;
+    height: 180px;
+  }  
+}
+
+
+.collection-typographic-card-inline-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-typographic-list--layout-horizontal.collection-list--separator-style-none .collection-typographic-card-title {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.collection-typographic-card-title {
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+}
+
+.collection-list--link-style-pill .ctl-list-item-none {
+  display: none;
+  width: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.collection-typographic-card-image {
+  position: relative;
+  width: 400px;
+  height: 400px; 
+  z-index: 0;
+  line-height: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.collection-typographic-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ci-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0ms, opacity 300ms;
+}
+
+.collection-list-teaser-image-mobile {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.collection-list-teaser-image-mobile-first {
+  margin-bottom: 2rem;
+}
+
+.collection-list-teaser-image-mobile-last {
+  margin-top: 2rem;
+}
+
+.collection-list-teaser-image-mobile img {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ctc-mobile-image-ratio-portrait .ctc-mobile-image {
+  height: 0;
+  padding-bottom: 120%;
+}
+
+.ctc-mobile-image-ratio-portrait-4x6 .ctc-mobile-image {
+  height: 0;
+  padding-bottom: 140%;  
+}
+
+.ctc-mobile-image-ratio-square .ctc-mobile-image {
+  height: 0;
+  padding-bottom: 100%;  
+}
+
+.ctc-mobile-image-ratio-landscape .ctc-mobile-image {
+  height: 0;
+  padding-bottom: 66%;
+}
+
+.collection-list-teaser-image {
+  display: none;
+}
+
+@media only screen and (min-width: 750px) {
+  .collection-list-teaser-image-mobile {
+    position: absolute;
+    left: var(--page-margin-tablet);
+  }
+  .collection-list-teaser-image-mobile.ctc-mobile-image-size-small {
+    width: 240px;
+  }
+  .collection-list-teaser-image-mobile.ctc-mobile-image-size-medium {
+    width: 300px;
+  }
+  .collection-list-teaser-image-mobile.ctc-mobile-image-size-large {
+    width: 400px;
+  }
+  .ctl-images-position-center .collection-list-teaser-image-mobile {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ctl-images-position-right .collection-list-teaser-image-mobile {
+    left: auto;
+    right: var(--page-margin-tablet);
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .collection-list-teaser-image-mobile {
+    display: none;
+  }
+  .ci-visible.collection-teaser-image-1 {
+    visibility: visible;  
+  }
+  .collection-list-teaser-image {
+    display: block;
+  }
+  .ci-hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+  .ci-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0ms, opacity 300ms;
+  }
+}
+
+
+@media only screen and (min-width: 1025px) {
+  /* Portrait 4:5 ratio */
+  .ctc-image-ratio-portrait--size-small {
+    width: 240px;
+    height: 300px;
+  }
+  .ctc-image-ratio-portrait--size-medium {
+    width: 300px;
+    height: 375px;
+  }
+  .ctc-image-ratio-portrait--size-large {
+    width: 400px;
+    height: 500px;
+  }
+  /* Portrait 4:6 ratio */
+  .ctc-image-ratio-portrait-4x6--size-small {
+    width: 240px;
+    height: 360px;
+  }
+  .ctc-image-ratio-portrait-4x6--size-medium {
+    width: 300px;
+    height: 450px;
+  }
+  .ctc-image-ratio-portrait-4x6--size-large {
+    width: 400px;
+    height: 600px;
+  }
+  /* Square ratio */
+  .ctc-image-ratio-square--size-small {
+    width: 240px;
+    height: 240px;
+  }
+  .ctc-image-ratio-square--size-medium {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .ctc-image-ratio-square--size-large {
+    width: 400px;
+    height: 400px;
+  }
+  /* Landscape ratio */
+  .ctc-image-ratio-landscape--size-small {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .ctc-image-ratio-landscape--size-medium {
+    width: 460px;
+    height: 305px;
+  }
+  
+  .ctc-image-ratio-landscape--size-large {
+    width: 600px;
+    height: 400px;
+  }
+  
+  .ctl-ul-images-ratio-square--size-small {
+    min-height: 240px;
+  }
+  
+  .ctl-ul-images-ratio-landscape--size-small {
+    min-height: 200px;
+  }
+  
+  .ctl-ul-images-ratio-portrait--size-small {
+    min-height: 300px;
+  }
+  
+  .ctl-ul-images-ratio-portrait-4x6--size-small {
+    min-height: 400px;
+  }
+  
+  .ctl-ul-images-ratio-square--size-medium {
+    min-height: 300px;
+  }
+  
+  .ctl-ul-images-ratio-landscape--size-medium {
+    min-height: 340px;
+  }
+  
+  .ctl-ul-images-ratio-portrait--size-medium {
+    min-height: 450px;
+  }
+  
+  .ctl-ul-images-ratio-portrait-4x6--size-medium {
+    min-height: 450px;
+  }
+  
+  .ctl-ul-images-ratio-square--size-large {
+    min-height: 400px;
+  }
+  
+  .ctl-ul-images-ratio-landscape--size-large {
+    min-height: 400px;
+  }
+  
+  .ctl-ul-images-ratio-portrait--size-large {
+    min-height: 500px;
+  }
+  
+  .ctl-ul-images-ratio-portrait-4x6--size-large {
+    min-height: 600px;
+  }  
+}
+
+@media only screen and (min-width: 1200px) {
+  /* Landscape ratio */
+  .ctc-image-ratio-landscape--size-medium {
+    width: 510px;
+    height: 340px;
+  } 
+}
+
+.collection-typographic-list-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.collection-typographic-list-background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-list-teaser-image {
+  position: relative;
+  z-index: 1;
+}
+
+.collection-list-section .section-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.ctlw-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);  
+  align-items: center;
+}
+
+.collection-list-teaser-list {
+  position: relative;
+  z-index: 2;
+}
+
+.ctl-images-position-left .collection-list-teaser-image {
+  position: absolute;
+  left: var(--page-margin-mobile);
+}
+
+.ctl-images-position-center .collection-list-teaser-image {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ctl-images-position-right .collection-list-teaser-image {
+  position: absolute;
+  right: var(--page-margin-mobile);
+}
+
+@media only screen and (min-width: 750px) {
+  .cl-list-width-50 .collection-typographic-list {
+    width: calc(50% - (var(--grid-desktop-horizontal-spacing) / 2));
+  }
+  .cl-list-width-50.align-right .collection-typographic-list {
+    margin-left: calc(50% - (var(--grid-desktop-horizontal-spacing) / 2));
+  }  
+  .ctl-images-position-left .collection-list-teaser-image {
+    left: var(--page-margin-tablet);
+  }
+  .ctl-images-position-right .collection-list-teaser-image {
+    right: var(--page-margin-tablet);
+  }  
+}
+
+@media only screen and (min-width: 950px) {
+  .ctl-images-position-left .collection-list-teaser-image {
+    left: var(--page-margin-desktop);
+  }
+  .ctl-images-position-right .collection-list-teaser-image {
+    right: var(--page-margin-desktop);
+  }  
+}
+
+.cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-foreground-rgb),0.15);
+}
+
+.color-scheme-fg-01 .cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-accent-one-rgb),0.15);
+}
+
+.color-scheme-fg-02 .cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-accent-two-rgb),0.15);
+}
+
+.color-scheme-fg-03 .cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-accent-three-rgb),0.15);
+}
+
+.color-scheme-fg-04 .cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-accent-four-rgb),0.15);
+}
+
+.color-scheme-fg-05 .cl-list-hoz-borders .ctl-list-item {
+  border-bottom: 1px solid rgba(var(--color-accent-five-rgb),0.15);
+}
+
+.ctl-list-item:last-child {
+  border-bottom: 0;
+}
+
+.collection-typographic-list--layout-horizontal .ctl-list-item {
+  border-bottom: 0 !important;
+}
+
+.collection-typographic-list--layout-vertical .collection-typographic-card-title, .collection-typographic-list--layout-asymmetric .collection-typographic-card-title {
+  padding: 5px 0;
+}
+
+.cl-list-hoz-borders .collection-typographic-card-title {
+  padding: 12px 0;
+}
+
+.collection-list--link-style-pill .collection-typographic-card-title {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  display: flex;
+  align-items: center;
+  border: var(--menu-pills-border-width) solid;
+  border-radius: var(--menu-pills-radius);
+  padding: var(--buttons-padding) 16px;
+  min-height: calc(44px + var(--buttons-padding));
+  line-height: 1.0;
+}
+
+.collection-typographic-list--layout-asymmetric .ctl-list-item:nth-child(odd) {
+  justify-content: flex-start;
+}
+
+.collection-typographic-list--layout-asymmetric .ctl-list-item:nth-child(even) {
+  justify-content: flex-end;
+}
+
+.ctl-list-item a {
+  opacity: 0.7;
+  transition: 0.2s linear;
+}
+
+.collection-typographic-list:has(.collection-typographic-card-inline-image) .ctl-list-item a {
+  width: 100%;
+  opacity: 1;
+}
+
+.ctl-list-item a:hover {
+  opacity: 1;
+  transition: 0.2s linear;
+}
+
+@media only screen and (min-width: 1025px) {
+  .tci-visibility-hover {
+    opacity: 0;
+    transition: 0.2s linear;
+  }
+  .align-center .collection-typographic-card:has(.tci-position--inline-justified), 
+  .align-center .collection-typographic-card:has(.tci-position--inline-hover-justified) {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    column-gap: 0;
+  }
+  .align-center .collection-typographic-card .tci-position--inline-justified, 
+  .align-center .collection-typographic-card .tci-position--inline-hover-justified {
+    order: 2;
+    grid-column: 8 / span 1;
+    text-align: right;
+    margin-left: auto;
+  }
+  .align-center .collection-typographic-card:has(.tci-position--inline-justified) .collection-typographic-card-title, 
+  .align-center .collection-typographic-card:has(.tci-position--inline-hover-justified) .collection-typographic-card-title {
+    grid-column: 3 / span 4;    
+  }
+  .ctl-list-item a:hover .tci-visibility-hover {
+    opacity: 1;
+    transition: 0.2s linear;
+  }
+}

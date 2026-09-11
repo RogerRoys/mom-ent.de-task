@@ -1,0 +1,262 @@
+<nav>
+  <ul class="nav-ul--primary" role="list">
+    {% for link in section.settings.main_menu.links %}
+      {% if link.links != blank %}
+      <li>
+        {% if link.url contains '/collections/' and section.settings.images_p_level == true %}
+        {% assign url_parts = link.url | split: '/collections/' %}
+        {% assign remainder = url_parts[1] | split: '/' %}
+        {% assign p_collection_handle = remainder[0] %}
+        {% assign p_collection = collections[p_collection_handle] %}
+        {% if section.settings.drawer_list_system == 'sliding' %}
+        <a class="mob-parent-button{% if section.settings.menu_highlight_list contains link.title %} menu-item-special-highlight{% endif %}" href="{{ link.url }}">
+          {% if p_collection %}
+          <div class="nav-drawer--collection-image-row">
+          <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+          {% if p_collection.featured_image != blank %}
+            {{ p_collection.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+          {% endif %}
+          </div>
+          <div class="nav-drawer--collection-title">{{ link.title }}<span class="mob-parent-link-icon">{% render 'icon-caret' %}</span></div>
+          </div>
+          {% endif %}
+        </a>
+        {% else %}
+        <button class="mob-parent-accordion-button{% if section.settings.menu_highlight_list contains link.title %} menu-item-special-highlight{% endif %}" aria-expanded="false">
+          <div class="nav-drawer--collection-title">{{ link.title }}<span class="mob-parent-link-icon">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</span></div>
+        </button>
+        {% endif %}
+
+        {% else %}
+
+        {% if section.settings.drawer_list_system == 'sliding' %}
+        <a class="mob-parent-button{% if section.settings.menu_highlight_list contains link.title %} menu-item-special-highlight{% endif %}" href="{{ link.url }}">{{ link.title }}<span class="mob-parent-link-icon">{% render 'icon-caret' %}</span></a>  
+        {% else %}
+        <button class="mob-parent-accordion-button{% if section.settings.menu_highlight_list contains link.title %} menu-item-special-highlight{% endif %}" aria-expanded="false">{{ link.title }}<span class="mob-parent-link-icon">{% if settings.accordion_icon == 'plus' %}{% render 'icon-plus' %}{% render 'icon-minus' %}{% else %}{% render 'icon-caret' %}{% endif %}</span></button>
+        {% endif %}               
+        {% endif %}   
+        <div class="mob-secondary-level-ul"{% if section.settings.drawer_list_system == 'accordions' %} aria-hidden="true"{% endif %}>
+          <button class="nav-secondary-fo-back-button" tabindex="0" aria-label="{{ link.title }}">{% render 'icon-caret' %}{{ link.title }}</button>
+        <ul class="nav-ul--secondary" role="list">
+          {% if section.settings.menu_viewall_mobile and section.settings.menu_viewall_mobile_position == 'first' and link.url contains '/collections/' %}<li class="li-mobile-viewall"><a href="{{ link.url }}">{{ section.settings.menu_viewall_mobile_label }}</a></li>{% endif %}
+          {% for childlink in link.links %}
+          {% if childlink.links.size > 0 %}
+          <li>
+            {% if childlink.url contains '/collections/' and section.settings.images_s_level == true and section.settings.drawer_list_system == 'sliding' %}
+            <a class="{% if section.settings.drawer_list_system == 'sliding' %}mob-parent-button{% else %}mob-accordion-group-heading{% endif %}{% if section.settings.menu_highlight_list contains childlink.title %} menu-item-special-highlight{% endif %}" href="{{ childlink.url }}">
+            {% assign url_parts = childlink.url | split: '/collections/' %}
+            {% assign remainder = url_parts[1] | split: '/' %}
+            {% assign s_collection_handle = remainder[0] %}
+            {% assign s_collection = collections[s_collection_handle] %}
+            {% if s_collection %}
+              <div class="nav-drawer--collection-image-row">
+              <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+              {% if s_collection.featured_image != blank %}
+                {{ s_collection.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+              {% endif %}
+              </div>
+              <div class="nav-drawer--collection-title">{{ childlink.title }}<span class="mob-parent-link-icon">{% render 'icon-caret' %}</span></div>
+              </div>
+            {% endif %}  
+            </a>
+
+            {% else %}
+            <a class="{% if section.settings.drawer_list_system == 'sliding' %}mob-parent-button{% else %}mob-accordion-group-heading{% endif %}{% if section.settings.menu_highlight_list contains childlink.title %} menu-item-special-highlight{% endif %}" href="{{ childlink.url }}">{{ childlink.title }}<span class="mob-parent-link-icon">{% render 'icon-caret' %}</span></a> 
+            {% endif %}
+            <div class="mob-third-level-ul">
+              <button class="nav-secondary-fo-back-button" tabindex="0" aria-label="{{ childlink.title }}">{% render 'icon-caret' %}{{ childlink.title }}</button>
+              <ul class="nav-ul--tertiary" role="list">
+                {% if section.settings.menu_viewall_mobile and section.settings.menu_viewall_mobile_position == 'first' and childlink.url contains '/collections/' %}<li class="li-mobile-viewall"><a href="{{ childlink.url }}">{{ section.settings.menu_viewall_mobile_label }}</a></li>{% endif %}
+                {% for grandchildlink in childlink.links %}
+                  <li>
+                    {% if grandchildlink.url contains '/collections/' and section.settings.images_t_level == true %}
+                      <a href="{{ grandchildlink.url }}"{% if section.settings.menu_highlight_list contains grandchildlink.title %} class="menu-item-special-highlight"{% endif %}>
+                        {% assign url_parts = grandchildlink.url | split: '/collections/' %}
+                        {% assign remainder = url_parts[1] | split: '/' %}
+                        {% assign grandchild_collection_handle = remainder[0] %}
+                        {% assign grandchild_collection = collections[grandchild_collection_handle] %}
+                        {% if grandchild_collection %}
+                          <div class="nav-drawer--collection-image-row">
+                          <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+                          {% if grandchild_collection.featured_image != blank %}
+                            {{ grandchild_collection.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+                            {% endif %}
+                          </div>
+                          <div class="nav-drawer--collection-title">{{ grandchildlink.title }}</div>
+                          </div>
+                        {% endif %}
+                      </a>
+                    {% else %}
+                      <a href="{{ grandchildlink.url }}"{% if section.settings.menu_highlight_list contains grandchildlink.title %} class="menu-item-special-highlight"{% endif %}>{{ grandchildlink.title }}</a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+                {% if section.settings.menu_viewall_mobile and section.settings.menu_viewall_mobile_position == 'last' and childlink.url contains '/collections/' %}<li class="li-mobile-viewall"><a href="{{ childlink.url }}">{{ section.settings.menu_viewall_mobile_label }}</a></li>{% endif %}
+              </ul>
+
+        <div class="drawer-sub-level-image-block-wrapper">
+        {% assign drawer_menu_name = childlink.title | handleize %}
+          {% assign image_count = 0 %}
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'image' %}
+        {% assign match_name = block.settings.dd_name | handleize %}
+        {% if match_name == drawer_menu_name and block.settings.show_in_drawer and block.settings.show_in_drawer_primary == false %}
+          {% assign image_count = image_count | plus: 1 %}
+            <div class="menu-drawer-feature-block mdf-{{ image_count }} text-position--{{ block.settings.text_position }} text-color--{{ block.settings.text_color }}">
+            {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+            {% if block.settings.badge != blank %}<div class="menu-drawer-feature-block--badge">{{ block.settings.badge }}</div>{% endif %}
+            <div class="menu-drawer-feature-block--image img-ratio--{{ section.settings.dd_image_ratio }}">  
+            {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+            </div>
+            {% if block.settings.heading != blank %}
+            <div class="menu-drawer-feature-block--text">
+              <div class="menu-drawer-feature-block--heading text-{{ block.settings.heading_size }} heading-weight-{{ block.settings.heading_weight }}">{{ block.settings.heading }}</div> 
+              {% if block.settings.sub_heading != blank %}<div class="menu-drawer-feature-block--subheading text-{{ block.settings.text_size }}">{{ block.settings.sub_heading }}</div>{% endif %}
+            {% if block.settings.button_show and block.settings.button_label != blank %}<div class="menu-drawer-feature-block--button button-style-{{ block.settings.button_style }} button-width-{{ block.settings.button_width }}">{{ block.settings.button_label }}</div>{% endif %}
+            </div>
+            {% endif %}
+            {% if block.settings.image_link != blank %}</a>{% endif %}
+            </div>
+          {% endif %}
+        {% endcase %}
+        {% endfor %}
+        </div>
+
+            </div>
+          </li>
+          {% else %}
+          <li>
+          {% if childlink.url contains '/collections/' and section.settings.images_s_level == true %}           
+          {% assign url_parts = childlink.url | split: '/collections/' %}
+          {% assign remainder = url_parts[1] | split: '/' %}
+          {% assign collection_no_child_handle = remainder[0] %}
+          {% assign collection_no_child = collections[collection_no_child_handle] %}
+            
+          {% if collection_no_child %}
+          <a href="{{ childlink.url }}"{% if section.settings.menu_highlight_list contains childlink.title %} class="menu-item-special-highlight"{% endif %}>
+          <div class="nav-drawer--collection-image-row">
+          <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+          {% if collection_no_child.featured_image != blank %}
+            {{ collection_no_child.featured_image | image_url: width: 120 | image_tag: loading: 'lazy' }}
+          {% endif %}
+          </div>
+          <div class="nav-drawer--collection-title">{{ childlink.title }}</div>
+          </div>
+          </a>
+          {% endif %}
+          {% else %}
+          <a href="{{ childlink.url }}"{% if section.settings.menu_highlight_list contains childlink.title %} class="menu-item-special-highlight"{% endif %}>{{ childlink.title }}</a>
+          {% endif %}
+          </li>
+          {% endif %}  
+          {% endfor %}
+          {% if section.settings.menu_viewall_mobile and section.settings.menu_viewall_mobile_position == 'last' and link.url contains '/collections/' %}<li class="li-mobile-viewall"><a href="{{ link.url }}">{{ section.settings.menu_viewall_mobile_label }}</a></li>{% endif %}
+        </ul>
+
+        <div class="drawer-sub-level-image-block-wrapper">
+        {% assign drawer_menu_name = link.title | handleize %}
+        {% assign image_count = 0 %}
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'image' %}
+        {% assign match_name = block.settings.dd_name | handleize %}
+        {% if match_name == drawer_menu_name and block.settings.show_in_drawer and block.settings.show_in_drawer_primary == false %}
+          {% assign image_count = image_count | plus: 1 %}
+            <div class="menu-drawer-feature-block mdf-{{ image_count }} text-position--{{ block.settings.text_position }} text-color--{{ block.settings.text_color }}">
+            {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+            {% if block.settings.badge != blank %}<div class="menu-drawer-feature-block--badge">{{ block.settings.badge }}</div>{% endif %}
+            <div class="menu-drawer-feature-block--image img-ratio--{{ section.settings.dd_image_ratio }}">  
+            {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+            </div>
+            {% if block.settings.heading != blank %}
+            <div class="menu-drawer-feature-block--text">
+              <div class="menu-drawer-feature-block--heading text-{{ block.settings.heading_size }} heading-weight-{{ block.settings.heading_weight }}">{{ block.settings.heading }}</div> 
+              {% if block.settings.sub_heading != blank %}<div class="menu-drawer-feature-block--subheading text-{{ block.settings.text_size }}">{{ block.settings.sub_heading }}</div>{% endif %}
+            {% if block.settings.button_show and block.settings.button_label != blank %}<div class="menu-drawer-feature-block--button button-style-{{ block.settings.button_style }} button-width-{{ block.settings.button_width }}">{{ block.settings.button_label }}</div>{% endif %}
+            </div>
+            {% endif %}
+            {% if block.settings.image_link != blank %}</a>{% endif %}
+            </div>
+          {% endif %}
+        {% endcase %}
+        {% endfor %}
+        </div>
+
+        </div>
+      </li>
+      {% else %}
+      <li>
+      {% if link.url contains '/collections/' and section.settings.images_p_level == true %}    
+        {% assign url_parts = link.url | split: '/collections/' %}
+        {% assign remainder = url_parts[1] | split: '/' %}
+        {% assign p_collection_no_child_handle = remainder[0] %}
+        {% assign p_collection_no_child = collections[p_collection_no_child_handle] %}     
+        <a href="{{ link.url }}"{% if section.settings.menu_highlight_list contains link.title %} class="menu-item-special-highlight"{% endif %}>     
+          <div class="nav-drawer--collection-image-row">
+          <div class="nav-drawer--collection-image ci-ratio-{{ section.settings.ci_image_ratio }} ci-size-{{ section.settings.ci_image_size }}">
+          {% if p_collection_no_child.featured_image != blank %}
+            {{ p_collection_no_child.featured_image | image_url: width: 160 | image_tag: loading: 'lazy' }}
+          {% endif %}
+          </div>
+          <div class="nav-drawer--collection-title">{{ link.title }}</div>
+          </div>
+        </a>
+      {% else %}
+      <a href="{{ link.url }}"{% if section.settings.menu_highlight_list contains link.title %} class="menu-item-special-highlight"{% endif %}>{{ link.title }}</a>
+      {% endif %}
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  {% assign drawer_image_count = 0 %}
+  {% for block in section.blocks %}
+  {% case block.type %}
+  {% when 'image' %}
+    {% if block.settings.show_in_drawer_primary and block.settings.image %}
+      {% assign drawer_image_count = drawer_image_count | plus: 1 %}
+    {% endif %}
+  {% endcase %}
+  {% endfor %}
+  
+  <div class="drawer-images-grid drawer-images-grid-count-{{ drawer_image_count }}">
+  {% for block in section.blocks %}
+  {% case block.type %}
+  {% when 'image' %}
+    {% if block.settings.show_in_drawer_primary and block.settings.image %}
+
+      <div class="menu-drawer-feature-block drawer-primary-feature-block text-position--{{ block.settings.text_position }} text-color--{{ block.settings.text_color }} sl-hide">
+      {% if block.settings.image_link != blank %}<a href="{{ block.settings.image_link }}">{% endif %}
+      {% if block.settings.badge != blank %}<div class="menu-drawer-feature-block--badge">{{ block.settings.badge }}</div>{% endif %}
+      <div class="menu-drawer-feature-block--image img-ratio--{{ section.settings.dd_image_ratio }}">  
+      {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+      </div>
+      {% if block.settings.heading != blank %}
+      <div class="menu-drawer-feature-block--text">
+        <div class="menu-drawer-feature-block--heading text-{{ block.settings.heading_size }} heading-weight-{{ block.settings.heading_weight }}">{{ block.settings.heading }}</div> 
+        {% if block.settings.sub_heading != blank %}<div class="menu-drawer-feature-block--subheading text-{{ block.settings.text_size }}">{{ block.settings.sub_heading }}</div>{% endif %}
+        {% if block.settings.button_show and block.settings.button_label != blank %}<div class="menu-drawer-feature-block--button button-style-{{ block.settings.button_style }} button-width-{{ block.settings.button_width }}">{{ block.settings.button_label }}</div>{% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.image_link != blank %}</a>{% endif %}
+      </div>
+    {% endif %}
+  {% endcase %}
+  {% endfor %}
+  </div>
+
+  {% if section.settings.secondary_menu.links != blank %}
+  <div class="nav-drawer--secondary-menu{% if section.settings.show_drawer_border_additional_menu %} nav-drawer--secondary-menu-border-top{% endif %} nav-font-family--{{ section.settings.nav_font_family_drawer_secondary_menu }} sl-hide">
+    <ul role="list">
+    {% for link in section.settings.secondary_menu.links %}
+      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+    {% if shop.customer_accounts_enabled and section.settings.account_enable %}
+      <li><a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a></li>
+    {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+
+</nav>

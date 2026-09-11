@@ -1,0 +1,1171 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .article-template {
+    padding-top: {{ section.settings.top_padding }}px;
+    padding-bottom: {{ section.settings.bottom_padding }}px;
+  }
+{% endstyle %}
+
+{% assign date_format = settings.date_format %}
+
+<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        <div class="{{ section.settings.article_width }}">
+          {% render block %}
+        </div>
+      
+      {%- when 'header' -%}
+      {% style %}
+        .article-template--hero-image {
+          padding-top: {{ block.settings.image_top_padding | times: 0.5 }}px;
+          padding-bottom: {{ block.settings.image_bottom_padding | times: 0.5 }}px;
+        }
+        .article-header {
+          padding-top: {{ block.settings.padding_top | times: 0.5 }}px;
+          padding-bottom: {{ block.settings.padding_bottom | times: 0.5 }}px;          
+        }
+        @media only screen and (min-width: 750px) {
+          .article-template--hero-image {
+            padding-top: {{ block.settings.image_top_padding }}px;
+            padding-bottom: {{ block.settings.image_bottom_padding }}px;
+          }
+          .article-header {
+            padding-top: {{ block.settings.padding_top }}px;
+            padding-bottom: {{ block.settings.padding_bottom }}px;          
+          }
+        }
+      {% if block.settings.bottom_border %}
+      .article-header-horizontal, .article-header-banner, .article-header {
+        border-bottom: 1px solid rgba(var(--color-foreground-rgb), 0.15);
+      }  
+      {% endif %}
+      {% endstyle %}      
+      {% if block.settings.header_style == 'banner' or block.settings.header_style == 'banner_fullscreen' and article.image %}
+        <div class="article-header-banner color-scheme-{{ block.settings.text_color }} color-scheme-{{ block.settings.bg_color }}{% if block.settings.header_style == 'banner_fullscreen' %} article-header-banner-fullscreen{% endif %}" {{ block.shopify_attributes }}>
+        <div class="article-header-banner--text {{ block.settings.text_width }} align-{{ block.settings.txt_alignment }} text-{{ block.settings.text_size }}">
+        <div class="article-header--blog-title">
+        {%- if block.settings.blog_show_title -%}<span>{{ blog.title }}</span>{%- endif -%}
+        </div> 
+        <h1 class="article-header--title {{ block.settings.heading_size }}" itemprop="headline">{{ article.title | escape }}</h1>
+        {%- if block.settings.blog_show_author -%}
+          <span class="article-header--data-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            {% if block.settings.blog_author_label != blank %}{{ block.settings.blog_author_label }} {% endif %}<span itemprop="name">{{ article.author }}</span>
+          </span>
+        {%- endif -%}
+        {%- if block.settings.blog_show_date -%}
+          <span class="article-header--data-date" itemprop="dateCreated pubdate datePublished">
+            {{- article.published_at | time_tag: date_format -}}
+          </span>
+        {%- endif -%}
+        </div>
+        {%- if article.image -%}
+        <div class="article-header-banner--bg-img">
+        {{ article.image | image_url: width: 2800 | image_tag: fetchpriority: 'high' }}
+        </div>
+        {%- endif -%}
+        </div>
+
+        {% if block.settings.blog_show_excerpt and article.excerpt.size > 0 %}
+        <div class="{{ section.settings.article_width }} align-{{ block.settings.txt_alignment }}">
+        <div class="article-header--excerpt article-header--excerpt-below-banner text-large">
+          <p>{{ article.excerpt }}</p> 
+        </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+        {% if block.settings.header_style == 'default' %}
+        <div class="article-header color-scheme-{{ block.settings.text_color }} color-scheme-{{ block.settings.bg_color }} {{ block.settings.txt_alignment }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.blog_show_title -%}<div class="article-header--blog-title {{ block.settings.text_width }}">{{ blog.title }}</div>{%- endif -%}
+          <div class="{{ block.settings.text_width }}">
+          <h1 class="article-header--title {{ block.settings.heading_size }}" itemprop="headline">{{ article.title | escape }}</h1>
+          </div>
+          {% if block.settings.blog_show_excerpt and article.excerpt.size > 0 %}
+          <div class="article-header--excerpt {{ block.settings.text_width }} text-large">
+            <p>{{ article.excerpt }}</p> 
+          </div>
+          {% endif %}
+
+          <div class="article-header--blog-meta-data {{ block.settings.text_width }} text-{{ block.settings.text_size }}">
+          {%- if block.settings.blog_show_author -%}
+            <span class="article-header--data-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              {% if block.settings.blog_author_label != blank %}{{ block.settings.blog_author_label }} {% endif %}<span itemprop="name">{{ article.author }}</span>
+            </span>
+          {%- endif -%}
+          {%- if block.settings.blog_show_date -%}
+            <span class="article-header--data-date" itemprop="dateCreated pubdate datePublished">
+              {{ article.published_at | time_tag: date_format }}
+            </span>
+          {%- endif -%}
+          </div>
+
+          {%- if article.image -%}
+          <div class="article-template--hero-image article-hero-image-stacked page-width article-hero-image-{{ block.settings.header_img_ratio }}">
+            <div class="image-wrapper">
+            {{ article.image | image_url: width: 2400 | image_tag: fetchpriority: 'high' }}
+            </div>
+          </div>
+          {%- endif -%}
+        </div>
+
+        {% endif %}
+
+        {% if block.settings.header_style == 'horizontal' %}
+        <div class="article-header-horizontal image-position-{{ block.settings.hoz_image_position }} color-scheme-{{ block.settings.text_color }} color-scheme-{{ block.settings.bg_color }} align-{{ block.settings.txt_alignment }}" {{ block.shopify_attributes }}>
+          <div class="article-header-horizontal--image ratio-{{ block.settings.header_img_ratio }}">
+          {% if article.image %}
+            {{ article.image | image_url: width: 1800 | image_tag: fetchpriority: 'high' }}
+          {% endif %}
+          </div>
+          <div class="article-header-horizontal--text text-{{ block.settings.text_size }}">
+          {% if block.settings.blog_show_title %}
+            <span class="article-header--blog-title">{{ blog.title }}</span>
+          {% endif %}
+          <h1 class="article-header--title {{ block.settings.heading_size }}" itemprop="headline">{{ article.title | escape }}</h1>
+          {% if block.settings.blog_show_author %}
+            <span class="article-header--data-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              {% if block.settings.blog_author_label != blank %}{{ block.settings.blog_author_label }} {% endif %}<span itemprop="name">{{ article.author }}</span>
+            </span>
+          {% endif %}
+          {% if block.settings.blog_show_date %}
+            <span class="article-header--data-date" itemprop="dateCreated pubdate datePublished">
+              {{ article.published_at | time_tag: date_format }}
+            </span>
+          {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      
+        {% if block.settings.header_style == 'stacked_image_first' %}
+        <div class="article-header color-scheme-{{ block.settings.text_color }} color-scheme-{{ block.settings.bg_color }} {{ block.settings.txt_alignment }}" {{ block.shopify_attributes }}>
+          {%- if article.image -%}
+          <div class="article-template--hero-image article-hero-image-stacked page-width article-hero-image-{{ block.settings.header_img_ratio }}">
+            <div class="image-wrapper">
+            {{ article.image | image_url: width: 2400 | image_tag: fetchpriority: 'high' }}
+            </div>
+          </div>
+          {%- endif -%}
+
+        {%- if block.settings.blog_show_title -%}<div class="article-header--blog-title {{ block.settings.text_width }} text-{{ block.settings.text_size }}">{{ blog.title }}</div>{%- endif -%}
+          <div class="{{ block.settings.text_width }}">
+          <h1 class="article-header--title {{ block.settings.heading_size }}" itemprop="headline">{{ article.title | escape }}</h1>
+          </div>
+          {% if block.settings.blog_show_excerpt and article.excerpt.size > 0 %}
+          <div class="article-header--excerpt {{ block.settings.text_width }} text-large">
+            <p>{{ article.excerpt }}</p> 
+          </div>
+          {% endif %}
+          <div class="article-header--blog-meta-data {{ block.settings.text_width }} text-{{ block.settings.text_size }}">
+          {%- if block.settings.blog_show_author -%}
+            <span class="article-header--data-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+              {% if block.settings.blog_author_label != blank %}{{ block.settings.blog_author_label }} {% endif %}<span itemprop="name">{{ article.author }}</span>
+            </span>
+          {%- endif -%}
+          {%- if block.settings.blog_show_date -%}
+            <span class="article-header--data-date" itemprop="dateCreated pubdate datePublished">
+              {{ article.published_at | time_tag: date_format }}
+            </span>
+          {%- endif -%}
+          </div>
+        </div>
+        {% endif %}
+      
+      {%- when 'content' -%}
+          {% style %}
+            .article-template__content {
+              padding-top: {{ block.settings.top_padding }}px;
+              padding-bottom: {{ block.settings.bottom_padding }}px;
+            }
+          {% endstyle %}
+        <div class="article-template__content {{ section.settings.article_width }} article-text-size--{{ block.settings.text_size }} article-bq-alignment--{{ block.settings.block_quote_alignment }} article-bq-size--{{ block.settings.block_quote_size }} rte" itemprop="articleBody" {{ block.shopify_attributes }}>
+          {{ article.content }}
+        </div>
+      
+      {%- when 'footer' -%}
+      <style>
+        .article-footer {
+          padding-top: {{ block.settings.top_padding | times: 0.5 }}px;
+          padding-bottom: {{ block.settings.bottom_padding | times: 0.5 }}px;
+        }
+        @media {
+          .article-footer {
+            padding-top: {{ block.settings.top_padding }}px;
+            padding-bottom: {{ block.settings.bottom_padding }}px;
+          }
+        }
+      </style>
+      <div class="article-footer {{ section.settings.article_width }} align-{{ block.settings.txt_alignment }}" {{ block.shopify_attributes }}>
+        {% if block.settings.border_top %}<hr class="blog-footer--border-top">{% endif %}
+        {% if block.settings.show_tags and article.tags.size > 0 %}
+        <div class="article-footer-tags">
+        {% for tag in article.tags %}
+        <a class="article-footer-tag text-small" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+        {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% if block.settings.show_author or block.settings.show_date %}
+
+        {% if block.settings.show_date and block.settings.show_author and article.user.image != blank and block.settings.blog_show_author_image %}
+        <span class="article-footer--data-date" itemprop="dateCreated pubdate datePublished">
+          {{- article.published_at | time_tag: date_format -}}
+        </span>
+        {% endif %}
+
+        <div class="article-footer-author-date">
+
+        {% if block.settings.show_author and article.user.image != blank and block.settings.blog_show_author_image %}
+        {% assign avatar_image_size = 120 %}
+        {% if block.settings.author_image_size == 'small' %}
+          {% assign avatar_image_size = 100 %}
+        {% endif %}
+        {% if block.settings.author_image_size == 'large' %}
+          {% assign avatar_image_size = 180 %}
+        {% endif %}
+          <div class="article-footer--author-avatar avatar-size--{{ block.settings.author_image_size }}">
+          {{ article.user.image | image_url: width: avatar_image_size | image_tag: loading: 'lazy' }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_author %}
+        <div class="article-footer--author-date-group">
+
+        <span class="article-footer--data-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          {% if block.settings.blog_author_label != blank %}{{ block.settings.blog_author_label }} {% endif %}<span itemprop="name">{{ article.author }}</span>
+        </span>
+
+        {% if block.settings.show_author and block.settings.blog_show_author_bio and article.user.bio != blank and article.user.bio.size < 50  %}
+          <span class="article-footer--data-author-bio">{{ article.user.bio }}</span>
+        {% endif %}
+
+        {% if block.settings.show_author and block.settings.blog_show_author_link and article.user.homepage != blank %}
+          <span class="article-footer--data-author-link"><a href="{{ article.user.homepage }}" target="_blank" rel="noopener,nofollow">{{ article.user.homepage | remove: "https://" | remove: "www" }}</a></span>
+        {% endif %}        
+
+        {% if block.settings.show_date and block.settings.show_author %}
+        {% if article.user.image == blank or block.settings.blog_show_author_image == false %}
+        <span class="article-footer--data-date" itemprop="dateCreated pubdate datePublished">
+          {{- article.published_at | time_tag: date_format -}}
+        </span>
+        {% endif %}
+        {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% if block.settings.show_author == false and block.settings.show_date %}
+        <span class="article-footer--data-date" itemprop="dateCreated pubdate datePublished">
+          {{- article.published_at | time_tag: date_format -}}
+        </span>
+        {% endif %}
+        </div>
+
+        {% if block.settings.show_author and block.settings.blog_show_author_bio and article.user.bio != blank and article.user.bio.size >= 50  %}
+          <span class="article-footer--data-author-bio">{{ article.user.bio }}</span>
+        {% endif %}
+
+        {% endif %}
+  
+        {% if block.settings.enable_sharing %}
+          <div class="article-footer-share">
+          {% capture article_share_url %}{{ article.url | prepend: request.origin }}{% endcapture %}
+          
+          {% if block.settings.share_label != blank %}
+            <span class="article-footer-share-title">{{ block.settings.share_label }}</span>
+          {% endif %}
+
+          <div id="standardShare" class="social-sharing-component share-hidden">
+            <a href="https://facebook.com/sharer.php?u={{ article_share_url }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.alt_text.share_on_facebook' | t }}">{% render 'icon-facebook' %}</a>
+            <a href="https://twitter.com/home?status={{ article_share_url }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.alt_text.share_on_twitter' | t }}">{% render 'icon-twitter-x' %}</a>
+            <a href="https://pinterest.com/pin/create/button/?url={{ article_share_url }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.alt_text.share_on_pinterest' | t }}">{% render 'icon-pinterest' %}</a>
+            <a href="https://api.whatsapp.com/send?text={{ article_share_url }}" rel="noopener" aria-label="{{ 'general.social.alt_text.share_on_whatsapp' | t }}">{% render 'icon-whatsapp' %}</a>
+          </div>
+            
+          <div id="nativeShare" class="social-sharing-component">
+              <button id="nativeShareButton" class="social-sharing-native-share-button">{% render 'icon-share' %}</button> 
+          </div>
+
+          <script>
+            const nativeShareWrapper = document.getElementById('nativeShare');
+            const nativeShare = document.getElementById('nativeShareButton');
+            const standardShare = document.getElementById('standardShare');
+            
+            if (navigator.share) {
+              //standardShare.classList.remove("share-hidden");
+              standardShare.style.display = 'none';
+            } else {
+               nativeShareWrapper.style.display = 'none';
+               standardShare.classList.remove("share-hidden");
+               standardShare.classList.add("share-visible");      
+            }
+            if (nativeShare && nativeShare.style.display !== 'none') {
+                nativeShare.addEventListener('click', async () => {
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                          title: document.title,
+                          url: window.location.href
+                      });
+                    } catch (error) {
+                        console.error('Error sharing:', error);
+                    }
+                  }
+                });
+            }
+          </script>
+
+          </div>
+          {% endif %}
+
+      {% if block.settings.border_bottom %}<hr class="blog-footer--border-bottom">{% endif %}
+      </div>
+    {%- endcase -%}
+  {%- endfor -%}
+
+
+  {%- if blog.comments_enabled? -%}
+    <div class="article-template__comment-wrapper">
+      <div id="comments" class="{{ section.settings.article_width }}">
+        {%- if article.comments_count > 0 -%}
+          {% # theme-check-disable %}
+          {%- assign anchorId = '#Comments-' | append: article.id -%}
+          {% # theme-check-enable %}
+
+          <h2 class="h3" id="Comments-{{ article.id }}" tabindex="-1">
+            {{ 'blogs.article.comments' | t: count: article.comments_count }}
+          </h2>
+          {% paginate article.comments by 5 %}
+            <div class="article-template__comments">
+              {%- if article.comment.status == 'pending' and article.comment.content -%}
+                <article id="{{ article.comment.id }}" class="article-template__comments-comment">
+                  <div class="article-template__comment-header">
+                  <div class="article-template__comment-avatar">
+                  {% assign author_parts = article.comment.author | split: " " %}
+                  {% if author_parts.size > 1 %}
+                    {{ author_parts.first | slice: 0 }}{{ author_parts.last | slice: 0 }}
+                  {% else %}
+                    {{ author_parts.first | slice: 0 }}
+                  {% endif %}
+                  </div>
+                  <div class="article-template__comment-author-data">
+                  <span>{{ article.comment.author }}</span>
+                  <span class="article-comment-date">{{- article.comment.created_at | time_tag: date_format -}}</span>
+                  </div>
+                  </div>
+
+                  <div class="article-template__comment-text">
+                  {{ article.comment.content }}
+                  </div>
+                </article>
+              {%- endif -%}
+
+              {%- for comment in article.comments -%}
+                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                  <div class="article-template__comment-header">
+                  <div class="article-template__comment-avatar">
+                  {% assign author_parts = comment.author | split: " " %}
+                  {% if author_parts.size > 1 %}
+                    {{ author_parts.first | slice: 0 }}{{ author_parts.last | slice: 0 }}
+                  {% else %}
+                    {{ author_parts.first | slice: 0 }}
+                  {% endif %}
+                  </div>
+                  <div class="article-template__comment-author-data">
+                  <span>{{ comment.author }}</span>
+                  <span class="article-comment-date">{{- comment.created_at | time_tag: date_format -}}</span>
+                  </div>
+                  </div>
+                
+                  <div class="article-template__comment-text">
+                  {{ comment.content }}
+                  </div> 
+                </article>
+              {%- endfor -%}
+              {% render 'pagination', paginate: paginate, anchor: anchorId %}
+            </div>
+          {% endpaginate %}
+        {%- endif -%}
+        {% form 'new_comment', article %}
+          {%- liquid
+            assign post_message = 'blogs.article.success'
+            if blog.moderated? and article.comment.status == 'unapproved'
+              assign post_message = 'blogs.article.success_moderated'
+            endif
+          -%}
+          <h2 class="h3">{{ 'blogs.article.comment_form_title' | t }}</h2>
+          {%- if form.errors -%}
+            <div class="form__message" role="alert">
+              <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
+                {% render 'icon-error' %}
+                {{ 'templates.contact.form.error_heading' | t }}
+              </h3>
+            </div>
+            <ul class="form-status-list caption-large">
+              {%- for field in form.errors -%}
+                <li>
+                  <a href="#CommentForm-{{ field }}" class="link">
+                    {%- if form.errors.translated_fields[field] contains 'author' -%}
+                      {{ 'blogs.article.name' | t }}
+                    {%- elsif form.errors.translated_fields[field] contains 'body' -%}
+                      {{ 'blogs.article.message' | t }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] }}
+                    {%- endif -%}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- elsif form.posted_successfully? -%}
+            <div class="form-status-list form__message" role="status">
+              <h3 class="form-status" tabindex="-1" autofocus>
+                {% render 'icon-success' %}
+                {{ post_message | t }}
+              </h3>
+            </div>
+          {%- endif -%}
+
+          <div
+            {% if blog.moderated? == false %}
+              class="article-template__comments-fields"
+            {% endif %}
+          >
+            <div class="article-template__comment-fields">
+              <div class="field field--with-error">
+                <label class="field__label" for="CommentForm-author">
+                  {{- 'blogs.article.name' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                <input
+                  type="text"
+                  name="comment[author]"
+                  id="CommentForm-author"
+                  class="field__input"
+                  autocomplete="name"
+                  value="{{ form.author }}"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'author' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-author-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.name' | t }}"
+                >
+
+                {%- if form.errors contains 'author' -%}
+                  <small id="CommentForm-author-error">
+                    <span class="form__message">
+                      {%- render 'icon-error' -%}
+                      {{- 'blogs.article.name' | t }}
+                      {{ form.errors.messages.author }}.</span
+                    >
+                  </small>
+                {%- endif -%}
+              </div>
+              <div class="field field--with-error">
+                <label class="field__label" for="CommentForm-email">
+                  {{- 'blogs.article.email' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                <input
+                  type="email"
+                  name="comment[email]"
+                  id="CommentForm-email"
+                  autocomplete="email"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.email' | t }}"
+                >
+                {%- if form.errors contains 'email' -%}
+                  <small id="CommentForm-email-error">
+                    <span class="form__message">
+                      {%- render 'icon-error' -%}
+                      {{- 'blogs.article.email' | t }}
+                      {{ form.errors.messages.email }}.</span
+                    >
+                  </small>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="field field--with-error">
+              <label class="form__label field__label" for="CommentForm-body">
+                {{- 'blogs.article.message' | t }}
+                <span aria-hidden="true">*</span></label
+              >
+              <textarea
+                rows="5"
+                name="comment[body]"
+                id="CommentForm-body"
+                class="text-area field__input"
+                aria-required="true"
+                required
+                {% if form.errors contains 'body' %}
+                  aria-invalid="true"
+                  aria-describedby="CommentForm-body-error"
+                {% endif %}
+                placeholder="{{ 'blogs.article.message' | t }}"
+              >{{ form.body }}</textarea>
+
+            </div>
+            {%- if form.errors contains 'body' -%}
+              <small id="CommentForm-body-error">
+                <span class="form__message">
+                  {%- render 'icon-error' -%}
+                  {{- 'blogs.article.message' | t }}
+                  {{ form.errors.messages.body }}.</span
+                >
+              </small>
+            {%- endif -%}
+          </div>
+          {%- if blog.moderated? -%}
+            <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
+          {%- endif -%}
+          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+        {% endform %}
+      </div>
+    </div>
+  {%- endif -%}
+
+  
+</article>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ request.origin | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      "image": [
+        {{ article | image_url: width: 1920 | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }}
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-article.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+  {
+    "type": "select",
+    "id": "article_width",
+    "label": "t:sections.all.width",
+    "options": [
+      {
+        "value": "page-width-narrow",
+        "label": "t:sections.all.narrow"
+      },
+      {
+        "value": "page-width-medium",
+        "label": "t:sections.all.size.medium"
+      }
+      ],
+    "default": "page-width-narrow"
+  },
+  {
+    "type": "range",
+    "id": "top_padding",
+    "min": 0,
+    "max": 180,
+    "step": 10,
+    "unit": "px",
+    "default": 0,
+    "label": "t:sections.all.padding.padding_top"
+  },
+  {
+    "type": "range",
+    "id": "bottom_padding",
+    "min": 0,
+    "max": 180,
+    "step": 10,
+    "unit": "px",
+    "default": 60,
+    "label": "t:sections.all.padding.padding_bottom"
+  }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "header",
+      "name": "t:sections.main-article.blocks.header.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "header_style",
+          "options": [
+            {
+              "value": "banner",
+              "label": "t:sections.main-article.blocks.header.settings.header_style.options__1.label"
+            },
+            {
+              "value": "banner_fullscreen",
+              "label": "t:sections.main-article.blocks.header.settings.header_style.options__2.label"
+            },
+            {
+              "value": "default",
+              "label": "t:sections.main-article.blocks.header.settings.header_style.options__3.label"
+            },
+            {
+              "value": "stacked_image_first",
+              "label": "t:sections.main-article.blocks.header.settings.header_style.options__4.label"
+            }  ,          
+            {
+              "value": "horizontal",
+              "label": "t:sections.all.layouts.horizontal"
+            }
+          ],
+          "default": "banner",
+          "label": "t:sections.main-article.blocks.header.settings.header_style.label"
+        },
+        {
+          "type": "select",
+          "id": "hoz_image_position",
+          "label": "t:sections.main-article.blocks.header.settings.header_hoz_image_position.label",
+          "info": "t:sections.main-article.blocks.header.settings.header_hoz_image_position.info",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.all.alignment.left"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.all.alignment.right"
+            }
+    		],
+          "default": "right"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.text"
+        },
+        {
+          "type": "select",
+          "id": "txt_alignment",
+          "label": "t:sections.all.alignment.alignment_header",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.all.alignment.left"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.all.alignment.center"
+            }
+    		],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "t:sections.all.heading_size.label",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.all.size.medium"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.size.large"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.size.xl"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:sections.all.size.xxl"
+            }
+          ],
+          "default": "h1"
+        },        
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "t:sections.all.size.text_size",
+          "options": [
+            {
+              "value": "default",
+              "label": "t:sections.all.size.medium"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.all.size.large"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.all.size.xl"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "text_width",
+          "label": "t:sections.all.width",
+          "options": [
+            {
+              "value": "page-width",
+              "label": "t:sections.all.default"
+            },
+            {
+              "value": "page-width-medium",
+              "label": "t:sections.all.size.medium"
+            },
+            {
+              "value": "page-width-narrow",
+              "label": "t:sections.all.narrow"
+            }
+          ],
+          "default": "page-width"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_title",
+          "default": true,
+          "label": "t:sections.main-article.blocks.header.settings.show_title.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_excerpt",
+          "default": true,
+          "label": "t:sections.main-article.blocks.header.settings.show_excerpt.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author",
+          "default": false,
+          "label": "t:sections.main-article.blocks.header.settings.show_author.label"
+        },        
+        {
+          "type": "text",
+          "id": "blog_author_label",
+          "visible_if": "{{ block.settings.blog_show_author == true }}",
+          "label": "t:sections.all.label",
+          "info": "t:sections.all.optional"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_date",
+          "default": true,
+          "label": "t:sections.main-article.blocks.header.settings.show_date.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.image",
+          "info": "t:sections.main-article.blocks.header.settings.header__image.info"
+        },
+        {
+          "type": "select",
+          "id": "header_img_ratio",
+          "options": [
+            {
+              "value": "landscape-6x4",
+              "label": "t:sections.all.ratio.landscape_6_4"
+            },
+            {
+              "value": "landscape-16x9",
+              "label": "t:sections.all.ratio.landscape_16_9"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.all.ratio.square"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.all.ratio.portrait_4_5"
+            },
+            {
+              "value": "adapt",
+              "label": "t:sections.all.ratio.adapt_to_image"
+            }          
+          ],
+          "default": "landscape-6x4",
+          "label": "t:sections.all.ratio.ratio_heading"
+        },
+        {
+          "type": "range",
+          "id": "image_top_padding",
+          "min": 0,
+          "max": 180,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_top"
+        },
+        {
+          "type": "range",
+          "id": "image_bottom_padding",
+          "min": 0,
+          "max": 180,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_bottom"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.colors.label"
+        },
+        {
+          "type": "select",
+          "id": "text_color",
+          "options": [
+            {
+              "value": "fg-white",
+              "label": "t:sections.all.colors.white.label"
+            },
+            {
+              "value": "fg-body",
+              "label": "t:sections.all.colors.background_body.label"
+            },
+            {
+              "value": "fg-01",
+              "label": "t:sections.all.colors.accent_1.label"
+            },
+            {
+              "value": "fg-02",
+              "label": "t:sections.all.colors.accent_2.label"
+            },
+            {
+              "value": "fg-03",
+              "label": "t:sections.all.colors.accent_3.label"
+            },
+            {
+              "value": "fg-04",
+              "label": "t:sections.all.colors.accent_4.label"
+            }
+          ],
+          "default": "fg-white",
+          "label": "t:sections.all.colors.text_color.label"
+        },
+        {
+          "type": "select",
+          "id": "bg_color",
+          "options": [
+            {
+              "value": "bg-body",
+              "label": "t:sections.all.colors.background_body.label"
+            },
+            {
+              "value": "bg-01",
+              "label": "t:sections.all.colors.background_1.label"
+            },
+            {
+              "value": "bg-02",
+              "label": "t:sections.all.colors.background_2.label"
+            },
+            {
+              "value": "bg-03",
+              "label": "t:sections.all.colors.background_3.label"
+            },
+            {
+              "value": "bg-04",
+              "label": "t:sections.all.colors.background_4.label"
+            }
+          ],
+          "default": "bg-body",
+          "label": "t:sections.all.colors.background_color.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "bottom_border",
+          "default": false,
+          "label": "t:sections.all.border_bottom"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.all.layouts.vertical_padding"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 160,
+          "step": 10,
+          "unit": "px",
+          "default": 100,
+          "label": "t:sections.all.padding.padding_top"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 160,
+          "step": 10,
+          "unit": "px",
+          "default": 20,
+          "label": "t:sections.all.padding.padding_bottom"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "t:sections.main-article.blocks.content.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:sections.all.text"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "t:sections.all.size.label",
+          "options": [
+            {
+              "value": "medium",
+              "label": "t:sections.all.size.normal"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.all.size.large"
+            }
+    		],
+          "default": "medium"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-article.blocks.content.settings.block_quote.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "block_quote_alignment",
+          "label": "t:sections.all.alignment.alignment_header",
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "block_quote_size",
+          "label": "t:sections.all.size.label",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.all.size.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.all.size.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.all.size.large"
+            }
+    		],
+          "default": "medium"
+        },
+        {
+          "type": "header",
+          "content": "Padding"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 180,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_top"
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 180,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_bottom"
+        }        
+      ]
+    },
+    {
+      "type": "footer",
+      "name": "t:sections.main-article.blocks.footer.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "txt_alignment",
+          "label": "t:sections.all.alignment.alignment_header",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.all.alignment.left"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.all.alignment.center"
+            }
+    		],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 120,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_top"
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 120,
+          "step": 10,
+          "unit": "px",
+          "default": 40,
+          "label": "t:sections.all.padding.padding_bottom"
+        },
+        {
+          "type": "checkbox",
+          "id": "border_top",
+          "default": true,
+          "label": "t:sections.all.border_top"
+        },
+        {
+          "type": "checkbox",
+          "id": "border_bottom",
+          "default": false,
+          "label": "t:sections.all.border_bottom"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-article.blocks.footer.settings.header__1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tags",
+          "default": true,
+          "label": "t:sections.main-article.blocks.footer.settings.show_tags.label"
+    	  },
+        {
+          "type": "checkbox",
+          "id": "show_date",
+          "default": true,
+          "label": "t:sections.main-article.blocks.footer.settings.show_date.label"
+    	  },
+        {
+          "type": "checkbox",
+          "id": "show_author",
+          "default": true,
+          "label": "t:sections.main-article.blocks.footer.settings.show_author.label"
+    	  },
+        {
+          "type": "text",
+          "id": "blog_author_label",
+          "visible_if": "{{ block.settings.show_author == true }}",
+          "label": "t:sections.all.label",
+          "info": "t:sections.all.optional"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author_image",
+          "visible_if": "{{ block.settings.show_author == true }}",
+          "default": false,
+          "label": "t:sections.main-article.blocks.footer.settings.show_author_image.label",
+          "info": "t:sections.main-article.blocks.footer.settings.show_author_image.info"
+        },
+        {
+          "type": "select",
+          "id": "author_image_size",
+          "visible_if": "{{ block.settings.show_author == true }}",
+          "label": "t:sections.main-article.blocks.footer.settings.author_image_size.label",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.all.size.small"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.all.size.medium"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.all.size.large"
+            }
+    		],
+          "default": "medium"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author_bio",
+          "visible_if": "{{ block.settings.show_author == true }}",
+          "default": false,
+          "label": "t:sections.main-article.blocks.footer.settings.show_author_bio.label",
+          "info": "t:sections.main-article.blocks.footer.settings.show_author_bio.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "blog_show_author_link",
+          "visible_if": "{{ block.settings.show_author == true }}",
+          "default": false,
+          "label": "t:sections.main-article.blocks.footer.settings.show_author_link.label",
+          "info": "t:sections.main-article.blocks.footer.settings.show_author_link.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-article.blocks.footer.settings.header__2.label"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.footer.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.footer.settings.title_info.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_sharing",
+          "default": true,
+          "label": "t:sections.main-article.blocks.footer.settings.enable_sharing.label"
+    	},
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.all.label",
+          "default": "Share"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

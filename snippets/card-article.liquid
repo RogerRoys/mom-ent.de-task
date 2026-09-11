@@ -1,0 +1,64 @@
+{% comment %}
+  Renders an article card for a given blog
+
+  Accepts:
+  - blog: {Object} Blog object
+  - article: {Object} Article object
+  - media_aspect_ratio: {String} The setting changes the aspect ratio of the article image, if shown.
+  - media_size: {String} The render size of the article image, if set in the section.
+  - show_image: {Boolean} The setting either show the article image or not. If it's not included it will show the image by default.
+  - show_excerpt: {Boolean} The setting either show article excerpt or not.
+  - show_tags: {Boolean} The setting either show article tags or not.
+  - show_date: {Boolean} The setting either show the article date or not.
+  - show_author: {Boolean} The setting either show the article author or not.
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+
+  Usage:
+  {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
+{% endcomment %}
+
+{% assign date_format = settings.date_format %}
+{% assign media_size = media_size | default: 900 %}
+  
+<div class="article-card bc-align--{{ settings.blog_card_text_alignment }}{% if show_image == false or article.image == blank %} article-card-no-images{% endif %}">
+<a href="{{ article.url }}">
+
+{%- if show_image == true and article.image -%}
+<div class="article-card--image article-card-image-ratio-{{ media_aspect_ratio }}">
+{% if lazy_load %}
+{{ article.image | image_url: width: media_size | image_tag: loading: 'lazy' }}
+{% else %}
+{{ article.image | image_url: width: media_size | image_tag }}
+{% endif %}
+ 
+</div>
+{%- endif -%}
+<div class="article-card--title">
+{% if template == 'blog' %}
+<h2 class="h3 article-card-main-blog">{{ article.title }}</h2>
+{% else %}
+<h3 class="article-card-heading">{{ article.title }}</h3>
+{% endif %}
+
+{%- if show_author -%}<span class="article-card--data">{{ article.author }}</span>{%- endif -%}{%- if show_author and show_date -%}<span class="divider-bullet">&bull;</span>{%- endif -%}{%- if show_date -%}<span class="article-card--data">{{ article.published_at | time_tag: date_format }}</span>{%- endif -%}
+</div>
+{% if show_excerpt %}
+  {% if article.excerpt.size > 0 %}
+  <p class="article-card--excerpt">
+  {{ article.excerpt | strip_html | truncatewords: 30 }}
+  </p>
+  {% endif %}
+  {% if article.excerpt.size < 1 and article.content.size > 1 %}
+  <p class="article-card--excerpt">
+  {{ article.content | strip_html | truncatewords: 30 }}
+  </p>
+  {% endif %}
+{% endif %}
+
+{% if show_tags and article.tags.size > 0 %}
+<div class="article-card--tags">
+{% for tag in article.tags %}<span class="article-card-tag">{{ tag }}</span>{% endfor %}
+</div>
+{% endif %}
+</a>
+</div>

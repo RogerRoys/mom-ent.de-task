@@ -1,0 +1,241 @@
+{% style %}
+.section-{{ section.id }} .csn-inner {
+  margin-top: {{ section.settings.padding_top | times: 0.5 }}px;
+  margin-bottom: {{ section.settings.padding_bottom | times: 0.5 }}px;
+}
+  
+@media only screen and (min-width: 750px) {
+  .section-{{ section.id }} .csn-inner {
+    margin-top: {{ section.settings.padding_top }}px;
+    margin-bottom: {{ section.settings.padding_bottom }}px;
+  }  
+}
+
+{% if settings.menu_pills_radius > 20 %}
+.collection-sub-navigation.menu-style-pills li a {
+  padding: 0 2.2rem !important;
+}  
+{% endif %}
+  
+{% endstyle %}
+
+{% if section.settings.menu != blank %}
+<div class="collection-sub-navigation section-{{ section.id }}{% if section.settings.menu_style == 'images' %} csn-images{% else %} page-width{% endif %} align-{{ section.settings.alignment }} menu-style-{{ section.settings.menu_style }}">
+<div class="csn-inner">
+{% if section.settings.menu_style == 'images' and section.settings.menu.links.size > 6 %}
+<div class="csn-arrows">
+  <button class="csn-arrow csn-arrow-prev" aria-label="{{ 'accessibility.left' | t }}">{% render 'icon-arrow-slider' %}</button>
+  <button class="csn-arrow csn-arrow-next" aria-label="{{ 'accessibility.right' | t }}">{% render 'icon-arrow-slider' %}</button>
+</div>
+{% endif %}
+  <ul class="csn-ul{% if section.settings.menu.links.size < 6 %} csn-ul-dtnoscroll{% endif %}">
+    {% for link in section.settings.menu.links %}
+      <li>
+        <a href="{{ link.url }}"{% if collection.url == link.url %} class="current-link"{% endif %}>
+          {% if link.url contains '/collections/' and section.settings.menu_style == 'images' %}
+            {% assign collection_handle_no_child = link.url | split: '/' | last %}
+            {% assign collection_no_child = collections[collection_handle_no_child] %}
+            {% assign render_width = 280 %}
+            {% assign render_height = 280 %}
+            {% if section.settings.image_ratio == 'portrait-4x5' %}
+              {% assign render_height = 360 %}
+            {% endif %}
+            {% if section.settings.image_ratio == 'portrait-4x6' %}
+              {% assign render_height = 420 %}
+            {% endif %}
+            <div class="collection-sub-navigation-image csn-image-ratio-{{ section.settings.image_ratio }}">
+            {% if collection_no_child.featured_image %}
+              {% if collection_no_child.featured_image.aspect_ratio > 1 %}
+                {{ collection_no_child.featured_image | image_url: height: render_height | image_tag: loading: 'lazy' }}
+              {% else %}
+                {{ collection_no_child.featured_image | image_url: width: render_width | image_tag: loading: 'lazy' }}
+              {% endif %}
+            {% endif %}
+            </div>
+          {% endif %}
+          <span class="link-label">{{ link.title }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+</div>
+{% endif %}
+
+{% if section.settings.menu_style == 'images' and section.settings.menu.links.size > 6 %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var csnsliders = document.querySelectorAll(".collection-sub-navigation");
+  
+  csnsliders.forEach(function (slider) {
+    const menuContainer = slider.querySelector('.csn-ul');
+    const leftArrow = slider.querySelector('.csn-arrow-prev');
+    const rightArrow = slider.querySelector('.csn-arrow-next');
+    
+    const updateArrows = () => {
+      const scrollPosition = menuContainer.scrollLeft;
+      const containerWidth = menuContainer.clientWidth;
+      const totalWidth = menuContainer.scrollWidth;
+      const scrollLimit = totalWidth - containerWidth;
+
+      if (scrollPosition <= 0) {
+        leftArrow.classList.add('disabled');
+      } else {
+        leftArrow.classList.remove('disabled');
+      }
+
+      if (scrollPosition >= scrollLimit) {
+        rightArrow.classList.add('disabled');
+      } else {
+        rightArrow.classList.remove('disabled');
+      }
+    };
+
+    // Initial state of the arrows
+    updateArrows();
+
+    // Scroll event listener
+    menuContainer.addEventListener('scroll', updateArrows);
+
+    // Left arrow click event
+    if (leftArrow) {
+      leftArrow.addEventListener('click', () => {
+        menuContainer.scrollBy({
+          top: 0,
+          left: -160,  // Scroll left when left arrow is clicked
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Right arrow click event
+    if (rightArrow) {
+      rightArrow.addEventListener('click', () => {
+        menuContainer.scrollBy({
+          top: 0,
+          left: 160,  // Scroll right when right arrow is clicked
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+}); 
+
+function positionArrows() {
+  const image = document.querySelector('.collection-sub-navigation-image img');
+  const arrows = document.querySelector('.csn-arrows');
+
+  if (image && arrows) {
+    const imageHeight = image.offsetHeight;
+    arrows.style.top = `${imageHeight / 2}px`;
+  }
+}
+
+// Run on load
+window.addEventListener('load', positionArrows);
+
+// Optional: Run on resize too, in case the UL height changes
+window.addEventListener('resize', positionArrows);
+</script>
+{% endif %}
+  
+{% schema %}
+  {
+    "name": "t:sections.main-collection-sub-navigation.name",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "t:sections.header.settings.menu.label"
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:sections.all.alignment.left"
+          },
+          {
+            "value": "center",
+            "label": "t:sections.all.alignment.center"
+          }
+        ],
+        "default": "left",
+        "label": "t:sections.all.alignment.alignment_header"
+      },
+      {
+        "type": "select",
+        "id": "menu_style",
+        "options": [
+          {
+            "value": "list",
+            "label": "t:sections.all.text"
+          },
+          {
+            "value": "pills",
+            "label": "t:sections.main-collection-sub-navigation.settings.menu_style.options__2.label"
+          },
+          {
+            "value": "images",
+            "label": "t:sections.main-collection-sub-navigation.settings.menu_style.options__3.label"
+          }
+        ],
+        "default": "list",
+        "label": "t:sections.main-collection-sub-navigation.settings.menu_style.label"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "options": [
+          {
+            "value": "landscape",
+            "label": "t:sections.all.ratio.landscape_6_4"
+          },
+          {
+            "value": "landscape-16x9",
+            "label": "t:sections.all.ratio.landscape_16_9"
+          },
+          {
+            "value": "square",
+            "label": "t:sections.all.ratio.square"
+          },
+          {
+            "value": "portrait-4x5",
+            "label": "t:sections.all.ratio.portrait_4_5"
+          },
+          {
+            "value": "portrait-4x6",
+            "label": "t:sections.all.ratio.portrait_4_6"
+          },
+          {
+            "value": "circle",
+            "label": "t:sections.all.shape.circle"
+          }
+        ],
+        "default": "landscape",
+        "label": "t:sections.all.ratio.image_ratio"
+      },
+      {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60,
+      "label": "t:sections.all.padding.padding_top"
+      },
+      {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 40,
+      "label": "t:sections.all.padding.padding_bottom"
+      }
+    ]
+}
+{% endschema %}

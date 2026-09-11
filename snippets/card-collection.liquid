@@ -1,0 +1,67 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square".
+  - heading_size: Size of the card heading. Values are "small", "normal", "large" or "XL"
+  - card_type: Overlay or stacked card.
+  - button_style: The style of the card button.
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{% assign media_size = 900 %}
+
+{% if image_resolution == 'low' %}
+{% assign media_size = 720 %}
+{% endif %}
+
+{% if image_resolution == 'high' %}
+{% assign media_size = 1400 %}
+{% endif %}
+
+{% if collection_image == blank %}
+{% assign collection_image = card_collection.featured_image %}
+{% endif %}
+
+<div class="card-collection card-type-{{ card_type }} card-ratio-{{ media_aspect_ratio }}">
+<a href="{{ card_collection.url }}">
+<div class="card-collection--image{% if collection_video %} autoplaying-video{% endif %}">
+{% if collection_video %}
+{{
+  collection_video
+  | video_tag:
+    image_size: '1080x',
+    autoplay: true,
+    loop: true,
+    controls: false,
+    muted: true
+}}
+{% endif %}
+{% if collection_image and collection_video == blank %}
+{{ collection_image | image_url: width: media_size | image_tag: loading: 'lazy' }}
+{% endif %}
+
+{% unless collection_video or collection_image %}
+{% render 'media-placeholder-collection', sequence_number: sequence_number %}
+{% endunless %}
+
+</div>
+<div class="card-collection--title card-title-{{ title_position }} card-title-alignment--{{ settings.collection_card_text_alignment }}">
+  <h3 class="{{ heading_size }}{% if section.settings.card_heading_visibility == 'rollover_central' %} h0{% endif %}">{% if card_collection.title != blank %}{{ card_collection.title }}{% else %}{{ 'onboarding.collection_title' | t }}{% endif %}</h3>
+  {% if collection_description != blank %}
+  <p>{{ collection_description }}</p>
+  {% endif %}
+  {% if show_button and button_position == 'inline' and card_type == 'overlay' and buttons_label != blank %}
+  <div class="{% if button_style contains 'button' %}button {% endif %}card-button-inline {{ button_style }}">{{ buttons_label }}</div>
+  {% endif %}
+  {% if show_button and card_type == 'stacked' and buttons_label != blank %}
+  <div class="{% if button_style contains 'button' %}button {% endif %}card-button-inline {{ button_style }}">{{ buttons_label }}</div>
+  {% endif %}
+</div>
+{% if show_button and button_position == 'bottom' and card_type == 'overlay' and buttons_label != blank %}
+<div class="button-card-bottom{% if settings.collection_card_text_alignment == 'center' %} button-card-bottom-align-center{% endif %}"><span class="{% if button_style contains 'button' %}button {% endif %}{{ button_style }}">{{ buttons_label }}</span></div>
+{% endif %}
+</a>
+</div>

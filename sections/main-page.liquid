@@ -1,0 +1,140 @@
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+.section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.8 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.8 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+
+{%- endstyle -%}
+
+{% assign enable_unit_toggle = false %}
+
+<div class="{{ section.settings.content_width }} section-{{ section.id }}-padding section-index-{{ section.index }}{% if request.design_mode %} section-index-1{% endif %}">
+  {% unless section.settings.heading_hide %}
+  <h1 class="main-page-title page-title align-{{ section.settings.hdr_alignment }}">
+    {{ page.title | escape }}
+  </h1>
+  {% endunless %}
+  <div class="rte">
+  {% if page.url contains 'size' and enable_unit_toggle %}
+    <div class="unit-toggle-container text-small">
+      <div class="unit-toggle selected metric-toggle">CM</div>
+      <div class="unit-toggle imperial-toggle">IN</div>
+    </div>
+  {% endif %}
+    {{ page.content }}
+  </div>
+</div>
+
+{% if page.url contains 'size' and enable_unit_toggle %}
+<script>
+  var metricBtn = document.querySelector(".metric-toggle");
+  var imperialBtn = document.querySelector(".imperial-toggle");
+  var imperialTables = document.querySelectorAll(".imperial-table");
+  var metricTables = document.querySelectorAll(".metric-table");
+  var unitToggleContainer = document.querySelector(".unit-toggle-container");
+
+  // Hide unit toggle if no metric or imperial tables exist
+  if (imperialTables.length === 0 && metricTables.length === 0 && unitToggleContainer) {
+    unitToggleContainer.style.display = "none";
+  }
+  
+  // Hide all imperial tables on page load
+  window.addEventListener("DOMContentLoaded", function () {
+    imperialTables.forEach(table => table.style.display = "none");
+  });
+  
+  if (metricBtn && imperialBtn) {
+    metricBtn.addEventListener("click", function () {
+      // Show metric tables, hide imperial tables
+      metricTables.forEach(table => table.style.display = "block");
+      imperialTables.forEach(table => table.style.display = "none");
+      this.classList.add("selected");
+      imperialBtn.classList.remove("selected");
+    });
+
+    imperialBtn.addEventListener("click", function () {
+      // Show imperial tables, hide metric tables
+      imperialTables.forEach(table => table.style.display = "block");
+      metricTables.forEach(table => table.style.display = "none");
+      metricBtn.classList.remove("selected");
+      this.classList.add("selected");
+    });
+  }
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:sections.all.margin",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.default"
+        },
+        {
+          "value": "page-width-medium",
+          "label": "t:sections.all.size.medium"
+        },
+        {
+          "value": "page-width-narrow",
+          "label": "t:sections.all.narrow"
+        },
+        {
+          "value": "page-width-full",
+          "label": "t:sections.all.full_width"
+        }
+		],
+      "default": "page-width"
+    },
+    {
+      "type": "text_alignment",
+      "id": "hdr_alignment",
+      "label": "t:sections.main-page.settings.heading_alignment.label",
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_hide",
+      "default": false,
+      "label": "t:sections.main-page.settings.heading_hide.label",
+      "info": "t:sections.main-page.settings.heading_hide.info"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 100
+    }
+  ]
+}
+{% endschema %}

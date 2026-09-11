@@ -1,0 +1,38 @@
+{% comment %}
+  Renders a swatch component - used in product card, product page and collection filters.
+  Accepts:
+  - swatch: {Object} a swatch object
+
+  Usage:
+  {% render 'swatch',
+    swatch: value.swatch
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign swatch_value = null
+  assign swatch_render_size = 48
+  assign swatch_color_scheme = 'dark'
+  assign swatch_brightness = swatch.color | color_brightness
+  if swatch_brightness > 125
+    assign swatch_color_scheme = 'light'
+  endif
+  if swatch_size == 'large'
+    assign swatch_render_size = 80
+  endif
+  if swatch.image
+    assign image_url = swatch.image | image_url: width: swatch_render_size
+    assign swatch_value = 'url(' | append: image_url | append: ')'
+  elsif swatch.color
+    assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+  endif
+-%}
+
+<span
+  {% if swatch_value %}
+    class="swatch swatch-brightness--{{ swatch_color_scheme }} swatch--available{% if swatch_value == 'rgb(255 255 255)' %} swatch-with-border{% endif %}"
+    style="background: {{ swatch_value }};"
+  {% else %}
+    class="swatch swatch--unavailable"
+  {% endif %}
+></span>

@@ -1,0 +1,680 @@
+{{ 'section-image-comparison.css' | asset_url | stylesheet_tag }}
+
+{% assign scrubber_border_opacity = section.settings.scrubber_border_opacity | divided_by: 10 %}
+
+{% assign image_size = 2800 %}
+
+{% if section.settings.enable_max_image_width %}
+{% assign image_size = section.settings.max_image_width | times: 2 %}  
+{% endif %}
+
+{%- style -%}
+.section-{{ section.id }} .section-inner {
+  padding-top: {{ section.settings.padding_top | times: 0.8 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.8 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }} .section-inner {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+
+.section-{{ section.id }} .ba-max-width {
+  max-width: {{ section.settings.max_image_width }}px;
+}
+
+.section-{{ section.id }} .ba-caption-bg--bg-01, .section-{{ section.id }} .ba-caption-bg--bg-02, .section-{{ section.id }} .ba-caption-bg--bg-03, .section-{{ section.id }} .ba-caption-bg--bg-04, .section-{{ section.id }} .ba-caption-bg--bg-05 {
+  border-radius: {{ section.settings.caption_corner_radius }}px;
+}  
+
+.section-{{ section.id }} .drag-button {
+  border: 1px solid rgba(0,0,0,0.{{ scrubber_border_opacity }});
+}
+
+.section-{{ section.id }} .ba-dragger-fg--white .drag-button {
+  border: 1px solid rgba(255,255,255,0.{{ scrubber_border_opacity }});
+}
+  
+.section-{{ section.id }} .ba-dragger-fg--01 .drag-button {
+  border: 1px solid rgba(var(--color-accent-one-rgb),0.{{ scrubber_border_opacity }});
+}
+
+.section-{{ section.id }} .ba-dragger-fg--02 .drag-button {
+  border: 1px solid rgba(var(--color-accent-two-rgb),0.{{ scrubber_border_opacity }});
+}
+
+.section-{{ section.id }} .ba-dragger-fg--03 .drag-button {
+  border: 1px solid rgba(var(--color-accent-three-rgb),0.{{ scrubber_border_opacity }});
+}
+
+.section-{{ section.id }} .ba-dragger-fg--04 .drag-button {
+  border: 1px solid rgba(var(--color-accent-four-rgb),0.{{ scrubber_border_opacity }});
+}
+
+.section-{{ section.id }} .ba-dragger-fg--05 .drag-button {
+  border: 1px solid rgba(var(--color-accent-five-rgb),0.{{ scrubber_border_opacity }});
+}
+
+{% if settings.media_radius > 18 %}
+.image-caption-before, .image-caption-after {
+  top: 20px;
+}
+
+.ba-caption-position--bottom .image-caption-before, .ba-caption-position--bottom .image-caption-after {
+  top: auto;
+  bottom: 20px;
+}
+
+.image-caption-before {
+  left: 20px;
+}
+
+.image-caption-after {
+  right: 20px;
+  top: 20px;
+}
+{% endif %}
+  
+{%- endstyle -%}
+
+<div class="section-container section-image-comparison section-{{ section.id }} color-scheme-{{ section.settings.text_color }} color-scheme-{{ section.settings.bg_color }}">
+
+{% if section.settings.top_border %}
+<hr class="section-border section-border-color-{{ section.settings.border_color }} section-border-width-{{ section.settings.border_width }}">
+{% endif %}
+
+<div class="section-inner {{ section.settings.section_margin }} align-{{ section.settings.content_alignment }}">
+  
+{% unless section.settings.section_label == blank and section.settings.heading == blank and section.settings.subheading == blank %}
+<div class="section-header{% if section.settings.section_margin == 'none' %} page-width{% endif %} section-header-std-padding">
+{% unless section.settings.section_label == blank %}<div class="section-label">{{ section.settings.section_label }}</div>{% endunless %}
+{% unless section.settings.heading == blank %}<h2>{{ section.settings.heading }}</h2>{% endunless %}
+{% unless section.settings.subheading == blank %}{{ section.settings.subheading }}{% endunless %}
+</div>
+{% endunless %}
+  
+<div class="before-after-section-inner{% if section.settings.enable_max_image_width %} ba-max-width{% endif %} ba-image-ratio--{{ section.settings.image_ratio }} ba-caption-position--{{ section.settings.caption_position }}">
+  <div class="dragger ba-dragger-fg--{{ section.settings.scrubber_fg_col }} ba-dragger-bg--{{ section.settings.scrubber_bg_col }}">
+      <button class="drag-button" aria-label="Drag">
+        {% render 'icon-caret' %}
+        {% render 'icon-caret' %}
+      </button>
+  </div>
+  
+  <div class="image-caption-after text-{{ section.settings.caption_size }} ba-caption-color--{{ section.settings.caption_fg_col }} ba-caption-bg--{{ section.settings.caption_bg_col }}{% if section.settings.caption_corner_radius > 10 %} lbr{% endif %}">{{ section.settings.main_image_caption }}</div>
+  <div class="before-after-container">
+  <div class="image-before">
+    {% if section.settings.main_image %}
+    {{ section.settings.main_image | image_url: width: image_size | image_tag: loading: 'lazy' }}
+    {% else %}
+      {% render 'media-placeholder-scenic', style: 1 %}
+    {% endif %}
+  </div>
+  <div class="image-after">
+    <div class="image-caption-before text-{{ section.settings.caption_size }} ba-caption-color--{{ section.settings.caption_fg_col }} ba-caption-bg--{{ section.settings.caption_bg_col }}{% if section.settings.caption_corner_radius > 10 %} lbr{% endif %}">{{ section.settings.secondary_image_caption }}</div>
+    {% if section.settings.secondary_image %}
+    {{ section.settings.secondary_image | image_url: width: image_size | image_tag: loading: 'lazy' }}
+    {% else %}
+      {% render 'media-placeholder-scenic', style: 2 %}
+    {% endif %}
+  </div>
+  </div>
+</div>
+
+</div>
+  
+{% if section.settings.bottom_border %}
+<hr class="section-border section-border-color-{{ section.settings.border_color }} section-border-width-{{ section.settings.border_width }}">
+{% endif %}
+
+</div>
+
+<script>
+{
+  const icsectionId = '{{ section.id }}';
+  const section = document.querySelector(`.section-${icsectionId}`);
+    
+  const container = section.querySelector('.before-after-container');
+  const dragger = section.querySelector('.dragger');
+  const dragButton = section.querySelector('.drag-button');
+  const imageAfter = section.querySelector('.image-after');
+  const imgAfter = imageAfter.querySelector('img'); // Target the img inside imageAfter
+
+  // Function to update img width to match .before-after-section-inner
+  const updateImageWidth = () => {
+    const sectionInnerWidth = container.offsetWidth; // Get the width of .before-after-section-inner
+    if (imgAfter) {
+      imgAfter.style.width = `${sectionInnerWidth}px`; // Set img width to match  
+    }
+  };
+
+  // Run on page load
+  updateImageWidth();
+
+  // Update on window resize
+  window.addEventListener('resize', updateImageWidth);
+    
+  let isDragging = false;
+
+  const updateAfterImage = (e) => {
+    const containerRect = container.getBoundingClientRect();
+    const offsetX = Math.min(Math.max(0, e.clientX - containerRect.left), containerRect.width);
+    const percentage = (offsetX / containerRect.width) * 100;
+
+    // Update the width of .image-after and the position of the dragger
+    imageAfter.style.width = `${percentage}%`;
+    dragger.style.left = `${percentage}%`;
+  };
+
+  // Start dragging
+  dragButton.addEventListener('mousedown', () => {
+    isDragging = true;
+  });
+  dragButton.addEventListener('touchstart', () => {
+    isDragging = true;
+  }, { passive: true });
+
+  // Stop dragging
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+  document.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // Dragging movement
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      requestAnimationFrame(() => updateAfterImage(e));
+    }
+  });
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging) {
+      requestAnimationFrame(() => updateAfterImage(e.touches[0]));
+    }
+  }, { passive: true });
+
+
+  // Keyboard accessibility for dragger
+  dragButton.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      const containerRect = container.getBoundingClientRect();
+      let currentPercentage = parseFloat(dragger.style.left) || 50;
+      let step = (100 / containerRect.width) * 100;
+
+      let newPercentage = e.key === 'ArrowLeft' ? currentPercentage - step : currentPercentage + step;
+      console.log(newPercentage);
+
+      if (newPercentage < 5 || newPercentage > 95) {
+        return false;
+      }
+
+      imageAfter.style.width = `${newPercentage}%`;
+      dragger.style.left = `${newPercentage}%`;
+    }
+  });
+}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.image_comparison.name",
+  "disabled_on": {
+    "groups": ["header", "footer"],
+    "templates": ["cart"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.text"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "t:sections.all.caption"
+	  },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.heading"
+	  },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "t:sections.all.sub_heading"
+	  },
+    {
+      "type": "header",
+      "content": "t:sections.all.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_margin",
+      "label": "t:sections.all.margin",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:sections.all.default"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.all.none"
+        }
+		],
+      "default": "page-width"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "t:sections.all.alignment.alignment_header",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.image_comparison.settings.header_images.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.all.ratio.image_ratio",
+      "options": [
+        {
+          "value": "landscape-16x9",
+          "label": "t:sections.all.ratio.landscape_16_9"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.all.ratio.landscape_6_4"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.ratio.square"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.ratio.portrait_4_5"
+        },
+        {
+          "value": "portrait-4x6",
+          "label": "t:sections.all.ratio.portrait_4_6"
+        }
+      ],
+      "default": "landscape-16x9"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_max_image_width",
+      "default": false,
+      "label": "t:sections.image_comparison.settings.enable_max_image_width.label"
+	  },
+    {
+      "type": "range",
+      "id": "max_image_width",
+      "min": 600,
+      "max": 1400,
+      "step": 100,
+      "unit": "px",
+      "label": "t:sections.image_comparison.settings.max_image_width.label",
+      "default": 800
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "t:sections.image_comparison.settings.first_image.label"
+	  },
+    {
+      "type": "text",
+      "id": "main_image_caption",
+      "default": "Before",
+      "label": "t:sections.image_comparison.settings.first_image_caption.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_image",
+      "label": "t:sections.image_comparison.settings.second_image.label"
+	  },
+    {
+      "type": "text",
+      "id": "secondary_image_caption",
+      "default": "After",
+      "label": "t:sections.image_comparison.settings.second_image_caption.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.caption"
+    },
+    {
+      "type": "select",
+      "id": "caption_position",
+      "label": "t:sections.image_comparison.settings.caption_position.label",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.all.alignment.top"
+        },
+        {
+          "value": "middle",
+          "label": "t:sections.all.alignment.middle"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.all.alignment.bottom"
+        }
+		],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "caption_size",
+      "label": "t:sections.image_comparison.settings.caption_size.label",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.all.size.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.all.size.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.all.size.large"
+        }
+		],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "caption_fg_col",
+      "options": [
+        {
+          "value": "white",
+          "label": "t:sections.all.colors.white.label"
+        },
+        {
+          "value": "fg-01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "fg-02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "fg-03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "fg-04",
+          "label": "t:sections.all.colors.accent_4.label"
+        },
+        {
+          "value": "fg-05",
+          "label": "t:sections.all.colors.accent_5.label"
+        }
+      ],
+      "default": "white",
+      "label": "t:sections.image_comparison.settings.caption_text_color.label"
+    },
+    {
+      "type": "select",
+      "id": "caption_bg_col",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.all.none"
+        },
+        {
+          "value": "bg-01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "bg-02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "bg-03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "bg-04",
+          "label": "t:sections.all.colors.accent_4.label"
+        },
+        {
+          "value": "bg-05",
+          "label": "t:sections.all.colors.accent_5.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.image_comparison.settings.caption_text_bg.label"
+    },
+    {
+      "type": "range",
+      "id": "caption_corner_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.image_comparison.settings.caption_corner_radius.label",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "scrubber_fg_col",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.all.body"
+        },
+        {
+          "value": "white",
+          "label": "t:sections.all.colors.white.label"
+        },
+        {
+          "value": "01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "04",
+          "label": "t:sections.all.colors.accent_4.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.image_comparison.settings.dragger_color.label"
+    },
+    {
+      "type": "select",
+      "id": "scrubber_bg_col",
+      "options": [
+        {
+          "value": "white",
+          "label": "t:sections.all.colors.white.label"
+        },
+        {
+          "value": "01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "04",
+          "label": "t:sections.all.colors.accent_4.label"
+        }
+      ],
+      "default": "white",
+      "label": "t:sections.image_comparison.settings.dragger_bg.label"
+    },
+    {
+      "type": "range",
+      "id": "scrubber_border_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.image_comparison.settings.dragger_border_opacity.label",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.colors.label"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "options": [
+        {
+          "value": "fg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "fg-01",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "fg-02",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "fg-03",
+          "label": "t:sections.all.colors.accent_3.label"
+        },
+        {
+          "value": "fg-04",
+          "label": "t:sections.all.colors.accent_4.label"
+        },
+        {
+          "value": "fg-05",
+          "label": "t:sections.all.colors.accent_5.label"
+        }
+      ],
+      "default": "fg-body",
+      "label": "t:sections.all.colors.text_color.label"
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "options": [
+        {
+          "value": "bg-body",
+          "label": "t:sections.all.colors.background_body.label"
+        },
+        {
+          "value": "bg-01",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "bg-02",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "bg-03",
+          "label": "t:sections.all.colors.background_3.label"
+        },
+        {
+          "value": "bg-04",
+          "label": "t:sections.all.colors.background_4.label"
+        },
+        {
+          "value": "bg-05",
+          "label": "t:sections.all.colors.background_5.label"
+        }
+      ],
+      "default": "bg-body",
+      "label": "t:sections.all.colors.background_color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 180,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 180,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_border",
+      "default": false,
+      "label": "t:sections.all.border_top"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_border",
+      "default": false,
+      "label": "t:sections.all.border_bottom"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "label": "t:sections.all.width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.all.normal"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.full_width"
+        }
+        ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "border_color",
+      "label": "t:sections.all.border_color",
+      "options": [
+        {
+          "value": "dark",
+          "label": "t:sections.all.colors.dark.label"
+        },
+        {
+          "value": "light",
+          "label": "t:sections.all.colors.light.label"
+        }
+        ],
+      "default": "dark"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image_comparison.presets.name"
+    }
+  ]
+}
+{% endschema %}

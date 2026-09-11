@@ -1,0 +1,25 @@
+.discounts {
+  font-size: var(--font-ui-size-mobile);
+}
+
+.discounts__discount {
+  display: flex;
+  align-items: center;
+  line-height: inherit;
+}
+
+.discounts__discount--position {
+  justify-content: center;
+}
+
+@media screen and (min-width: 750px) {
+  .discounts__discount--position {
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .discounts {
+    font-size: var(--font-ui-size-desktop);
+  }
+}

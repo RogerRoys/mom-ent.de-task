@@ -1,0 +1,258 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-recently-viewed.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+.section-{{ section.id }}:has(.card-product) {
+  padding-top: {{ section.settings.padding_top | times: 0.8 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.8 }}px;
+}
+
+{% if section.settings.top_border %}
+.section-{{ section.id }}:has(.card-product) {
+  padding-top: 0;
+}
+.section-{{ section.id }}:has(.card-product) .section-border {
+  margin-bottom: {{ section.settings.padding_top }}px;
+}
+{% endif %}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}:has(.card-product) {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  {% if section.settings.top_border %}
+  .section-{{ section.id }}:has(.card-product) {
+    padding-top: 0;
+  }
+  .section-{{ section.id }}:has(.card-product) .section-border {
+    margin-bottom: {{ section.settings.padding_top }}px;
+  }
+  {% endif %}
+}
+
+{% if section.settings.show_vendor == false %}
+.section-{{ section.id }} .card-product-vendor {
+  display: none;
+}
+{% endif %}
+  
+{%- endstyle -%}
+
+{% assign card_media_aspect_ratio = settings.card_img_aspect_ratio %}
+
+<div class="section-recently-viewed section-{{ section.id }} align-{{ section.settings.alignment }}">
+
+{% if section.settings.top_border %}
+<hr class="section-border section-border-color-{{ section.settings.border_color }} section-border-width-{{ section.settings.border_width }}">
+{% endif %}
+
+  <div id="recentlyViewedTitle" class="section-header section-header-std-padding page-width align-{{ section.settings.content_alignment }}"> 
+    <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="slider-outer-wrapper recent-items-grid-outer">
+    <ul class="grid product-grid slider-grid slider-element slider-grid--columns-mobile-2 recent-products-grid" id="recentItemsGrid" role="list">
+      <!-- Display the recently viewed items here -->
+    </ul>
+  {% render 'scrolltrack' %}
+  </div>
+
+<script defer>
+  // Clear all data from the list
+  function clearRecentlist() {
+    saveRecentlist([]);
+    displayRecentlist();
+  }
+
+  // Remove an item from the list
+  function removeItem(index) {
+    var recentlist = getRecentlist();
+    recentlist.splice(index, 1);
+    saveRecentlist(recentlist);
+    displayRecentlist();
+  }
+
+  // Retrieve the recentlist from local storage
+  function getRecentlist() {
+    var recentlist = localStorage.getItem("RecentlyViewedItemsList");
+    if (recentlist === null) {
+      return []; // Return an empty array if recentlist doesn't exist
+    }
+    return JSON.parse(recentlist);
+  }
+
+  // Save the recentlist to local storage
+  function saveRecentlist(recentlist) {
+    localStorage.setItem("RecentlyViewedItemsList", JSON.stringify(recentlist));
+  }
+
+  // Display the recentlist items on the page
+  function displayRecentlist() {
+    var recentlist = getRecentlist();
+    var recentlistItemsDiv = document.getElementById("recentItemsGrid");
+    var sectionTitle = document.getElementById("recentlyViewedTitle");
+
+    if (recentlist.length === 0) {
+      sectionTitle.classList.add('hidden'); // Hide section title
+    }
+
+    recentlistItemsDiv.innerHTML = "";
+
+    for (var i = Math.max(0, recentlist.length - 6); i < recentlist.length; i++) {
+      var item = recentlist[i];
+
+      var htmlContent = `   
+        <li class="grid__item">
+          <div class="card-product card-recently-viewed-product card-ratio-{{ card_media_aspect_ratio }}">
+            <a href="${item.productUrl}">
+              <div class="card-media">
+                <div class="card-product-image-outer">
+                  <div class="card-product--image">
+                  <div class="card-product--image-wrapper card-product--single-image-wrapper">
+                    <img src="${item.productImg}" alt="${item.productTitle}" loading="lazy">
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-product--text-section{% if settings.card_text_border %} card-product--text-section-border{% endif %}">
+                <div class="card-product--title">
+                  {% unless settings.card_show_vendor_inline %}
+                  <div class="card-product-vendor vendor--style-{{ settings.card_vendor_text_style }}">${item.productVendor}</div>
+                  {% endunless %}
+                  <h3 class="card-product-title-h3">{% if settings.card_show_vendor_inline %}<span>${item.productVendor} </span>{% endif %}${item.productTitle}</h3>
+                </div>
+              </div>
+            </a>
+          </div>
+        </li>
+      `;
+
+      recentlistItemsDiv.insertAdjacentHTML('afterbegin', htmlContent);
+    }
+  }
+  displayRecentlist();
+
+</script>
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "t:sections.recently-viewed-products.name",
+    "class": "section",
+    "limit": 1,
+    "enabled_on": {
+      "templates": ["index","collection","product","cart"]
+    },    
+    "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Recently Viewed",
+      "label": "t:sections.all.heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "t:sections.all.size.small"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.size.medium"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.size.large"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "default": "left",
+      "label": "t:sections.all.alignment.alignment_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.recently-viewed-products.settings.show_vendor.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border"
+    },
+    {
+	  "type": "checkbox",
+	  "id": "top_border",
+	  "default": false,
+    "label": "t:sections.all.border_top"
+	  },
+    {
+      "type": "select",
+      "id": "border_width",
+      "label": "t:sections.all.width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:sections.all.normal"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.all.full_width"
+        }
+        ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "border_color",
+      "label": "t:sections.all.border_color",
+      "options": [
+        {
+          "value": "dark",
+          "label": "t:sections.all.colors.dark.label"
+        },
+        {
+          "value": "light",
+          "label": "t:sections.all.colors.light.label"
+        }
+        ],
+      "default": "dark"
+    }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.recently-viewed-products.presets.name"
+      }
+    ]
+}
+{% endschema %}
