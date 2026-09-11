@@ -9,65 +9,61 @@
  */
 {
   "sections": {
-    "slideshow_6Ce4Tk": {
-      "type": "slideshow",
+    "image_banner_4cEYR8": {
+      "type": "image-banner",
       "blocks": {
-        "slide_gQFMqF": {
-          "type": "slide",
+        "buttons_xmVETA": {
+          "type": "buttons",
           "settings": {
-            "image": "shopify://shop_images/Havenly_Hero_Desktop_08185b3a-aa41-49a5-959f-0c3d544d92a5_1.jpg",
-            "image_animation": "none",
-            "caption": "",
-            "heading": "",
-            "subheading": "",
-            "btn_block_txt": "Shop now",
-            "btn_block_url": "shopify://collections/all",
-            "btn_block_style": "button--solid"
+            "btn_one_show": true,
+            "btn_one_txt": "Button label",
+            "btn_one_link": "shopify://products/test-3",
+            "btn_one_style": "button--solid",
+            "btn_two_show": false,
+            "btn_two_txt": "Button label",
+            "btn_two_link": "",
+            "btn_two_style": "button--solid",
+            "btn_layout_mobile": "stacked",
+            "btn_layout": "inline",
+            "btn_alignment": "auto",
+            "btn_width_mobile": "auto",
+            "btn_width_desktop": "auto",
+            "btn_width_desktop_value": 200,
+            "btn_color_scheme": "default",
+            "padding_top": 20,
+            "padding_bottom": 20
           }
         }
       },
       "block_order": [
-        "slide_gQFMqF"
+        "buttons_xmVETA"
       ],
-      "custom_css": [
-        ".swiper-button-prev:after {display: none; fill: white;}",
-        ".swiper-button-next:after {display: none;}",
-        ".arrows-style-outline .swiper-button-prev {color: white;}",
-        ".arrows-style-outline .swiper-button-next {color: white;}"
-      ],
+      "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "banner_size": "banner-style-large",
-        "slideshow_type": "multi_message",
-        "section_margin_width": "full-width-slideshow",
-        "media_scaling": "cover",
-        "section_top_padding": 0,
-        "section_bottom_padding": 0,
-        "slider_autoplay": true,
-        "slider_effect": "slide",
-        "slider_autoplay_interval": 6,
-        "slider_speed": 600,
-        "show_arrows": true,
-        "arrow_style": "outline",
-        "section_label": "",
-        "heading": "",
-        "subheading": "",
-        "heading_size": "h1",
-        "text_size": "text-body",
-        "txt_position": "middle",
+        "banner_size": "banner-style-fullscreen",
+        "banner_full_link": "",
+        "image": "shopify://shop_images/Havenly_Hero_Desktop_08185b3a-aa41-49a5-959f-0c3d544d92a5_1.jpg",
+        "primary_image_size": "dt-full-bleed",
+        "image_padding": 0,
+        "main_image_animation": "none",
+        "image_blur": 0,
+        "primary_image_mobile_show": true,
+        "secondary_image_size": "dt-full-bleed",
+        "secondary_image_padding": 0,
+        "secondary_image_animation": "none",
+        "secondary_image_blur": 0,
+        "secondary_image_mobile_show": true,
         "txt_alignment": "center",
-        "txt_width": 600,
+        "txt_position": "middle",
+        "content_width": 100,
+        "text_vertical_spacing": 10,
         "top_padding": 0,
         "bottom_padding": 0,
-        "btn_one_txt": "",
-        "btn_one_link": "",
-        "btn_one_style": "button--outline",
-        "btn_two_txt": "",
-        "btn_two_link": "",
-        "btn_two_style": "button--solid",
+        "fade_in_text": true,
+        "scroll_fade_effect": false,
+        "text_blend_effect": "none",
         "text_color": "fg-white",
-        "bg_color": "bg-body",
-        "btn_color_scheme": "white",
-        "pagination_color": "match",
+        "bg_color": "rgba(0,0,0,0)",
         "overlay_level": 0
       }
     },
@@ -874,7 +870,7 @@
     }
   },
   "order": [
-    "slideshow_6Ce4Tk",
+    "image_banner_4cEYR8",
     "rich_text_jUNibh",
     "section_text_ticker_JHe6xH",
     "multicolumn_CPiPBy",
