@@ -1,1 +1,846 @@
-{"sections":{"main":{"type":"main-product","blocks":{"breadcrumb_Ui8wgw":{"type":"breadcrumb","disabled":true,"settings":{"text_case":"normal","divider_style":"slash","homepage_link":false}},"tags_qFz8mT":{"type":"tags","disabled":true,"settings":{"badge_position":"normal","badge_media_alignment":"right","badge_font_size":11}},"title":{"type":"title","settings":{"title_size":"h1"}},"air_product_reviews_app_summary_block_hfjQ4X":{"type":"shopify:\/\/apps\/ag-product-reviews\/blocks\/app-summary-block\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327","settings":{}},"text_nRJjbE":{"type":"text","settings":{"text":"<h2><em>Ihr tägliches Ritual für Ausgeglichenheit und mentale Stärke<\/em><\/h2>","text_color":"fg-body","bg_color":"bg-body","padding":0,"border_radius":0}},"text_7MEJtB":{"type":"text","settings":{"text":"<p>Von Müttern für Mütter entwickelt: MOMent of Balance vereint KSM-66® Ashwagandha, Rhodiola rosea, Löwenmähne und Vitamin B6 in zwei täglich einzunehmenden Fruchtgummis. Sie bringen Leichtigkeit, Ausgeglichenheit und Achtsamkeit in Ihren Alltag.<br\/><br\/>90 Fruchtgummis | 45-Tage-Vorrat<\/p>","text_color":"fg-body","bg_color":"bg-body","padding":0,"border_radius":0}},"price":{"type":"price","settings":{"price_size":"price--large","show_discounts":true,"price_show_taxes":false,"price_taxes_position":"below","show_shoppay_banner":true}},"inventory_zeVG83":{"type":"inventory","disabled":true,"settings":{"inventory_display":"status","inventory_threshold":10,"inventory-color-coded":false,"hide_if_in_stock":false}},"d397b53e-d0be-4717-805f-6ee8a8d247bf":{"type":"variant_picker","settings":{"picker_title":"","label_alignment":"inherit","font_family":"accent","picker_type":"button","pill_alignment":"center","pill_min_width":54,"pill_layout":"auto","pill_selected_state":"outline","minimal_highlight_style":"underline","pill_threshold":20,"pill_additional_options_display":"accordion","show_labels":true,"show_puncuation":true,"swatch_label_position":"below","border_top":false,"border_bottom":false,"use_variant_images":false,"thumbnail_variants_label":"Color","use_color_swatches":false,"color_swatches_style":"round","color_swatch_size":"normal","visual_variants_array":"Color","color_swatches_array":"White - #f2f2f2\nBlack - #000000\nNavy - #233756\nRed - #912014\nDark Grey - #333333"}},"099f936f-1f52-44f2-8d7b-0188fbd363d5":{"type":"quantity_selector","disabled":true,"settings":{"show_label":true,"selector_layout":"stacked","border_top":false,"border_bottom":false}},"870625ea-f97e-4cab-b3b3-04010a7854a5":{"type":"popup","disabled":true,"settings":{"text":"Pop-up link","padding_top":0,"padding_bottom":0,"link_style":"text","text_alignment":"left","text_size":"small","link_icon":"none","popup_display_type":"modal","popup_width":"normal","content_source":"page_content","popup_content_heading":"","popup_content_text":"","page":""}},"pumper_bundles_app_block_qb_G3JYJM":{"type":"shopify:\/\/apps\/pumper-bundles\/blocks\/app-block-qb\/0856870d-2aca-4b1e-a662-cf1797f61270","settings":{"selected_product":"{{product}}","using_page_builder":false}},"buy_buttons":{"type":"buy_buttons","settings":{"button_style":"solid","button_additional_padding_top":0,"button_additional_padding_bottom":0,"show_dynamic_checkout":false,"show_payment_methods":false,"show_pickup":false,"pickup_alignment":"center","show_pickup_icon":true,"show_gift_card_recipient":true}},"icon_text_list_L7mkMp":{"type":"icon_text_list","settings":{"padding_top":0,"padding_right":0,"padding_bottom":20,"padding_left":0,"spacing_between_items":16,"icon_text_spacing":16,"vertical_alignment":"center","background_color":"#ffffff","border_radius":8,"icon_color":"#000000","text_size":16,"mobtext_size":14,"text_color":"#000000","icon_1_type":"image","icon_1_size":52,"mobicon_1_size":52,"icon_1_image":"shopify:\/\/shop_images\/Created_by_moms_for_moms.svg","icon_1_svg":"check","icon_1_custom_svg":"","text_1":"- Von Müttern für Mütter entwickelt","icon_2_type":"image","icon_2_size":52,"mobicon_2_size":52,"icon_2_image":"shopify:\/\/shop_images\/Third-party_lab_tested.svg","icon_2_svg":"shield","icon_2_custom_svg":"","text_2":"- Unabhängig laborgeprüft","icon_3_type":"image","icon_3_size":52,"mobicon_3_size":52,"icon_3_image":"shopify:\/\/shop_images\/45-day_supply.svg","icon_3_svg":"clock","icon_3_custom_svg":"","text_3":"- 45 Tage Vorrat","icon_4_type":"image","icon_4_size":52,"mobicon_4_size":52,"icon_4_image":"shopify:\/\/shop_images\/Made_in_EU.svg","icon_4_svg":"tag","icon_4_custom_svg":"","text_4":"- Hergestellt in der EU","icon_5_type":"svg","icon_5_size":24,"mobicon_5_size":24,"icon_5_svg":"gift","icon_5_custom_svg":"","text_5":""}},"collapsible_tab_AVNjdx":{"type":"collapsible_tab","settings":{"heading":"Das Gefühl","content":"<p>Muttersein ist schön und manchmal überwältigend. Manchmal braucht man einfach einen Moment, um durchzuatmen und zu sich zurückzufinden.<\/p><p>MOMent of Balance steht nicht für Perfektion und auch nicht dafür, noch mehr zu leisten. Es ist ein tägliches Ritual für mehr Balance, das Sie durch den Alltag begleitet und Ihnen Raum gibt, ihm mit etwas mehr Leichtigkeit zu begegnen.<\/p><p>Von Müttern für Mütter entwickelt, sind diese Gummies ein kleiner täglicher Anker. Eine hochwertige Formel für mehr Balance und bewusste MOMente des Innehaltens im echten Alltag moderner Mütter.<\/p><h2><\/h2>","page":""}},"5c65d55b-9f21-4d69-b50a-6219b616bb68":{"type":"collapsible_tab","settings":{"heading":"Die Magie im Inneren","content":"<p>In MOMent of Balance kommen ausgewählte Adaptogene und Vitamin B6 in köstlichen, glutenfreien, veganen Gummies zusammen — zu einer hochwertigen Formel, die mit Sorgfalt für moderne Mütter entwickelt wurde.<\/p><p><strong>Bio KSM-66® Ashwagandha-Wurzel<\/strong><br\/>Ein hochwertiger Vollspektrum-Wurzelextrakt aus Indien, wo Ashwagandha seit Langem im Ayurveda verwendet wird. Sorgfältig aufgrund seiner Qualität und Herkunft ausgewählt, verleiht er der Formel einen geerdeten, zeitlosen Charakter.<\/p><p><strong>Bio Lion’s Mane Pilzextrakt<\/strong><br\/>Ein besonderer Pilzextrakt aus China, ausgewählt aufgrund seines einzigartigen Charakters und hochwertigen Profils. Er bringt eine moderne, achtsame Note in die Formel und ergänzt die Mischung mit stiller Stärke und Intention.<\/p><p><strong>Rhodiola rosea<\/strong><br\/>Ein botanischer Extrakt aus Spanien, mit langer Tradition und einem festen Platz in der Welt pflanzlicher Inhaltsstoffe. In MOMent of Balance ergänzt Rhodiola die Formel mit ihrer eigenen besonderen botanischen Note.<\/p><p><strong>Vitamin B6 <\/strong><br\/>Vitamin B6 trägt zu einer normalen psychischen Funktion bei, trägt zur Verringerung von Müdigkeit und Ermüdung bei, trägt zu einem normalen Energiestoffwechsel bei und trägt zu einer normalen Funktion des Nervensystems bei.<\/p>","page":""}},"collapsible_tab_aDDzmn":{"type":"collapsible_tab","settings":{"heading":"Das Ritual","content":"{{ product.metafields.custom.how_to_use | metafield_tag }}","page":""}},"collapsible_tab_3FdHiY":{"type":"collapsible_tab","settings":{"heading":"Health Claims","content":"<ul><li>Vitamin B6 trägt zu einer normalen psychologischen Funktion bei.<\/li><li>Vitamin B6 trägt zur Verringerung von Müdigkeit und Ermüdung bei.<\/li><li>Vitamin B6 trägt zu einem normalen Energiestoffwechsel bei.<\/li><li>Vitamin B6 trägt zur normalen Funktion des Nervensystems bei.<\/li><\/ul>","page":""}},"collapsible_tab_fDPaRf":{"type":"collapsible_tab","settings":{"heading":"Nährwerte","content":"<p>Tagesportion (2 Gummies) enthält:<br\/>Ashwagandha KSM-66® Extrakt — 300 mg<br\/>davon Withanolide — 15 mg<br\/>Löwenmähne-Pilzextrakt — 240 mg<br\/>davon Beta-Glucane — 48 mg<br\/>Rhodiola-rosea-Wurzelextrakt DER 4:1 — 80 mg<br\/>davon Salidroside — 0,8 mg<br\/>Vitamin B6 (Pyridoxinhydrochlorid) — 0,9 mg (64%*)<\/p><p><br\/>*RM = Referenzmenge<\/p>","page":""}},"collapsible_tab_p7PrGd":{"type":"collapsible_tab","settings":{"heading":"Produktinformationen","content":"{{ product.metafields.custom.product_information | metafield_tag }}","page":""}},"collapsible_tab_gjMQ4x":{"type":"collapsible_tab","settings":{"heading":"Die Balance-Garantie","content":"<p>Wahre Balance braucht Zeit. Da es einige Wochen dauern kann, bis MOMent of Balance Teil Ihrer täglichen Routine wird, möchten wir, dass sich Ihr erster MOMent of Balance von Anfang an richtig anfühlt.<br\/><br\/>Wenn Sie MOMent of Balance zum ersten Mal ausprobieren und feststellen, dass das Produkt nicht das Richtige für Sie ist, können Sie uns innerhalb von 30 Tagen nach der Lieferung kontaktieren und im Rahmen unserer moment Balance-Garantie eine Rückerstattung beantragen.<br\/><br\/>Die Garantie ist auf ein berechtigtes Glas pro Kunde begrenzt. Bei Bundle-Käufen ist die Rückerstattung auf den Wert eines Glases begrenzt.<br\/><br\/>Für die Einreichung eines Rückerstattungsantrags benötigen wir ein Foto des geöffneten Glases.<br\/><br\/>Ihre gesetzlichen Rechte bleiben unberührt.<\/p>","page":""}},"collapsible_tab_6FDgwi":{"type":"collapsible_tab","settings":{"heading":"Unabhängige Labortests","content":"<p>Unsere Formel wurde von der GBA Group unabhängig geprüft.<br\/><br\/>Dabei wurden mikrobiologische Parameter sowie ausgewählte Stoffe wie Blei, Cadmium, Quecksilber, Arsen, Gluten, Sojaprotein und Laktose untersucht.<br\/><br\/>Die mikrobiologischen Ergebnisse waren unauffällig; zudem entspricht die geprüfte Probe hinsichtlich Blei, Cadmium und Quecksilber den Höchstgehalten der Verordnung (EU) 2023\/915.<\/p><p>Den vollständigen Prüfbericht der GBA Group können Sie hier <a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0918\/1265\/9541\/files\/26015654-001-PB_KSM-Ashwagandha__Rhodiola_rosea__Lowenmahne__Vitamin_B6.pdf?v=1780823087\" target=\"_blank\" title=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0918\/1265\/9541\/files\/26015654-001-PB_KSM-Ashwagandha__Rhodiola_rosea__Lowenmahne__Vitamin_B6.pdf?v=1780823087\">einsehen.<\/a><\/p>","page":""}}},"block_order":["breadcrumb_Ui8wgw","tags_qFz8mT","title","air_product_reviews_app_summary_block_hfjQ4X","text_nRJjbE","text_7MEJtB","price","inventory_zeVG83","d397b53e-d0be-4717-805f-6ee8a8d247bf","099f936f-1f52-44f2-8d7b-0188fbd363d5","870625ea-f97e-4cab-b3b3-04010a7854a5","pumper_bundles_app_block_qb_G3JYJM","buy_buttons","icon_text_list_L7mkMp","collapsible_tab_AVNjdx","5c65d55b-9f21-4d69-b50a-6219b616bb68","collapsible_tab_aDDzmn","collapsible_tab_3FdHiY","collapsible_tab_fDPaRf","collapsible_tab_p7PrGd","collapsible_tab_gjMQ4x","collapsible_tab_6FDgwi"],"custom_css":[".product-buy-buttons-wrapper {margin-bottom: 10px;}",".icon-wrapper-icontextlistl7mkmp {display: none !important;}"],"settings":{"section_desktop_layout":"image-left","enable_sticky_info":true,"enable_sticky_buttons":true,"sticky_buttons_padding":10,"sticky_buttons_padding_horizontal":20,"sticky_buttons_border":true,"sticky_buttons_shadow":0,"enable_sticky_buttons_desktop":true,"sticky_buttons_desktop_media":true,"sticky_buttons_desktop_price":true,"sticky_buttons_desktop_position":"bottom","sticky_buttons_desktop_margin":"auto","sticky_buttons_desktop_padding_vertical":16,"show_variant_image_only":false,"media_bg_col":"rgba(0,0,0,0)","gallery_aspect_ratio":"square","gallery_media_scale":"default","gallery_height_limit_desktop":true,"media_section_width":"wide","product_section_width":"standard","media_mobile_width":"full-width","media_width_offset":0,"gallery_grid_spacing":0,"mobile_media_nav":"bullets","mobile_media_nav_position":"below-media","gallery_layout":"grid","desktop_media_items_in_view":"1","desktop_media_nav":"thumbnails","desktop_media_thumbnail_size":"normal","desktop_media_thumbnail_position":"left","desktop_media_thumbnail_placement":"overlay","thumbnail_border_opacity":20,"thumbnail_border_opacity_active":80,"arrow_style":"solid-inverted","desktop_arrow_position":"middle","desktop_arrow_vis":"visible","balance_grid":true,"media_video_autoplay":true,"media_video_play_button_style":"outline","zoom_enable":true,"gallery_mega_zoom":"normal","zoom_enable_in_out":true,"zoom_thumbnail_position_mobile":"bottom","zoom_thumbnail_position_desktop":"left","zoom_thumbnail_background":false,"zoom_thumbnail_border":false,"zoom_fg_color":"fg-body","zoom_bg_color":"bg-body","info_txt_alignment":"left","text_section_position":"center","text_section_vertical_position":"top","text_section_max_width":700,"text_section_padding":20,"blocks_vertical_spacing":15,"description_split_keyword":"DETAILS","padding_top_mobile":0,"padding_bottom_mobile":30,"padding_top":60,"padding_bottom":60,"vertical_border":false,"bottom_border":false,"border_width":"full","border_color":"dark"}},"complementary-products":{"type":"complementary-products","disabled":true,"settings":{"heading":"Pair it with","heading_size":"h2","heading_alignment":"left","products_to_show":4,"arrow_style":"solid-inverted","card_image_display":"second_image_hover","pagination_color_scheme":"body","show_price":true,"show_vendor":false,"show_swatches":false,"show_color_count":false,"text_color":"fg-body","bg_color":"bg-body","padding_top":60,"padding_bottom":60,"top_border":false,"bottom_border":false,"border_width":"normal","border_color":"dark"}},"ss_scrolling_logo_cloud_eNVMKn":{"type":"ss-scrolling-logo-cloud","blocks":{"slide_Rnyjdn":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/made-in-EU.jpg","link":""}},"slide_VFtTtc":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/non-gmo.jpg","link":""}},"slide_e49EGx":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/gluten-free.jpg","link":""}},"slide_W7XCVD":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/low-suger.jpg","link":""}},"slide_nwX6U3":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/vegan.jpg","link":""}},"slide_AaWW6d":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/3rd-party-lab.jpg","link":""}}},"block_order":["slide_Rnyjdn","slide_VFtTtc","slide_e49EGx","slide_W7XCVD","slide_nwX6U3","slide_AaWW6d"],"settings":{"ss-title":"","heading_custom":false,"heading_font":"assistant_n4","header_size":30,"header_align":"center","scrolling_velocity":79,"pause_hover":false,"shadow":false,"sliders_mt":16,"logo_padding_top":0,"logo_padding_bottom":0,"slider_gap":30,"slider_gap_mobile":50,"slider_direction":"left","icon_width":230,"header_color":"#121212","border_color":"#ffffff","background-color":"#ffffff","slider-background-color":"#ffffff","margin_top":0,"margin_bottom":0,"padding_top":36,"padding_bottom":36,"full_width":true,"content_width":120,"border_thickness":0,"lazy":true,"enable_feature":false,"top_divider_size":-25,"mobile_top_divider_size":-10,"bottom_divider_size":63,"mobile_bottom_divider_size":92,"icon_color":"#093a3b"}},"icons_wFbkBW":{"type":"icons","blocks":{"icon_text_igjnrf":{"type":"icon_text","settings":{"text":"Sugar-Free"}},"icon_text_eDVcJU":{"type":"icon_text","settings":{"text":"Gluten-Free"}},"icon_text_H8a6Hp":{"type":"icon_text","settings":{"text":"Vegan"}},"icon_text_7Rxmn6":{"type":"icon_text","settings":{"text":"Made In EU"}},"icon_text_WNHgyR":{"type":"icon_text","settings":{"text":"Science Backed"}},"icon_text_DtYN3j":{"type":"icon_text","settings":{"text":"NON GMO"}}},"block_order":["icon_text_igjnrf","icon_text_eDVcJU","icon_text_H8a6Hp","icon_text_7Rxmn6","icon_text_WNHgyR","icon_text_DtYN3j"],"disabled":true,"settings":{"padding_top":60,"padding_bottom":60}},"rich_text_jdBrpi":{"type":"rich-text","blocks":{"heading_dMbb3x":{"type":"heading","settings":{"heading":"Ein tägliches Ritual aus zwei Gummies. Die Kraft der Natur entfaltet sich Woche für Woche.","heading_size":"h0","alignment":"center","padding_top":0,"padding_bottom":20}}},"block_order":["heading_dMbb3x"],"custom_css":["@media only screen and (min-width: 750px) {.rich-text__blocks > * {width: 67%; }}"],"settings":{"content_width":"page-width","content_horizontal_position":"center","bg_image_darken":0,"bg_image_blur":0,"text_color":"fg-04","bg_color":"bg-02","padding_top":100,"padding_bottom":100,"top_border":false,"bottom_border":false,"border_width":"normal","border_color":"dark"}},"multicolumn_U4tUYT":{"type":"multicolumn","blocks":{"column_mqP3dm":{"type":"column","settings":{"column_span":"1","title":"Rhodiola rosea","heading_top_margin":5,"heading_margin":40,"text":"<p>Botanisch beheimatet in den Höhenlagen Nord- und Osteuropas, seit Jahrhunderten Teil der traditionellen Pflanzenkunde. Für MOMent: 4:1-Trockenextrakt, angebaut und hergestellt in Spanien, geprüft nach den Anforderungen des Europäischen Arzneibuches.<\/p>","block_btn_style":"link--underlined","link_label":"","link":""}},"column_VBYAJV":{"type":"column","settings":{"column_span":"1","title":"Bio Lion's mane (Hericium erinaceus, Fruchtkörper)","heading_top_margin":5,"heading_margin":15,"text":"<p>Fruchtkörper-Extrakt mit über 2.000-jähriger Geschichte in der traditionellen chinesischen Medizin. Bio-zertifiziert, laborgeprüft, frei von Stärke und Füllstoffen.<\/p>","block_btn_style":"link--underlined","link_label":"","link":""}},"column_wbRDU8":{"type":"column","settings":{"column_span":"1","title":"KSM-66® Ashwagandha-Wurzelextrakt (Withania somnifera)","heading_top_margin":5,"heading_margin":15,"text":"<p>Einer der am besten dokumentierten Ashwagandha-Extrakte weltweit, mit 24 klinischen Humanstudien. Ausschließlich aus der Wurzel, mit Wasser extrahiert.<\/p>","block_btn_style":"link--underlined","link_label":"","link":""}},"column_GFiNaE":{"type":"column","settings":{"column_span":"1","title":"Vitamin B6 (Pyridoxin)","heading_top_margin":5,"heading_margin":40,"text":"<p>Trägt zur normalen psychischen Funktion bei, unterstützt das Nervensystem und hilft dabei, Müdigkeit und Erschöpfung zu verringern.<br\/><em>*Zugelassene EU-Gesundheitsaussage (VO 432\/2012)<\/em><\/p>","block_btn_style":"link--underlined","link_label":"","link":""}}},"block_order":["column_mqP3dm","column_VBYAJV","column_wbRDU8","column_GFiNaE"],"custom_css":[".multicol-image-ratio-square .multicolumn-grid-item-image img {border: solid 1px; border-color: #bf4f45; border-radius: 1031%;}",".multicol-image-ratio-square .multicolumn-grid-item-image {margin-bottom: 25px;}","@media only screen and (min-width: 750px) {.grid-three-col {grid-column-gap: 80px; width: 90%; }}"],"settings":{"section_label":"","heading":"","heading_size":"h2","hdr_alignment":"center","subheading":"","btn_enable":false,"btn_txt":"","btn_link":"","btn_style":"solid","btn_position_mobile":"bottom","btn_position_desktop":"bottom","grid_layout":"stacked","arrow_style":"solid-inverted","arrow_position":"auto","grid_columns":4,"grid_column_gap":20,"keylines_show":false,"keylines_show_mobile":false,"keylines_mobile_width":"small","keyline_opacity":20,"column_layout":"stacked","column_vertical_alignment":"top","card_image_alignment":"center","image_size":"full-width","image_ratio":"square","text_alignment":"center","column_heading_size":"h3","block_button_width":"auto","link_opening":"page","text_color":"fg-body","bg_color":"bg-body","btn_color_scheme":"default","bg_image_darken":0,"top_padding":100,"bottom_padding":100,"top_border":false,"bottom_border":false,"border_width":"normal","border_color":"dark"}},"video_banner_qzDtni":{"type":"video-banner","blocks":{"heading_Uxnexf":{"type":"heading","settings":{"heading":"Werden Sie Teil unserer Familie","heading_size":"h1","txt_alignment":"center"}}},"block_order":["heading_Uxnexf"],"settings":{"banner_size":"banner-style-large","video_url":"shopify:\/\/files\/videos\/MOMent_Desert.mp4","overlay_level":0,"video_size":"100","video_position":"center","video_margin_mobile":0,"video_margin_desktop":0,"enable_playback_pause":false,"enable_audio":false,"txt_position":"middle","txt_alignment":"center","content_width":100,"text_vertical_spacing":10,"top_padding":0,"bottom_padding":0,"fade_in_text":true,"scroll_fade_effect":false,"text_blend_effect":"none","text_color":"fg-white","bg_color":"#000000"}},"new_r3NkYr":{"type":"new","custom_css":[".customer:not(.account):not(.order) {margin: 30px auto; background-color: #9386a6; color: #ffffff;}",".field__label,.customer .field label {color: #ffffff;}",".field__input,.customer .field input {border-color: #fff;}",".customer .field input {color: #fff;}","@media screen and (max-width: 750px) {.customer:not(.account):not(.order) {margin: 30px 8px; }}"],"settings":{"padding_top":30,"padding_bottom":0,"account_intro_text":"Seien Sie immer auf dem Laufenden! Treten Sie unserem Kreis bei und erhalten Sie exklusive Neuigkeiten zu neuen Produkten, inspirierenden Webinaren und besonderen Events. Verpassen Sie nichts mehr!","account_title":"Ein Konto erstellen","account_info_text":"Bitte geben Sie folgende Informationen ein:"}},"rich_text_37hKcB":{"type":"rich-text","blocks":{"heading_EGEkTU":{"type":"heading","settings":{"heading":"2 Minuten Ihrer Zeit = 5 % Ersparnis bei Ihrer ersten Bestellung","heading_size":"h2","alignment":"center","padding_top":0,"padding_bottom":20}},"button_ddUhby":{"type":"button","settings":{"alignment":"center","btn_layout":"inline","btn_color_scheme":"default","padding_top":20,"padding_bottom":0,"btn_one_show":true,"btn_one_txt":"Nehmen Sie an unserer Umfrage teil","btn_one_link":"https:\/\/9ppypi-jk.myshopify.com\/apps\/vf-product-reco\/8tzm2yt7","btn_one_style":"button--solid","btn_two_show":false,"btn_two_txt":"Button text","btn_two_link":"","btn_two_style":"button--solid"}}},"block_order":["heading_EGEkTU","button_ddUhby"],"custom_css":[".button {background-color: #9386a6;}"],"settings":{"content_width":"page-width-narrow","content_horizontal_position":"center","bg_image_darken":0,"bg_image_blur":0,"text_color":"fg-body","bg_color":"bg-body","padding_top":30,"padding_bottom":80,"top_border":false,"bottom_border":false,"border_width":"normal","border_color":"dark"}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You May Also Like","heading_size":"h2","heading_alignment":"center","products_to_show":4,"columns_tablet":4,"columns_desktop":4,"arrow_style":"solid-inverted","card_image_display":"second_image_hover","pagination_color_scheme":"body","show_price":true,"show_vendor":false,"show_swatches":false,"show_color_count":false,"show_rating":false,"enable_quick_add":false,"text_color":"fg-body","bg_color":"bg-body","padding_top":60,"padding_bottom":60,"top_border":false,"border_width":"normal","border_color":"dark"}},"1786734047b89df34e":{"type":"apps","blocks":{"judge_me_reviews_preview_badge_jjUBQY":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"judge_me_reviews_review_widget_McpzEh":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{"review_data":"sample_data","max_width":1200,"show_shop_reviews":false,"empty_state":"empty_widget"}}},"block_order":["judge_me_reviews_preview_badge_jjUBQY","judge_me_reviews_review_widget_McpzEh"],"settings":{"include_margins":true}}},"order":["main","complementary-products","ss_scrolling_logo_cloud_eNVMKn","icons_wFbkBW","rich_text_jdBrpi","multicolumn_U4tUYT","video_banner_qzDtni","new_r3NkYr","rich_text_37hKcB","related-products","1786734047b89df34e"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "breadcrumb_Ui8wgw": {
+          "type": "breadcrumb",
+          "disabled": true,
+          "settings": {
+            "text_case": "normal",
+            "divider_style": "slash",
+            "homepage_link": false
+          }
+        },
+        "tags_qFz8mT": {
+          "type": "tags",
+          "disabled": true,
+          "settings": {
+            "badge_position": "normal",
+            "badge_media_alignment": "right",
+            "badge_font_size": 11
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "h1"
+          }
+        },
+        "text_nRJjbE": {
+          "type": "text",
+          "settings": {
+            "text": "<h2><em>Ihr tägliches Ritual für Balance & mentale Stärke</em></h2>",
+            "text_color": "fg-body",
+            "bg_color": "bg-body",
+            "padding": 0,
+            "border_radius": 0
+          }
+        },
+        "text_7MEJtB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Von Müttern für Mütter entwickelt, vereint MOMent of Balance KSM-66® Ashwagandha, Rhodiola rosea, Lion's Mane und Vitamin B6 in einer hochwertigen Formel. Zwei Gummies pro Tag fügen sich einfach in Ihre tägliche Routine ein und werden so zu einem kleinen bewussten Ritual im Alltag.<br/><br/>90 Gummies | 45 Tage</p>",
+            "text_color": "fg-body",
+            "bg_color": "bg-body",
+            "padding": 0,
+            "border_radius": 0
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "price_size": "price--large",
+            "show_discounts": true,
+            "price_show_taxes": false,
+            "price_taxes_position": "below",
+            "show_shoppay_banner": true
+          }
+        },
+        "inventory_zeVG83": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "inventory_display": "status",
+            "inventory_threshold": 10,
+            "inventory-color-coded": false,
+            "hide_if_in_stock": false
+          }
+        },
+        "d397b53e-d0be-4717-805f-6ee8a8d247bf": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_title": "",
+            "label_alignment": "inherit",
+            "font_family": "accent",
+            "picker_type": "button",
+            "pill_alignment": "center",
+            "pill_min_width": 54,
+            "pill_layout": "auto",
+            "pill_selected_state": "outline",
+            "minimal_highlight_style": "underline",
+            "pill_threshold": 20,
+            "pill_additional_options_display": "accordion",
+            "show_labels": true,
+            "show_puncuation": true,
+            "swatch_label_position": "below",
+            "border_top": false,
+            "border_bottom": false,
+            "use_variant_images": false,
+            "thumbnail_variants_label": "Color",
+            "use_color_swatches": false,
+            "color_swatches_style": "round",
+            "color_swatch_size": "normal",
+            "visual_variants_array": "Color",
+            "color_swatches_array": "White - #f2f2f2\nBlack - #000000\nNavy - #233756\nRed - #912014\nDark Grey - #333333"
+          }
+        },
+        "099f936f-1f52-44f2-8d7b-0188fbd363d5": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+            "show_label": true,
+            "selector_layout": "stacked",
+            "border_top": false,
+            "border_bottom": false
+          }
+        },
+        "870625ea-f97e-4cab-b3b3-04010a7854a5": {
+          "type": "popup",
+          "disabled": true,
+          "settings": {
+            "text": "Pop-up link",
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "link_style": "text",
+            "text_alignment": "left",
+            "text_size": "small",
+            "link_icon": "none",
+            "popup_display_type": "modal",
+            "popup_width": "normal",
+            "content_source": "page_content",
+            "popup_content_heading": "",
+            "popup_content_text": "",
+            "page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "button_style": "solid",
+            "button_additional_padding_top": 0,
+            "button_additional_padding_bottom": 0,
+            "show_dynamic_checkout": false,
+            "show_payment_methods": false,
+            "show_pickup": false,
+            "pickup_alignment": "center",
+            "show_pickup_icon": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "text_jjhb8T": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Preiseinordnung: 67 € Vorbestellpreis pro Glas, 115 € für das 90-Tage-Paket. 79 € und 158 € sind der künftige reguläre Preis nach dem Launch.</p>",
+            "text_color": "fg-body",
+            "bg_color": "bg-body",
+            "padding": 0,
+            "border_radius": 0
+          }
+        },
+        "icon_text_list_L7mkMp": {
+          "type": "icon_text_list",
+          "settings": {
+            "padding_top": 20,
+            "padding_right": 0,
+            "padding_bottom": 20,
+            "padding_left": 0,
+            "spacing_between_items": 16,
+            "icon_text_spacing": 16,
+            "vertical_alignment": "center",
+            "background_color": "#ffffff",
+            "border_radius": 8,
+            "icon_color": "#000000",
+            "text_size": 16,
+            "mobtext_size": 14,
+            "text_color": "#000000",
+            "icon_1_type": "image",
+            "icon_1_size": 52,
+            "mobicon_1_size": 52,
+            "icon_1_image": "shopify://shop_images/Created_by_moms_for_moms.svg",
+            "icon_1_svg": "check",
+            "icon_1_custom_svg": "",
+            "text_1": "- Kostenloser Versand",
+            "icon_2_type": "image",
+            "icon_2_size": 52,
+            "mobicon_2_size": 52,
+            "icon_2_image": "shopify://shop_images/Third-party_lab_tested.svg",
+            "icon_2_svg": "shield",
+            "icon_2_custom_svg": "",
+            "text_2": "- Von Müttern für Mütter entwickelt",
+            "icon_3_type": "image",
+            "icon_3_size": 52,
+            "mobicon_3_size": 52,
+            "icon_3_image": "shopify://shop_images/45-day_supply.svg",
+            "icon_3_svg": "clock",
+            "icon_3_custom_svg": "",
+            "text_3": "- Unabhängig laborgeprüft",
+            "icon_4_type": "image",
+            "icon_4_size": 52,
+            "mobicon_4_size": 52,
+            "icon_4_image": "shopify://shop_images/Made_in_EU.svg",
+            "icon_4_svg": "tag",
+            "icon_4_custom_svg": "",
+            "text_4": "- 45 Tage",
+            "icon_5_type": "svg",
+            "icon_5_size": 24,
+            "mobicon_5_size": 24,
+            "icon_5_svg": "gift",
+            "icon_5_custom_svg": "",
+            "text_5": "- Hergestellt in der EU"
+          }
+        },
+        "collapsible_tab_AVNjdx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Das Gefühl",
+            "content": "<p>Muttersein ist schön und manchmal überwältigend. Manchmal braucht man einfach einen Moment, um durchzuatmen und zu sich zurückzufinden.</p><p>MOMent of Balance steht nicht für Perfektion und auch nicht dafür, noch mehr zu leisten. Es ist ein tägliches Ritual für mehr Balance, das Sie durch den Alltag begleitet und Ihnen Raum gibt, ihm mit etwas mehr Leichtigkeit zu begegnen.</p><p>Von Müttern für Mütter entwickelt, sind diese Gummies ein kleiner täglicher Anker. Eine hochwertige Formel für mehr Balance und bewusste MOMente des Innehaltens im echten Alltag moderner Mütter.</p><h2></h2>",
+            "page": ""
+          }
+        },
+        "5c65d55b-9f21-4d69-b50a-6219b616bb68": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Die Magie im Inneren",
+            "content": "<p>In MOMent of Balance kommen ausgewählte Adaptogene und Vitamin B6 in köstlichen, glutenfreien, veganen Gummies zusammen — zu einer hochwertigen Formel, die mit Sorgfalt für moderne Mütter entwickelt wurde.</p><p><strong>Bio KSM-66® Ashwagandha-Wurzel</strong><br/>Ein hochwertiger Vollspektrum-Wurzelextrakt aus Indien, wo Ashwagandha seit Langem im Ayurveda verwendet wird. Sorgfältig aufgrund seiner Qualität und Herkunft ausgewählt, verleiht er der Formel einen geerdeten, zeitlosen Charakter.</p><p><strong>Bio Lion’s Mane Pilzextrakt</strong><br/>Ein besonderer Pilzextrakt aus China, ausgewählt aufgrund seines einzigartigen Charakters und hochwertigen Profils. Er bringt eine moderne, achtsame Note in die Formel und ergänzt die Mischung mit stiller Stärke und Intention.</p><p><strong>Rhodiola rosea</strong><br/>Ein botanischer Extrakt aus Spanien, mit langer Tradition und einem festen Platz in der Welt pflanzlicher Inhaltsstoffe. In MOMent of Balance ergänzt Rhodiola die Formel mit ihrer eigenen besonderen botanischen Note.</p><p><strong>Vitamin B6 </strong><br/>Vitamin B6 trägt zu einer normalen psychischen Funktion bei, trägt zur Verringerung von Müdigkeit und Ermüdung bei, trägt zu einem normalen Energiestoffwechsel bei und trägt zu einer normalen Funktion des Nervensystems bei.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_aDDzmn": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Das Ritual",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_3FdHiY": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Health Claims",
+            "content": "<ul><li>Vitamin B6 trägt zu einer normalen psychologischen Funktion bei.</li><li>Vitamin B6 trägt zur Verringerung von Müdigkeit und Ermüdung bei.</li><li>Vitamin B6 trägt zu einem normalen Energiestoffwechsel bei.</li><li>Vitamin B6 trägt zur normalen Funktion des Nervensystems bei.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_fDPaRf": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Nährwerte",
+            "content": "<p>Tagesportion (2 Gummies) enthält:<br/>Ashwagandha KSM-66® Extrakt — 300 mg<br/>davon Withanolide — 15 mg<br/>Löwenmähne-Pilzextrakt — 240 mg<br/>davon Beta-Glucane — 48 mg<br/>Rhodiola-rosea-Wurzelextrakt DER 4:1 — 80 mg<br/>davon Salidroside — 0,8 mg<br/>Vitamin B6 (Pyridoxinhydrochlorid) — 0,9 mg (64%*)</p><p><br/>*RM = Referenzmenge</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_p7PrGd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Produktinformationen",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_gjMQ4x": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Die Balance-Garantie",
+            "content": "<p>Wahre Balance braucht Zeit. Da es einige Wochen dauern kann, bis MOMent of Balance Teil Ihrer täglichen Routine wird, möchten wir, dass sich Ihr erster MOMent of Balance von Anfang an richtig anfühlt.<br/><br/>Wenn Sie MOMent of Balance zum ersten Mal ausprobieren und feststellen, dass das Produkt nicht das Richtige für Sie ist, können Sie uns innerhalb von 30 Tagen nach der Lieferung kontaktieren und im Rahmen unserer moment Balance-Garantie eine Rückerstattung beantragen.<br/><br/>Die Garantie ist auf ein berechtigtes Glas pro Kunde begrenzt. Bei Bundle-Käufen ist die Rückerstattung auf den Wert eines Glases begrenzt.<br/><br/>Für die Einreichung eines Rückerstattungsantrags benötigen wir ein Foto des geöffneten Glases.<br/><br/>Ihre gesetzlichen Rechte bleiben unberührt.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_6FDgwi": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Unabhängige Labortests",
+            "content": "<p>Unsere Formel wurde von der GBA Group unabhängig geprüft.<br/><br/>Dabei wurden mikrobiologische Parameter sowie ausgewählte Stoffe wie Blei, Cadmium, Quecksilber, Arsen, Gluten, Sojaprotein und Laktose untersucht.<br/><br/>Die mikrobiologischen Ergebnisse waren unauffällig; zudem entspricht die geprüfte Probe hinsichtlich Blei, Cadmium und Quecksilber den Höchstgehalten der Verordnung (EU) 2023/915.</p><p>Den vollständigen Prüfbericht der GBA Group können Sie hier <a href=\"https://cdn.shopify.com/s/files/1/0918/1265/9541/files/26015654-001-PB_KSM-Ashwagandha__Rhodiola_rosea__Lowenmahne__Vitamin_B6.pdf?v=1780823087\" target=\"_blank\" title=\"https://cdn.shopify.com/s/files/1/0918/1265/9541/files/26015654-001-PB_KSM-Ashwagandha__Rhodiola_rosea__Lowenmahne__Vitamin_B6.pdf?v=1780823087\">einsehen.</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "breadcrumb_Ui8wgw",
+        "tags_qFz8mT",
+        "title",
+        "text_nRJjbE",
+        "text_7MEJtB",
+        "price",
+        "inventory_zeVG83",
+        "d397b53e-d0be-4717-805f-6ee8a8d247bf",
+        "099f936f-1f52-44f2-8d7b-0188fbd363d5",
+        "870625ea-f97e-4cab-b3b3-04010a7854a5",
+        "buy_buttons",
+        "text_jjhb8T",
+        "icon_text_list_L7mkMp",
+        "collapsible_tab_AVNjdx",
+        "5c65d55b-9f21-4d69-b50a-6219b616bb68",
+        "collapsible_tab_aDDzmn",
+        "collapsible_tab_3FdHiY",
+        "collapsible_tab_fDPaRf",
+        "collapsible_tab_p7PrGd",
+        "collapsible_tab_gjMQ4x",
+        "collapsible_tab_6FDgwi"
+      ],
+      "custom_css": [
+        ".product-buy-buttons-wrapper {margin-bottom: 10px;}",
+        ".icon-wrapper-icontextlistl7mkmp {display: none !important;}"
+      ],
+      "settings": {
+        "section_desktop_layout": "image-left",
+        "enable_sticky_info": true,
+        "enable_sticky_buttons": true,
+        "sticky_buttons_padding": 10,
+        "sticky_buttons_padding_horizontal": 20,
+        "sticky_buttons_border": true,
+        "sticky_buttons_shadow": 0,
+        "enable_sticky_buttons_desktop": true,
+        "sticky_buttons_desktop_media": true,
+        "sticky_buttons_desktop_price": true,
+        "sticky_buttons_desktop_position": "bottom",
+        "sticky_buttons_desktop_margin": "auto",
+        "sticky_buttons_desktop_padding_vertical": 16,
+        "show_variant_image_only": false,
+        "media_bg_col": "rgba(0,0,0,0)",
+        "gallery_aspect_ratio": "square",
+        "gallery_media_scale": "default",
+        "gallery_height_limit_desktop": true,
+        "media_section_width": "wide",
+        "product_section_width": "standard",
+        "media_mobile_width": "full-width",
+        "media_width_offset": 0,
+        "gallery_grid_spacing": 0,
+        "mobile_media_nav": "bullets",
+        "mobile_media_nav_position": "below-media",
+        "gallery_layout": "grid",
+        "desktop_media_items_in_view": "1",
+        "desktop_media_nav": "thumbnails",
+        "desktop_media_thumbnail_size": "normal",
+        "desktop_media_thumbnail_position": "left",
+        "desktop_media_thumbnail_placement": "overlay",
+        "thumbnail_border_opacity": 20,
+        "thumbnail_border_opacity_active": 80,
+        "arrow_style": "solid-inverted",
+        "desktop_arrow_position": "middle",
+        "desktop_arrow_vis": "visible",
+        "balance_grid": true,
+        "media_video_autoplay": true,
+        "media_video_play_button_style": "outline",
+        "zoom_enable": true,
+        "gallery_mega_zoom": "normal",
+        "zoom_enable_in_out": true,
+        "zoom_thumbnail_position_mobile": "bottom",
+        "zoom_thumbnail_position_desktop": "left",
+        "zoom_thumbnail_background": false,
+        "zoom_thumbnail_border": false,
+        "zoom_fg_color": "fg-body",
+        "zoom_bg_color": "bg-body",
+        "info_txt_alignment": "left",
+        "text_section_position": "center",
+        "text_section_vertical_position": "top",
+        "text_section_max_width": 700,
+        "text_section_padding": 20,
+        "blocks_vertical_spacing": 15,
+        "description_split_keyword": "DETAILS",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 30,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "vertical_border": false,
+        "bottom_border": false,
+        "border_width": "full",
+        "border_color": "dark"
+      }
+    },
+    "complementary-products": {
+      "type": "complementary-products",
+      "disabled": true,
+      "settings": {
+        "heading": "Pair it with",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "products_to_show": 4,
+        "arrow_style": "solid-inverted",
+        "card_image_display": "second_image_hover",
+        "pagination_color_scheme": "body",
+        "show_price": true,
+        "show_vendor": false,
+        "show_swatches": false,
+        "show_color_count": false,
+        "text_color": "fg-body",
+        "bg_color": "bg-body",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "top_border": false,
+        "bottom_border": false,
+        "border_width": "normal",
+        "border_color": "dark"
+      }
+    },
+    "ss_scrolling_logo_cloud_eNVMKn": {
+      "type": "ss-scrolling-logo-cloud",
+      "blocks": {
+        "slide_Rnyjdn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/made-in-EU.jpg",
+            "link": ""
+          }
+        },
+        "slide_VFtTtc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/non-gmo.jpg",
+            "link": ""
+          }
+        },
+        "slide_e49EGx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gluten-free.jpg",
+            "link": ""
+          }
+        },
+        "slide_W7XCVD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/low-suger.jpg",
+            "link": ""
+          }
+        },
+        "slide_nwX6U3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vegan.jpg",
+            "link": ""
+          }
+        },
+        "slide_AaWW6d": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3rd-party-lab.jpg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_Rnyjdn",
+        "slide_VFtTtc",
+        "slide_e49EGx",
+        "slide_W7XCVD",
+        "slide_nwX6U3",
+        "slide_AaWW6d"
+      ],
+      "settings": {
+        "ss-title": "",
+        "heading_custom": false,
+        "heading_font": "assistant_n4",
+        "header_size": 30,
+        "header_align": "center",
+        "scrolling_velocity": 79,
+        "pause_hover": false,
+        "shadow": false,
+        "sliders_mt": 16,
+        "logo_padding_top": 0,
+        "logo_padding_bottom": 0,
+        "slider_gap": 30,
+        "slider_gap_mobile": 50,
+        "slider_direction": "left",
+        "icon_width": 230,
+        "header_color": "#121212",
+        "border_color": "#ffffff",
+        "background-color": "#ffffff",
+        "slider-background-color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true,
+        "enable_feature": false,
+        "top_divider_size": -25,
+        "mobile_top_divider_size": -10,
+        "bottom_divider_size": 63,
+        "mobile_bottom_divider_size": 92,
+        "icon_color": "#093a3b"
+      }
+    },
+    "icons_wFbkBW": {
+      "type": "icons",
+      "blocks": {
+        "icon_text_igjnrf": {
+          "type": "icon_text",
+          "settings": {
+            "text": "Sugar-Free"
+          }
+        },
+        "icon_text_eDVcJU": {
+          "type": "icon_text",
+          "settings": {
+            "text": "Gluten-Free"
+          }
+        },
+        "icon_text_H8a6Hp": {
+          "type": "icon_text",
+          "settings": {
+            "text": "Vegan"
+          }
+        },
+        "icon_text_7Rxmn6": {
+          "type": "icon_text",
+          "settings": {
+            "text": "Made In EU"
+          }
+        },
+        "icon_text_WNHgyR": {
+          "type": "icon_text",
+          "settings": {
+            "text": "Science Backed"
+          }
+        },
+        "icon_text_DtYN3j": {
+          "type": "icon_text",
+          "settings": {
+            "text": "NON GMO"
+          }
+        }
+      },
+      "block_order": [
+        "icon_text_igjnrf",
+        "icon_text_eDVcJU",
+        "icon_text_H8a6Hp",
+        "icon_text_7Rxmn6",
+        "icon_text_WNHgyR",
+        "icon_text_DtYN3j"
+      ],
+      "disabled": true,
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "rich_text_jdBrpi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dMbb3x": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ein tägliches Ritual aus zwei Gummies. Die Kraft der Natur entfaltet sich Woche für Woche.",
+            "heading_size": "h0",
+            "alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        }
+      },
+      "block_order": [
+        "heading_dMbb3x"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 750px) {.rich-text__blocks > * {width: 67%; }}"
+      ],
+      "settings": {
+        "content_width": "page-width",
+        "content_horizontal_position": "center",
+        "bg_image_darken": 0,
+        "bg_image_blur": 0,
+        "text_color": "fg-04",
+        "bg_color": "bg-02",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "top_border": false,
+        "bottom_border": false,
+        "border_width": "normal",
+        "border_color": "dark"
+      }
+    },
+    "multicolumn_U4tUYT": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_mqP3dm": {
+          "type": "column",
+          "settings": {
+            "column_span": "1",
+            "title": "Rhodiola rosea",
+            "heading_top_margin": 5,
+            "heading_margin": 40,
+            "text": "<p>Botanisch beheimatet in den Höhenlagen Nord- und Osteuropas, seit Jahrhunderten Teil der traditionellen Pflanzenkunde. Für MOMent: 4:1-Trockenextrakt, angebaut und hergestellt in Spanien, geprüft nach den Anforderungen des Europäischen Arzneibuches.</p>",
+            "block_btn_style": "link--underlined",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_VBYAJV": {
+          "type": "column",
+          "settings": {
+            "column_span": "1",
+            "title": "Bio Lion's mane (Hericium erinaceus, Fruchtkörper)",
+            "heading_top_margin": 5,
+            "heading_margin": 15,
+            "text": "<p>Fruchtkörper-Extrakt mit über 2.000-jähriger Geschichte in der traditionellen chinesischen Medizin. Bio-zertifiziert, laborgeprüft, frei von Stärke und Füllstoffen.</p>",
+            "block_btn_style": "link--underlined",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_wbRDU8": {
+          "type": "column",
+          "settings": {
+            "column_span": "1",
+            "title": "KSM-66® Ashwagandha-Wurzelextrakt (Withania somnifera)",
+            "heading_top_margin": 5,
+            "heading_margin": 15,
+            "text": "<p>Einer der am besten dokumentierten Ashwagandha-Extrakte weltweit, mit 24 klinischen Humanstudien. Ausschließlich aus der Wurzel, mit Wasser extrahiert.</p>",
+            "block_btn_style": "link--underlined",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_GFiNaE": {
+          "type": "column",
+          "settings": {
+            "column_span": "1",
+            "title": "Vitamin B6",
+            "heading_top_margin": 5,
+            "heading_margin": 40,
+            "text": "<p>Trägt zur normalen psychischen Funktion bei, unterstützt das Nervensystem und hilft dabei, Müdigkeit und Erschöpfung zu verringern.<br/><em>*Zugelassene EU-Gesundheitsaussage (VO 432/2012)</em></p>",
+            "block_btn_style": "link--underlined",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_mqP3dm",
+        "column_VBYAJV",
+        "column_wbRDU8",
+        "column_GFiNaE"
+      ],
+      "custom_css": [
+        ".multicol-image-ratio-square .multicolumn-grid-item-image img {border: solid 1px; border-color: #bf4f45; border-radius: 1031%;}",
+        ".multicol-image-ratio-square .multicolumn-grid-item-image {margin-bottom: 25px;}",
+        "@media only screen and (min-width: 750px) {.grid-three-col {grid-column-gap: 80px; width: 90%; }}"
+      ],
+      "settings": {
+        "section_label": "",
+        "heading": "",
+        "heading_size": "h2",
+        "hdr_alignment": "center",
+        "subheading": "",
+        "btn_enable": false,
+        "btn_txt": "",
+        "btn_link": "",
+        "btn_style": "solid",
+        "btn_position_mobile": "bottom",
+        "btn_position_desktop": "bottom",
+        "grid_layout": "stacked",
+        "arrow_style": "solid-inverted",
+        "arrow_position": "auto",
+        "grid_columns": 4,
+        "grid_column_gap": 20,
+        "keylines_show": false,
+        "keylines_show_mobile": false,
+        "keylines_mobile_width": "small",
+        "keyline_opacity": 20,
+        "column_layout": "stacked",
+        "column_vertical_alignment": "top",
+        "card_image_alignment": "center",
+        "image_size": "full-width",
+        "image_ratio": "square",
+        "text_alignment": "center",
+        "column_heading_size": "h3",
+        "block_button_width": "auto",
+        "link_opening": "page",
+        "text_color": "fg-body",
+        "bg_color": "bg-body",
+        "btn_color_scheme": "default",
+        "bg_image_darken": 0,
+        "top_padding": 100,
+        "bottom_padding": 100,
+        "top_border": false,
+        "bottom_border": false,
+        "border_width": "normal",
+        "border_color": "dark"
+      }
+    },
+    "video_banner_qzDtni": {
+      "type": "video-banner",
+      "blocks": {
+        "heading_Uxnexf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Werden Sie Teil unserer Familie",
+            "heading_size": "h1",
+            "txt_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Uxnexf"
+      ],
+      "settings": {
+        "banner_size": "banner-style-large",
+        "overlay_level": 0,
+        "video_size": "100",
+        "video_position": "center",
+        "video_margin_mobile": 0,
+        "video_margin_desktop": 0,
+        "enable_playback_pause": false,
+        "enable_audio": false,
+        "txt_position": "middle",
+        "txt_alignment": "center",
+        "content_width": 100,
+        "text_vertical_spacing": 10,
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "fade_in_text": true,
+        "scroll_fade_effect": false,
+        "text_blend_effect": "none",
+        "text_color": "fg-white",
+        "bg_color": "#000000"
+      }
+    },
+    "new_r3NkYr": {
+      "type": "new",
+      "custom_css": [
+        ".customer:not(.account):not(.order) {margin: 30px auto; background-color: #9386a6; color: #ffffff;}",
+        ".field__label,.customer .field label {color: #ffffff;}",
+        ".field__input,.customer .field input {border-color: #fff;}",
+        ".customer .field input {color: #fff;}",
+        "@media screen and (max-width: 750px) {.customer:not(.account):not(.order) {margin: 30px 8px; }}"
+      ],
+      "settings": {
+        "padding_top": 30,
+        "padding_bottom": 0,
+        "account_intro_text": "Seien Sie immer auf dem Laufenden! Treten Sie unserem Kreis bei und erhalten Sie exklusive Neuigkeiten zu neuen Produkten, inspirierenden Webinaren und besonderen Events. Verpassen Sie nichts mehr!",
+        "account_title": "Ein Konto erstellen",
+        "account_info_text": "Bitte geben Sie folgende Informationen ein:"
+      }
+    },
+    "rich_text_37hKcB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EGEkTU": {
+          "type": "heading",
+          "settings": {
+            "heading": "2 Minuten Ihrer Zeit = 5 % Ersparnis bei Ihrer ersten Bestellung",
+            "heading_size": "h2",
+            "alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "button_ddUhby": {
+          "type": "button",
+          "settings": {
+            "alignment": "center",
+            "btn_layout": "inline",
+            "btn_color_scheme": "default",
+            "padding_top": 20,
+            "padding_bottom": 0,
+            "btn_one_show": true,
+            "btn_one_txt": "Nehmen Sie an unserer Umfrage teil",
+            "btn_one_link": "https://9ppypi-jk.myshopify.com/apps/vf-product-reco/8tzm2yt7",
+            "btn_one_style": "button--solid",
+            "btn_two_show": false,
+            "btn_two_txt": "Button text",
+            "btn_two_link": "",
+            "btn_two_style": "button--solid"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EGEkTU",
+        "button_ddUhby"
+      ],
+      "custom_css": [
+        ".button {background-color: #9386a6;}"
+      ],
+      "settings": {
+        "content_width": "page-width-narrow",
+        "content_horizontal_position": "center",
+        "bg_image_darken": 0,
+        "bg_image_blur": 0,
+        "text_color": "fg-body",
+        "bg_color": "bg-body",
+        "padding_top": 30,
+        "padding_bottom": 80,
+        "top_border": false,
+        "bottom_border": false,
+        "border_width": "normal",
+        "border_color": "dark"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You May Also Like",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "products_to_show": 4,
+        "columns_tablet": 4,
+        "columns_desktop": 4,
+        "arrow_style": "solid-inverted",
+        "card_image_display": "second_image_hover",
+        "pagination_color_scheme": "body",
+        "show_price": true,
+        "show_vendor": false,
+        "show_swatches": false,
+        "show_color_count": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "text_color": "fg-body",
+        "bg_color": "bg-body",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "top_border": false,
+        "border_width": "normal",
+        "border_color": "dark"
+      }
+    },
+    "1784786788c8bd5a93": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1786739329e4b61125": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "complementary-products",
+    "ss_scrolling_logo_cloud_eNVMKn",
+    "icons_wFbkBW",
+    "rich_text_jdBrpi",
+    "multicolumn_U4tUYT",
+    "video_banner_qzDtni",
+    "new_r3NkYr",
+    "rich_text_37hKcB",
+    "related-products",
+    "1784786788c8bd5a93",
+    "1786739329e4b61125"
+  ]
+}
