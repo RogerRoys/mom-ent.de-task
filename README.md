@@ -76,15 +76,15 @@ page flow while `new FormData(form)` still submits the properties.
 | `assets/gift-note.js` | widget behaviour + cart reconciliation |
 | `snippets/buy-buttons.liquid` | renders the snippet above `<product-form>` |
 | `sections/main-product.liquid` | the block settings shown in the theme customizer |
-| `snippets/cart-drawer.liquid`, `sections/main-cart-items.liquid` | hide the two properties from the cart UI |
+| `snippets/cart-drawer.liquid`, `sections/main-cart-items.liquid` | hide the message from the cart UI |
 
-The two properties are **hidden in the cart drawer and on the cart page** —
-the customer sets the note on the product page, and the cart stays clean. They
-are still submitted, so they remain visible at checkout, on the order, on the
-packing slip and in the Shopify admin, which is where the card gets written
-from. The list lives in **Theme settings → Cart → Ausgeblendete Eigenschaften**
-(comma separated); rename a property in the block settings and update it here
-too.
+In the cart, `Geschenk: Ja` is shown so the customer can see the card is on the
+order, while the message itself is hidden — they wrote it on the product page
+and it would only make the drawer noisy. Both are still submitted, so they stay
+visible at checkout, on the order, on the packing slip and in the Shopify admin,
+which is where the card gets written from. What to hide lives in **Theme
+settings → Cart → Ausgeblendete Eigenschaften** (comma separated); rename a
+property in the block settings and update it here too.
 
 Everything is editable under **Theme customizer → Product page → Buy buttons →
 Geschenknachricht**: on/off, title, subtitle, placeholder, hint, character
