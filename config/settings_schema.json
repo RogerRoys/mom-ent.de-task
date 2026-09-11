@@ -3183,14 +3183,14 @@
       },
       {
         "type": "header",
-        "content": "Ausgeblendete Eigenschaften"
+        "content": "Hidden properties"
       },
       {
         "type": "text",
         "id": "hidden_cart_properties",
         "default": "Geschenknachricht",
-        "label": "Im Warenkorb ausblenden",
-        "info": "Namen der Bestell-Eigenschaften, durch Komma getrennt. Sie werden im Warenkorb ausgeblendet, bleiben aber im Checkout, in der Bestellung, im Lieferschein und im Shopify-Admin sichtbar."
+        "label": "Hide in the cart",
+        "info": "Line item property names, comma separated. They are hidden in the cart but stay visible at checkout, on the order, on the packing slip and in the Shopify admin."
       }
     ]
   }
