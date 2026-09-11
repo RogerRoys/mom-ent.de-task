@@ -63,6 +63,11 @@ the line — bundle apps, subscriptions — is preserved. On the product page th
 toggle also hydrates from the cart, so it always shows what the order actually
 carries.
 
+Apps that inject into the product form area — the bundle widget on the presale
+template, for one — can land between the gift note and the button. The widget
+watches the product info column and puts itself back directly above
+`<product-form>`, so it stays next to the button whatever an app adds.
+
 The fields sit outside `<product-form>` and are bound to it with the HTML5
 `form` attribute. The theme turns `.product-form` into a fixed sticky bar on
 mobile (**Product page → Sticky add-to-cart**), so anything nested inside it
@@ -73,7 +78,7 @@ page flow while `new FormData(form)` still submits the properties.
 |---|---|
 | `snippets/gift-note.liquid` | markup, reads its settings from the `buy_buttons` block |
 | `assets/gift-note.css` | styling (accent colour via the `--gift-note-accent` custom property) |
-| `assets/gift-note.js` | widget behaviour + cart reconciliation |
+| `assets/gift-note.js` | widget behaviour, placement, cart reconciliation |
 | `snippets/buy-buttons.liquid` | renders the snippet above `<product-form>` |
 | `sections/main-product.liquid` | the block settings shown in the theme customizer |
 | `snippets/cart-drawer.liquid`, `sections/main-cart-items.liquid` | hide the message from the cart UI |

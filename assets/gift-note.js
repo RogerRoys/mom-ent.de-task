@@ -213,6 +213,45 @@
       });
   }
 
+  /* ----------------------------------------------------------- placement */
+
+  // The gift note belongs directly above the add-to-cart button, but apps that
+  // inject into the product form area (bundles, upsells) can land between the
+  // two. Nothing forbids that, so put the widget back rather than fight over
+  // markup: keep it the element right before <product-form>.
+  function place(node) {
+    var form = document.getElementById(node.dataset.giftForm);
+    var host = form ? form.closest('product-form') : null;
+    if (!host || !host.parentNode) return;
+    if (host.previousElementSibling === node) return;
+
+    host.parentNode.insertBefore(node, host);
+  }
+
+  function placeAll() {
+    document.querySelectorAll('[data-gift-note]').forEach(place);
+  }
+
+  // Apps inject whenever their own script gets around to it, so watch instead
+  // of guessing a delay. Moving the node back is itself a mutation, but the
+  // next pass finds it already in place and stops there.
+  function watch() {
+    if (typeof MutationObserver !== 'function') return;
+
+    var pending;
+    var observer = new MutationObserver(function () {
+      clearTimeout(pending);
+      pending = setTimeout(placeAll, 150);
+    });
+
+    document.querySelectorAll('[data-gift-note]').forEach(function (node) {
+      var scope = node.closest('.product__info-container') || node.parentNode;
+      if (!scope || !scope.dataset || scope.dataset.giftWatched) return;
+      scope.dataset.giftWatched = '1';
+      observer.observe(scope, { childList: true, subtree: true });
+    });
+  }
+
   /* ------------------------------------------------------------- wiring */
 
   document.addEventListener('change', function (event) {
@@ -259,6 +298,8 @@
         hydrate(node);
       }
     });
+    placeAll();
+    watch();
   }
 
   // Browsers restore checkbox state on back/forward without firing `change`.
