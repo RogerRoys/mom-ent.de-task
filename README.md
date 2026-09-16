@@ -73,9 +73,12 @@ add-to-cart**), which pins the whole `.product-form` to the bottom of the screen
 below 950px. So `buy-buttons.liquid` marks the wrapper `.has-gift-note`, and
 `gift-note.css` pins `.product-form__buttons` instead: the same bar, without the
 toggle and the message field being dragged into it. On desktop the bar is a panel that floats
-in once the real button scrolls away; `section-main-product.css` now keeps that
-panel to the product and the button, so neither the gift note nor a widget an
-app injected into the form gets duplicated into it.
+in once the real button scrolls away; that panel is the real form, moved, so
+everything it carries is shown a second time inside it — the gift note, and the
+bundle selector the Pumper app embed injects into the form. The section
+stylesheet hides those, and the section's sticky script enforces the same thing
+inline, because an app can out-specify a stylesheet. Neither ever touches an
+element that contains the submit button.
 
 | File | Role |
 |---|---|

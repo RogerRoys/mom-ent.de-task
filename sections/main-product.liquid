@@ -1876,6 +1876,47 @@ document.addEventListener('DOMContentLoaded', function () {
     return buyButtonsWrapper.offsetHeight;
   }
 
+  // The floating bar is the real product form, moved. Anything an app injects
+  // into that form — the bundle selector, upsells — rides along and is shown a
+  // second time inside the bar. gift-note/section CSS hides those, but an app
+  // can out-specify a stylesheet with an inline style, so enforce it here too.
+  // Nothing that contains the submit button is ever touched.
+  function trimStickyBar(sticking) {
+    const productForm = buyButtonsWrapper.querySelector('.product-form');
+    if (!productForm) return;
+
+    const innerForm = productForm.querySelector('form');
+    const buttons = productForm.querySelector('.product-form__buttons');
+    const candidates = [
+      ...productForm.children,
+      ...(innerForm ? innerForm.children : []),
+      ...(buttons ? buttons.children : [])
+    ];
+
+    candidates.forEach(function (el) {
+      if (el === innerForm || el === buttons) return;
+      if (el.querySelector('.product-form__submit')) return;
+      if (el.matches('.product-sticky-title, .product-form__error-message-wrapper')) return;
+      if (el.matches('.product-form__submit, .shopify-payment-button')) return;
+
+      if (sticking) {
+        if (el.dataset.stickyTrimmed) return;
+        el.dataset.stickyTrimmed = el.style.getPropertyPriority('display') === 'important'
+          ? 'important:' + el.style.display
+          : 'normal:' + el.style.display;
+        el.style.setProperty('display', 'none', 'important');
+        return;
+      }
+
+      if (!el.dataset.stickyTrimmed) return;
+      const parts = el.dataset.stickyTrimmed.split(':');
+      const value = parts.slice(1).join(':');
+      el.style.removeProperty('display');
+      if (value) el.style.setProperty('display', value, parts[0] === 'important' ? 'important' : '');
+      delete el.dataset.stickyTrimmed;
+    });
+  }
+
   function updateSticky() {
 
     if (window.innerWidth < 950) {
@@ -1895,9 +1936,12 @@ document.addEventListener('DOMContentLoaded', function () {
       buyButtonsWrapper.style.minHeight = `${getReserveHeight()}px`;
       buyButtonsWrapper.classList.add('stick-now');
       buyButtonsWrapper.classList.remove('stick-visible');
+      trimStickyBar(true);
 
       fadeInTimeout = setTimeout(function () {
         if (isSticky) {
+          // again, in case an app injected into the form in the meantime
+          trimStickyBar(true);
           buyButtonsWrapper.classList.add('stick-visible');
         }
       }, fadeDelay);
@@ -1914,6 +1958,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isSticky) {
           buyButtonsWrapper.classList.remove('stick-now');
           buyButtonsWrapper.style.minHeight = '';
+          trimStickyBar(false);
         }
       }, 0);
     }
