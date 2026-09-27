@@ -9,60 +9,92 @@
  */
 {
   "sections": {
-    "image_banner_4cEYR8": {
-      "type": "image-banner",
+    "slideshow_6Ce4Tk": {
+      "type": "slideshow",
       "blocks": {
-        "buttons_xmVETA": {
-          "type": "buttons",
+        "video_slide_7xjbf7": {
+          "type": "video_slide",
           "settings": {
-            "btn_one_show": true,
-            "btn_one_txt": "Button label",
-            "btn_one_link": "shopify://products/moment-of-balance",
-            "btn_one_style": "button--solid",
-            "btn_two_show": false,
-            "btn_two_txt": "Button label",
-            "btn_two_link": "",
-            "btn_two_style": "button--solid",
-            "btn_layout_mobile": "stacked",
-            "btn_layout": "inline",
-            "btn_alignment": "auto",
-            "btn_width_mobile": "auto",
-            "btn_width_desktop": "auto",
-            "btn_width_desktop_value": 200,
-            "btn_color_scheme": "default",
-            "padding_top": 20,
-            "padding_bottom": 20
+            "video": "shopify://files/videos/Pampas_moving_in_the_wind.mp4",
+            "video_mobile": "shopify://files/videos/Untitled design (16).mp4",
+            "caption": "",
+            "heading": "Für Balance & mentale Stärke  jeden Tag",
+            "subheading": "<p>Premium-Mischung mit KSM-66® Ashwagandha, Rhodiola rosea, Löwenmähne & Vitamin B6.</p>",
+            "btn_block_txt": "Jetzt kaufen",
+            "btn_block_url": "shopify://products/moment-of-balance-presale",
+            "btn_block_style": "button--outline"
+          }
+        },
+        "video_slide_6qMHMB": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/Green_leaves.mp4",
+            "caption": "",
+            "heading": "Die Kraft der Natur für mehr Balance",
+            "subheading": "",
+            "btn_block_txt": "Unsere Inhaltsstoffe",
+            "btn_block_url": "shopify://pages/our-ingredients",
+            "btn_block_style": "button--outline"
+          }
+        },
+        "video_slide_4pf44x": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/MOMent_Desert.mp4",
+            "video_mobile": "shopify://files/videos/MOMent_Desert.mp4",
+            "caption": "",
+            "heading": "Von Müttern für Mütter",
+            "subheading": "<p>Einen Moment nur für dich zu nehmen ist kein Egoismus. Es ist genau das, was dich stark hält.</p>",
+            "btn_block_txt": "Über MOMent",
+            "btn_block_url": "shopify://pages/moment-story",
+            "btn_block_style": "button--outline"
           }
         }
       },
       "block_order": [
-        "buttons_xmVETA"
+        "video_slide_7xjbf7",
+        "video_slide_6qMHMB",
+        "video_slide_4pf44x"
       ],
-      "name": "t:sections.image-banner.presets.name",
+      "custom_css": [
+        ".swiper-button-prev:after {display: none; fill: white;}",
+        ".swiper-button-next:after {display: none;}",
+        ".arrows-style-outline .swiper-button-prev {color: white;}",
+        ".arrows-style-outline .swiper-button-next {color: white;}"
+      ],
       "settings": {
-        "banner_size": "banner-style-fullscreen",
-        "banner_full_link": "",
-        "primary_image_size": "dt-full-bleed",
-        "image_padding": 0,
-        "main_image_animation": "none",
-        "image_blur": 0,
-        "primary_image_mobile_show": true,
-        "secondary_image_size": "dt-full-bleed",
-        "secondary_image_padding": 0,
-        "secondary_image_animation": "none",
-        "secondary_image_blur": 0,
-        "secondary_image_mobile_show": true,
-        "txt_alignment": "center",
+        "banner_size": "banner-style-large",
+        "slideshow_type": "multi_message",
+        "section_margin_width": "full-width-slideshow",
+        "media_scaling": "cover",
+        "section_top_padding": 0,
+        "section_bottom_padding": 0,
+        "slider_autoplay": true,
+        "slider_effect": "slide",
+        "slider_autoplay_interval": 6,
+        "slider_speed": 600,
+        "show_arrows": true,
+        "arrow_style": "outline",
+        "section_label": "",
+        "heading": "",
+        "subheading": "",
+        "heading_size": "h1",
+        "text_size": "text-body",
         "txt_position": "middle",
-        "content_width": 100,
-        "text_vertical_spacing": 10,
+        "txt_alignment": "center",
+        "txt_width": 600,
         "top_padding": 0,
         "bottom_padding": 0,
-        "fade_in_text": true,
-        "scroll_fade_effect": false,
-        "text_blend_effect": "none",
+        "btn_one_txt": "",
+        "btn_one_link": "",
+        "btn_one_style": "button--outline",
+        "btn_two_txt": "",
+        "btn_two_link": "",
+        "btn_two_style": "button--solid",
         "text_color": "fg-white",
-        "bg_color": "rgba(0,0,0,0)",
+        "bg_color": "bg-body",
+        "btn_color_scheme": "white",
+        "pagination_color": "match",
         "overlay_level": 0
       }
     },
@@ -132,6 +164,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/lion-s_mane.jpg",
             "title": "Bio Lion's mane (Hericium erinaceus, Fruchtkörper)",
             "heading_top_margin": 5,
             "heading_margin": 20,
@@ -145,6 +178,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/ashwagandha_roots.jpg",
             "title": "KSM-66® Ashwagandha-Wurzelextrakt (Withania somnifera)",
             "heading_top_margin": 5,
             "heading_margin": 20,
@@ -158,6 +192,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/rhadiola_rosea.jpg",
             "title": "Rhodiola rosea",
             "heading_top_margin": 5,
             "heading_margin": 40,
@@ -171,6 +206,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/Gemini_Generated_Image_bf9tmibf9tmibf9t.png",
             "title": "Vitamin B6",
             "heading_top_margin": 5,
             "heading_margin": 40,
@@ -239,6 +275,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #1:",
             "heading_top_margin": 10,
             "heading_margin": 0,
@@ -252,6 +289,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #2:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -265,6 +303,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #3:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -278,6 +317,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/MOMent_icon_gummies_1.png",
             "title": "Fakt #4:",
             "heading_top_margin": 10,
             "heading_margin": 5,
@@ -345,36 +385,42 @@
         "slide_DPxQfW": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/3rd-party-lab.jpg",
             "link": ""
           }
         },
         "slide_jtTNVC": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/made-in-EU.jpg",
             "link": ""
           }
         },
         "slide_pqmCdQ": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/non-gmo.jpg",
             "link": ""
           }
         },
         "slide_dPemFL": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/gluten-free.jpg",
             "link": ""
           }
         },
         "slide_8mVgC9": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/low-suger.jpg",
             "link": ""
           }
         },
         "slide_TiTVrd": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/vegan.jpg",
             "link": ""
           }
         }
@@ -515,6 +561,7 @@
         "image_alignment": "right",
         "dt_image_width": 50,
         "card_spacing": 30,
+        "image": "shopify://shop_images/Shani_Kids.1.jpg",
         "image_ratio": "square",
         "secondary_image_scale": "small",
         "txt_alignment": "left",
@@ -575,6 +622,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/shani_hersonski_team.png",
             "title": "Shani Hersonski, Gründerin",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -588,6 +636,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/Lenka.png",
             "title": "Lenka Kohnz, Beraterin",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -601,6 +650,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/riki_langberg_team.1.png",
             "title": "Dr. Riki Langberg, Beraterin für Naturheilkunde und Formulierung",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -713,6 +763,7 @@
         "section_size": "flexible",
         "card_spacing": 40,
         "content_width": "page-width-full-grid",
+        "video_url": "shopify://files/videos/White_flower.mp4",
         "image_ratio": "fit",
         "autoplay": true,
         "enable_video_looping": true,
@@ -744,6 +795,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/dates_balls.1.jpg",
             "title": "Unsere liebsten Energy Balls",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -757,6 +809,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/Artistic_Woman_looking_up_by_the_sea.png",
             "title": "Die stille Revolution: Der Leitfaden einer berufstätigen Mutter zur Kunst des Nein-Sagens",
             "heading_top_margin": 25,
             "heading_margin": 15,
@@ -770,6 +823,7 @@
           "type": "column",
           "settings": {
             "column_span": "1",
+            "image": "shopify://shop_images/illustration_of_a_woman_in_the_nature_heading.png",
             "title": "Die Alchemie der modernen Mutterschaft: Balance in der Weisheit der Natur finden",
             "heading_top_margin": 25,
             "heading_margin": 20,
@@ -861,6 +915,7 @@
       "settings": {
         "alignment": "center",
         "section_layout": "stacked",
+        "bg_image": "shopify://shop_images/thin-plant-stems-in-sun.jpg",
         "text_color": "fg-04",
         "bg_color": "bg-body",
         "padding_top": 60,
@@ -869,7 +924,7 @@
     }
   },
   "order": [
-    "image_banner_4cEYR8",
+    "slideshow_6Ce4Tk",
     "rich_text_jUNibh",
     "section_text_ticker_JHe6xH",
     "multicolumn_CPiPBy",
